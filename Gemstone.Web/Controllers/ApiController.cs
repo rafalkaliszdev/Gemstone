@@ -12,5 +12,29 @@ namespace Gemstone.Web.Controllers
         {
             return Content("test");
         }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Content("test");
+        }
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            return Content("test");
+        }
+
+        [HttpPut]
+        public IActionResult Put()
+        {
+            return Content("test");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Content("test");
+        }
     }
 }
