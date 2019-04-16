@@ -26,18 +26,9 @@ namespace Gemstone
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            // first commit 2019_04_11 23:49
-
-        
-
-
-
             app.UseDeveloperExceptionPage();
-
             app.UseHttpsRedirection();
             app.UseMvcWithDefaultRoute();
-
-
         }
     }
 }
