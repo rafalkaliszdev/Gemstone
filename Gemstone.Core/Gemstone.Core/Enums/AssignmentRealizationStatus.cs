@@ -3,7 +3,7 @@
     public enum AssignmentStatus
     {
         Unassigned = 0,
-        Assigned,
+        Assigned, 
         Spoiled,
         Done
     }
