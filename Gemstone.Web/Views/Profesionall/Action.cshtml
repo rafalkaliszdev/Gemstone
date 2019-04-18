@@ -1,0 +1,22 @@
+﻿@model Gemstone.Web.Models.ProfessionalModel
+@{
+    ViewData["Title"] = "View";
+}
+
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(x=>x.GeoCoordinate)
+    </div>
+    <div>
+        @Html.EditorFor(x=>x.GeoCoordinate)
+    </div>
+    <div>
+        <button type="submit"></button>
+    </div>
+}
