@@ -19,6 +19,7 @@ namespace Gemstone
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            //.ConfigureServices(s =>s.AddAutofac())
                 .UseStartup<Startup>();
     }
 }

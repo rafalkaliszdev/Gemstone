@@ -1,0 +1,14 @@
+﻿@model IList<ProfessionalModel>
+@using Gemstone.Web.Models
+
+
+
+@{
+    foreach (var entry in Model)
+    {
+        <div>@entry.Name</div>
+        <div>@entry.ReceivedReviews.First()</div>
+        <div>@entry.TakenAssignments.First()</div>
+        <hr />
+    }
+}

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gemstone.Core\Gemstone.Core\Gemstone.Core.csproj" />
+  </ItemGroup>
+
 </Project>

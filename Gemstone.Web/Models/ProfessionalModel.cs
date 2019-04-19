@@ -7,7 +7,10 @@ namespace Gemstone.Web.Models
 {
     public class ProfessionalModel
     {
-        public Queue</*Assignment*/string> TakenAssignments { get; set; }
+        public string Name { get; set; }
+        public bool IsBusy { get; set; }
+
+        public /*Queue*/IList</*Assignment*/string> TakenAssignments { get; set; }
         public IList</*Review*/string> ReceivedReviews { get; set; }
         public DateTime JoinedOn { get; set; }
         public string GeoCoordinate { get; set; }

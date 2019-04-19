@@ -10,12 +10,12 @@ namespace Gemstone.Core.Domain
     /// </summary>
     public class Assignment
     {
-        decimal MaxAcceptablePrice { get; set; }
-        DateTime AddedOn { get; set; }
-        DateTime ValidUntil { get; set; }
-        AssignmentStatus AssignmentStatus { get; set; }
-        string ExpectedResult { get; set; }
-        DateTime ExpectedDoneOn { get; set; }
-        Review Review { get; set; }
+        public decimal MaxAcceptablePrice { get; set; }
+        public DateTime AddedOn { get; set; }
+        public DateTime ValidUntil { get; set; }
+        public AssignmentStatus AssignmentStatus { get; set; }
+        public string ExpectedResult { get; set; }
+        public DateTime ExpectedDoneOn { get; set; }
+        public Review Review { get; set; }
     }
 }

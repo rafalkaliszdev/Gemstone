@@ -11,13 +11,7 @@ namespace Gemstone.Web.Controllers
         public IActionResult Index()
         {
             return View();
-            var content = @"<img src='https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png'>";
 
-            return new ContentResult()
-            {
-                Content = content,
-                ContentType = "text/html",
-            };
         }
     }
 }
