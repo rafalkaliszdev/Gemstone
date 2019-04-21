@@ -10,15 +10,7 @@ namespace Gemstone.Core.Domain
     /// </summary>
     public class Review
     {
-        // bad idea to include logic into it
-        //public Review(Assignment assignment)
-        //{
-        //    this.Assignment = assignment;
-        //}
         public Assignment Assignment { get; set; }
-        //{
-        //    get; private set;
-        //}
         public DateTime AddedOn { get; set; }
         public RealizationTime RealizationTime { get; set; }
         public RealizationQuality RealizationQuality { get; set; }
