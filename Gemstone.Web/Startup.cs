@@ -29,7 +29,10 @@ namespace Gemstone
 
 
             var builder = new ContainerBuilder();
-            builder.RegisterType<ProfessionalService>().As<IProfessionalService>().InstancePerLifetimeScope();
+
+            // register all Gemstone services
+            RegisterServices(builder);
+
             builder.Populate(services);
             this.ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(this.ApplicationContainer);
@@ -39,7 +42,15 @@ namespace Gemstone
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+
             app.UseMvcWithDefaultRoute();
+        }
+
+        public void RegisterServices(ContainerBuilder builder)
+        {
+            builder.RegisterType<ProfessionalService>().As<IProfessionalService>().InstancePerLifetimeScope();
         }
     }
 }
