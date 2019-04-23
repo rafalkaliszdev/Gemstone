@@ -18,10 +18,15 @@ namespace Gemstone.Web.Controllers
             this.professionalService = professionalService;
         }
 
+        public ActionResult Index()
+        {
+            return RedirectToAction(nameof(List));
+        }
+
         // todo consider making these async
         public ActionResult List()
         {
-            var pros = professionalService.GetAllProfessionals();
+            var pros = professionalService.GetAll();
 
             var model = new List<ProfessionalModel>();
             foreach (var pro in pros)
@@ -30,11 +35,10 @@ namespace Gemstone.Web.Controllers
                 {
                     Name = pro.Name,
                     IsBusy = pro.IsBusy,
-
-                    GeoCoordinate = pro.GeoCoordinate,
                     JoinedOn = pro.JoinedOn,
-                    ReceivedReviews = pro.ReceivedReviews.Select(x => x.AdditionalRemarks).ToList(),
-                    TakenAssignments = pro.TakenAssignments.Select(x => x.ExpectedResult).ToList(),
+                    ReceivedReviewsCount = pro.ReceivedReviews.Count,
+                    TakenAssignmentsCount = pro.TakenAssignments.Count,
+
                 });
             }
 

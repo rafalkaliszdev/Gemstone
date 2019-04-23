@@ -27,7 +27,6 @@ namespace Gemstone
         {
             services.AddMvc();
 
-
             var builder = new ContainerBuilder();
 
             // register all Gemstone services

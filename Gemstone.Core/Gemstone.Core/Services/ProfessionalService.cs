@@ -8,7 +8,19 @@ namespace Gemstone.Core.Services
 {
     public class ProfessionalService : IProfessionalService
     {
-        public IList<Professional> GetAllProfessionals()
+        public Professional GetById(string id)
+        {
+            return new Professional
+            {
+                Name = "Michal",
+                IsBusy = true,
+                JoinedOn = new DateTime(2019, 4, 19),
+                ReceivedReviews = new List<Review>() { new Review { AdditionalRemarks = "moto prepared as expected" } },
+                TakenAssignments = new List<Assignment>() { new Assignment { ExpectedResult = "prepare moto for long journey" } }
+            };
+        }
+
+        public IList<Professional> GetAll()
         {
             var exampleAssignment = new Assignment
             {
@@ -18,7 +30,6 @@ namespace Gemstone.Core.Services
                 ValidUntil = new DateTime(2019, 4, 9),
                 ExpectedResult = "prepare moto for long journey",
                 MaxAcceptablePrice = 12.34M,
-
             };
             var exampleReview = new Review
             {
@@ -36,7 +47,6 @@ namespace Gemstone.Core.Services
                 {
                     Name = "Michal",
                     IsBusy = true,
-                    GeoCoordinate = "jeden",
                     JoinedOn = new DateTime(2019,4,19),
                     ReceivedReviews = new List<Review>() { exampleReview },
                     TakenAssignments = new List<Assignment>() { exampleAssignment }
@@ -45,7 +55,6 @@ namespace Gemstone.Core.Services
                 {
                     Name = "Marcin",
                     IsBusy = false,
-                    GeoCoordinate = "dwa",
                     JoinedOn = new DateTime(2019,4,19),
                     ReceivedReviews = new List<Review>() { exampleReview },
                     TakenAssignments = new List<Assignment>() { exampleAssignment }
@@ -54,12 +63,26 @@ namespace Gemstone.Core.Services
                 {
                     Name = "Pawel",
                     IsBusy = false,
-                    GeoCoordinate = "trzy",
                     JoinedOn = new DateTime(2019,4,19),
                     ReceivedReviews = new List<Review>() { exampleReview },
                     TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
             };
+        }
+
+        public void Create(Professional professional)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Professional professional)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Professional professional)
+        {
+            throw new NotImplementedException();
         }
     }
 }

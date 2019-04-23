@@ -2,13 +2,25 @@
 @using Gemstone.Web.Models
 
 
+<table style="table-layout: fixed">
+    <tr style="color:blue">
+        <td>@Html.LabelFor(x => x.First().Name)</td>
+        <td>@Html.LabelFor(x => x.First().ReceivedReviewsCount)</td>
+        <td>@Html.LabelFor(x => x.First().TakenAssignmentsCount)</td>
+        <td>@Html.LabelFor(x => x.First().IsBusy)</td>
+        <td>@Html.LabelFor(x => x.First().JoinedOn)</td>
+    </tr>
 
-@{
-    foreach (var entry in Model)
-    {
-        <div>@entry.Name</div>
-        <div>@entry.ReceivedReviews.First()</div>
-        <div>@entry.TakenAssignments.First()</div>
-        <hr />
+    @{
+        foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Name</td>
+                <td>@entry.ReceivedReviewsCount     </td>
+                <td>@entry.TakenAssignmentsCount     </td>
+                <td>@entry.IsBusy     </td>
+                <td>@entry.JoinedOn </td>
+            </tr>
+        }
     }
-}
+</table>

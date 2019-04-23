@@ -7,6 +7,10 @@ namespace Gemstone.Core.Services
 {
     public interface IProfessionalService
     {
-        IList<Professional> GetAllProfessionals();
+        Professional GetById(string id);
+        IList<Professional> GetAll();
+        void Create(Professional professional);
+        void Update(Professional professional);
+        void Delete(Professional professional);
     }
 }

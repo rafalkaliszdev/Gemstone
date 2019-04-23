@@ -1,4 +1,5 @@
-﻿using Gemstone.Core.Enums;
+﻿using Gemstone.Core.Abstracts;
+using Gemstone.Core.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Gemstone.Core.Domain
     /// <summary>
     /// Represents a information-rich entry about quality of already finalized Assignment
     /// </summary>
-    public class Review
+    public class Review : BaseEntity
     {
         public Assignment Assignment { get; set; }
         public DateTime AddedOn { get; set; }
