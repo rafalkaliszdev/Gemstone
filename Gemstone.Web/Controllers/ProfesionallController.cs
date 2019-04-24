@@ -36,13 +36,49 @@ namespace Gemstone.Web.Controllers
                     Name = pro.Name,
                     IsBusy = pro.IsBusy,
                     JoinedOn = pro.JoinedOn,
-                    ReceivedReviewsCount = pro.ReceivedReviews.Count,
-                    TakenAssignmentsCount = pro.TakenAssignments.Count,
-
                 });
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Get(string id)
+        {
+            var pro = professionalService.GetById(id);
+            var model = new ProfessionalModel
+            {
+                Name = pro.Name,
+                IsBusy = pro.IsBusy,
+                JoinedOn = pro.JoinedOn,
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(ProfessionalModel model)
+        {
+            var pro = professionalService.GetById(model.Id);
+
+            pro.Name = model.Name;
+            pro.IsBusy = model.IsBusy;
+            pro.JoinedOn = model.JoinedOn;
+
+            professionalService.Update(pro);
+
+            return RedirectToAction(nameof(Get), new { id = model.Id } );
+        }
+
+        [HttpPost]
+        public ActionResult Update(ProfessionalModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(ProfessionalModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

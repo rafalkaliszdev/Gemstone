@@ -12,8 +12,8 @@ namespace Gemstone.Core.Domain
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }
-        public IList<Assignment> TakenAssignments { get; set; }
-        public IList<Review> ReceivedReviews { get; set; }
+        //public IList<Assignment> TakenAssignments { get; set; }
+        //public IList<Review> ReceivedReviews { get; set; }
         public DateTime JoinedOn { get; set; }
     }
 }
