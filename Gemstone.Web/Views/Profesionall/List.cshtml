@@ -5,8 +5,8 @@
 <table style="table-layout: fixed">
     <tr style="color:blue">
         <td>@Html.LabelFor(x => x.First().Name)</td>
-        <td>@Html.LabelFor(x => x.First().ReceivedReviewsCount)</td>
-        <td>@Html.LabelFor(x => x.First().TakenAssignmentsCount)</td>
+        @*<td>@Html.LabelFor(x => x.First().ReceivedReviewsCount)</td>
+        <td>@Html.LabelFor(x => x.First().TakenAssignmentsCount)</td>*@
         <td>@Html.LabelFor(x => x.First().IsBusy)</td>
         <td>@Html.LabelFor(x => x.First().JoinedOn)</td>
     </tr>
@@ -16,8 +16,8 @@
         {
             <tr>
                 <td>@entry.Name</td>
-                <td>@entry.ReceivedReviewsCount     </td>
-                <td>@entry.TakenAssignmentsCount     </td>
+                @*<td>@entry.ReceivedReviewsCount     </td>
+                <td>@entry.TakenAssignmentsCount     </td>*@
                 <td>@entry.IsBusy     </td>
                 <td>@entry.JoinedOn </td>
             </tr>

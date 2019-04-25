@@ -15,8 +15,8 @@ namespace Gemstone.Core.Services
                 Name = "Michal",
                 IsBusy = true,
                 JoinedOn = new DateTime(2019, 4, 19),
-                ReceivedReviews = new List<Review>() { new Review { AdditionalRemarks = "moto prepared as expected" } },
-                TakenAssignments = new List<Assignment>() { new Assignment { ExpectedResult = "prepare moto for long journey" } }
+                //ReceivedReviews = new List<Review>() { new Review { AdditionalRemarks = "moto prepared as expected" } },
+                //TakenAssignments = new List<Assignment>() { new Assignment { ExpectedResult = "prepare moto for long journey" } }
             };
         }
 
@@ -48,24 +48,24 @@ namespace Gemstone.Core.Services
                     Name = "Michal",
                     IsBusy = true,
                     JoinedOn = new DateTime(2019,4,19),
-                    ReceivedReviews = new List<Review>() { exampleReview },
-                    TakenAssignments = new List<Assignment>() { exampleAssignment }
+                    //ReceivedReviews = new List<Review>() { exampleReview },
+                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
                 new Professional
                 {
                     Name = "Marcin",
                     IsBusy = false,
                     JoinedOn = new DateTime(2019,4,19),
-                    ReceivedReviews = new List<Review>() { exampleReview },
-                    TakenAssignments = new List<Assignment>() { exampleAssignment }
+                    //ReceivedReviews = new List<Review>() { exampleReview },
+                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
                 new Professional
                 {
                     Name = "Pawel",
                     IsBusy = false,
                     JoinedOn = new DateTime(2019,4,19),
-                    ReceivedReviews = new List<Review>() { exampleReview },
-                    TakenAssignments = new List<Assignment>() { exampleAssignment }
+                    //ReceivedReviews = new List<Review>() { exampleReview },
+                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
             };
         }

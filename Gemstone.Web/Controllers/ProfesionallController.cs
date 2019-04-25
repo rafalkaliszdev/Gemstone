@@ -27,7 +27,6 @@ namespace Gemstone.Web.Controllers
         public ActionResult List()
         {
             var pros = professionalService.GetAll();
-
             var model = new List<ProfessionalModel>();
             foreach (var pro in pros)
             {
@@ -52,6 +51,7 @@ namespace Gemstone.Web.Controllers
                 IsBusy = pro.IsBusy,
                 JoinedOn = pro.JoinedOn,
             };
+
             return View(model);
         }
 
@@ -59,26 +59,33 @@ namespace Gemstone.Web.Controllers
         public ActionResult Create(ProfessionalModel model)
         {
             var pro = professionalService.GetById(model.Id);
-
             pro.Name = model.Name;
             pro.IsBusy = model.IsBusy;
             pro.JoinedOn = model.JoinedOn;
+            professionalService.Create(pro);
 
-            professionalService.Update(pro);
-
-            return RedirectToAction(nameof(Get), new { id = model.Id } );
+            return RedirectToAction(nameof(Get), new { id = model.Id });
         }
 
         [HttpPost]
         public ActionResult Update(ProfessionalModel model)
         {
-            throw new NotImplementedException();
+            var pro = professionalService.GetById(model.Id);
+            pro.Name = model.Name;
+            pro.IsBusy = model.IsBusy;
+            pro.JoinedOn = model.JoinedOn;
+            professionalService.Update(pro);
+
+            return RedirectToAction(nameof(Get), new { id = model.Id });
         }
 
         [HttpPost]
         public ActionResult Delete(ProfessionalModel model)
         {
-            throw new NotImplementedException();
+            var pro = professionalService.GetById(model.Id);
+            professionalService.Delete(pro);
+
+            return RedirectToAction(nameof(List));
         }
     }
 }
