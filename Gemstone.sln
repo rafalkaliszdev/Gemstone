@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemstone.Web", "Gemstone.Web\Gemstone.Web.csproj", "{D2C42D39-86FE-421F-B6E6-509ACF29B1B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemstone.Web", "Gemstone.Web\Gemstone.Web.csproj", "{D2C42D39-86FE-421F-B6E6-509ACF29B1B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemstone.Core", "Gemstone.Core\Gemstone.Core\Gemstone.Core.csproj", "{4248D51D-0B7A-4441-8935-6848029D7AD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemstone.Core", "Gemstone.Core\Gemstone.Core\Gemstone.Core.csproj", "{4248D51D-0B7A-4441-8935-6848029D7AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemstone.Infrastructure", "Gemstone.Infrastructure\Gemstone.Infrastructure\Gemstone.Infrastructure.csproj", "{1BF0E7C4-E1AB-4C59-886D-D1EA5D736CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gemstone.Infrastructure", "Gemstone.Infrastructure\Gemstone.Infrastructure\Gemstone.Infrastructure.csproj", "{1BF0E7C4-E1AB-4C59-886D-D1EA5D736CCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
