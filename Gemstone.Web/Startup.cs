@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Autofac.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Gemstone
 {
@@ -17,7 +18,7 @@ namespace Gemstone
     {
         public IContainer ApplicationContainer { get; private set; }
         private readonly IConfiguration _configuration;
-
+            
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -26,6 +27,8 @@ namespace Gemstone
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             var builder = new ContainerBuilder();
 
@@ -43,6 +46,8 @@ namespace Gemstone
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
         }

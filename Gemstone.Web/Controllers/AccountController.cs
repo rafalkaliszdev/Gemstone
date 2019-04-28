@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gemstone.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-
+﻿using Gemstone.Web.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 
 namespace Gemstone.Web.Controllers
 {
@@ -20,9 +15,6 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var q = HttpContext.User.Claims.ToList();
-            return Content("your log status: " + q.Count);
-
             var model = new AccountModel();
             return View(model);
         }
@@ -36,26 +28,49 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            //create principal for the current authentication scheme
-            var claims = new List<Claim>
+            var properties = new AuthenticationProperties
             {
-                new Claim("Name","testUser1"),
-                new Claim("Email","test@test.pl")
+                AllowRefresh = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1),
+                IsPersistent = true,
+                IssuedUtc = DateTime.UtcNow,
+                RedirectUri = "www.google.com"
             };
 
-            var userIdentity = new ClaimsIdentity(claims, "Auth");
-            var userPrincipal = new ClaimsPrincipal(userIdentity);
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name,"testUser1"),
+                new Claim(ClaimTypes.Email, "test@test.pl")
+            };
 
-            HttpContext.SignInAsync("Auth", userPrincipal);
+            var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return View();
+            HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(userIdentity));
+            var userClaims = HttpContext.User.Claims.ToList();
+
+            return Content("Login user claims:" 
+                + (userClaims.Count == 2 ? 
+                userClaims[0].Value + userClaims[1].Value
+                :
+                userClaims.Count.ToString()
+                ));
         }
 
         [HttpGet]
         public IActionResult Logout()
         {
-            HttpContext.SignOutAsync("Auth");
-            return View();
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var userClaims = HttpContext.User.Claims.ToList();
+            var q = HttpContext.User.Claims.ToList();
+
+            return Content("Login user claims:"
+                + (userClaims.Count == 2 ?
+                userClaims[0].Value + userClaims[1].Value
+                :
+                userClaims.Count.ToString()
+                ));
         }
     }
 }
