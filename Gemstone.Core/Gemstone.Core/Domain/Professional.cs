@@ -8,7 +8,7 @@ namespace Gemstone.Core.Domain
     /// <summary>
     /// Represents a Professional or Team of Professionals which can receive and get done Assignment 
     /// </summary>
-    public class Professional : BaseEntity
+    public class Professional : EntityBase
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }

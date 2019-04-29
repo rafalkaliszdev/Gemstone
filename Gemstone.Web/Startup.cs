@@ -26,6 +26,11 @@ namespace Gemstone
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(o =>
+            {
+                o.CheckConsentNeeded = c => true;
+            });
+
             services.AddMvc();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();

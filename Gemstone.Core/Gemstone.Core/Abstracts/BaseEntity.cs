@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gemstone.Core.Abstracts
 {
-    public abstract class BaseEntity
+    public abstract class EntityBase
     {
         public string Id { get; set; }
     }

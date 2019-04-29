@@ -8,7 +8,7 @@ namespace Gemstone.Core.Domain
     /// <summary>
     /// Represents a person or company which can add Assignment and Review
     /// </summary>
-    public class Assignor : BaseEntity
+    public class Assignor : EntityBase
     {
         IList<Assignment> CreatedAssignments { get; set; }
         IList<Review> WrittenReviews { get; set; }

@@ -2,12 +2,5 @@
 
 
 div {
-    padding: 50px,50px,50px,50px;
-    margin: 40px,40px,40px,40px;
-    border: 1px green dashed;
-    font-size: 200%;
-}
-
-td {
-    width: 33%;
+    border:1px green dotted;
 }
