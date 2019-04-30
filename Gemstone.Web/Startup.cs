@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Diagnostics;
+using System.IO;
 
 namespace Gemstone
 {
@@ -18,7 +20,7 @@ namespace Gemstone
     {
         public IContainer ApplicationContainer { get; private set; }
         private readonly IConfiguration _configuration;
-            
+
         public Startup(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -47,8 +49,32 @@ namespace Gemstone
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
+            //app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
+
+            app.UseExceptionHandler(error =>
+            {
+                error.Run(async context =>
+                {
+                    context.Response.StatusCode = 500;
+                    context.Response.ContentType = "text/html";
+
+                    await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
+                    await context.Response.WriteAsync("ERROR!<br><br>\r\n");
+
+                    var exceptionHandlerPathFeature =
+                        context.Features.Get<IExceptionHandlerPathFeature>();
+
+                    if (exceptionHandlerPathFeature?.Error is Exception)
+                    {
+                        await context.Response.WriteAsync("Generic exception thrown<br><br>\r\n");
+                    }
+
+                    await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
+                    await context.Response.WriteAsync("</body></html>\r\n");
+                    await context.Response.WriteAsync(new string(' ', 512)); // IE padding
+                });
+            });
 
             app.UseStaticFiles();
 
