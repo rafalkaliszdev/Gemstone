@@ -1,23 +1,9 @@
 ﻿@model Gemstone.Web.Models.AccountModel
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
 @{
-    ViewData["Title"] = "Sign In";
+    ViewData["PageTitle"] = "Sign In";
 }
 
-@if (accessor.HttpContext.User.Identity.IsAuthenticated)
-{
-    var user = accessor.HttpContext.User;
-    <div>
-        <p>Name: @user.Identity.Name</p>
-        <p>Claim @user.Claims.FirstOrDefault().Value</p>
-    </div>
-}
-else
-{
-    <div>
-        not authenciated
-    </div>
-}
 
 <div class="row">
     <div class="col-md-4">

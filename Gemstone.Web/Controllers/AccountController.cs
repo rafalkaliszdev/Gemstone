@@ -30,7 +30,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> SignIn()
         {
             var model = new AccountModel();
-            return View(model);
+            return await Task.Run(() => View());
         }
 
         [HttpPost]

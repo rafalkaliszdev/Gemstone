@@ -9,6 +9,9 @@
     <script src="\js\jquery-3.4.0.js"></script>
 </head>
 <body>
+    <nav>
+        <TagHelper:partial name="_SignInPartial"> </TagHelper:partial>
+    </nav>
     <h1>Motorcycle workshop</h1>
     <hr />
     <div>
@@ -20,7 +23,6 @@
 
     <footer>
         @Html.ActionLink("Home Page", "Index", "Home")
-        @Url.Action("Index,", "Home")
     </footer>
 </body>
 </html>
