@@ -6,11 +6,11 @@ using Gemstone.Core.Enums;
 
 namespace Gemstone.Core.Services
 {
-    public class ProfessionalService : IProfessionalService
+    public class SpecialistService : ISpecialistService
     {
-        public Professional GetById(string id)
+        public Specialist GetById(string id)
         {
-            return new Professional
+            return new Specialist
             {
                 Name = "Michal",
                 IsBusy = true,
@@ -20,7 +20,7 @@ namespace Gemstone.Core.Services
             };
         }
 
-        public IList<Professional> GetAll()
+        public IList<Specialist> GetAll()
         {
             var exampleAssignment = new Assignment
             {
@@ -41,9 +41,9 @@ namespace Gemstone.Core.Services
                 RealizationTime = RealizationTime.BeforeDeadline
             };
 
-            return new List<Professional>()
+            return new List<Specialist>()
             {
-                new Professional
+                new Specialist
                 {
                     Name = "Michal",
                     IsBusy = true,
@@ -51,7 +51,7 @@ namespace Gemstone.Core.Services
                     //ReceivedReviews = new List<Review>() { exampleReview },
                     //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
-                new Professional
+                new Specialist
                 {
                     Name = "Marcin",
                     IsBusy = false,
@@ -59,7 +59,7 @@ namespace Gemstone.Core.Services
                     //ReceivedReviews = new List<Review>() { exampleReview },
                     //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
-                new Professional
+                new Specialist
                 {
                     Name = "Pawel",
                     IsBusy = false,
@@ -70,17 +70,17 @@ namespace Gemstone.Core.Services
             };
         }
 
-        public void Create(Professional professional)
+        public void Create(Specialist Specialist)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Professional professional)
+        public void Update(Specialist Specialist)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Professional professional)
+        public void Delete(Specialist Specialist)
         {
             throw new NotImplementedException();
         }

@@ -9,10 +9,18 @@
     <script src="\js\jquery-3.4.0.js"></script>
 </head>
 <body>
+    <h1>Motorcycle workshop</h1>
+    <hr />
     <div>
 
         @RenderBody()
 
     </div>
+    <hr />
+
+    <footer>
+        @Html.ActionLink("Home Page", "Index", "Home")
+        @Url.Action("Index,", "Home")
+    </footer>
 </body>
 </html>

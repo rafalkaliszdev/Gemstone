@@ -19,6 +19,7 @@ namespace Gemstone
     public class Startup
     {
         public IContainer ApplicationContainer { get; private set; }
+
         private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
@@ -26,66 +27,77 @@ namespace Gemstone
             _configuration = configuration;
         }
 
+        private void RegisterTypes(ContainerBuilder builder)
+        {
+            builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
+        }
+
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(o =>
-            {
-                o.CheckConsentNeeded = c => true;
-            });
-
             services.AddMvc();
 
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o =>
+                {
+                    o.LoginPath = "/Account/SignIn";
+                    o.LogoutPath = "/Account/SignOut";
+                });
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             var builder = new ContainerBuilder();
 
-            // register all Gemstone services
-            RegisterServices(builder);
+            RegisterTypes(builder);
 
             builder.Populate(services);
+
             this.ApplicationContainer = builder.Build();
+
             return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage(); // detailed info, stack trace etc
+            }
+            else
+            {
+                app.UseExceptionHandler(error =>
+                {
+                    error.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        context.Response.ContentType = "text/html";
+
+                        await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
+                        await context.Response.WriteAsync("Exception<br><br>\r\n");
+
+                        var exceptionHandlerPathFeature =
+                            context.Features.Get<IExceptionHandlerPathFeature>();
+
+                        if (exceptionHandlerPathFeature?.Error is Exception)
+                        {
+                            await context.Response.WriteAsync("Generic exception thrown<br><br>\r\n");
+                        }
+
+                        await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
+                        await context.Response.WriteAsync("</body></html>\r\n");
+                    });
+                });
+            }
+
             app.UseHttpsRedirection();
 
-            app.UseExceptionHandler(error =>
-            {
-                error.Run(async context =>
-                {
-                    context.Response.StatusCode = 500;
-                    context.Response.ContentType = "text/html";
-
-                    await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
-                    await context.Response.WriteAsync("ERROR!<br><br>\r\n");
-
-                    var exceptionHandlerPathFeature =
-                        context.Features.Get<IExceptionHandlerPathFeature>();
-
-                    if (exceptionHandlerPathFeature?.Error is Exception)
-                    {
-                        await context.Response.WriteAsync("Generic exception thrown<br><br>\r\n");
-                    }
-
-                    await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
-                    await context.Response.WriteAsync("</body></html>\r\n");
-                    await context.Response.WriteAsync(new string(' ', 512)); // IE padding
-                });
-            });
+            app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseStaticFiles();
-
-            app.UseAuthentication();
 
             app.UseMvcWithDefaultRoute();
         }
 
-        public void RegisterServices(ContainerBuilder builder)
-        {
-            builder.RegisterType<ProfessionalService>().As<IProfessionalService>().InstancePerLifetimeScope();
-        }
+
     }
 }

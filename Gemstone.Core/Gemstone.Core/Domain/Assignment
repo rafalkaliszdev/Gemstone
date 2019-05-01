@@ -7,7 +7,7 @@ using Gemstone.Core.Abstracts;
 namespace Gemstone.Core.Domain
 {
     /// <summary>
-    /// Represents a task/order that can be created by Assignor, taken and executed by Professional
+    /// Represents a task/order that can be created by Assignor, taken and executed by Specialist
     /// </summary>
     public class Assignment : EntityBase
     {

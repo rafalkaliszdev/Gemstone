@@ -7,70 +7,68 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Gemstone.Web.Controllers
 {
     public class AccountController : Controller
     {
         [HttpGet]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
             var model = new AccountModel();
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Register(AccountModel model)
+        public async Task<IActionResult> Register(AccountModel model)
         {
+            return await Task.Run(() => View());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SignIn()
+        {
+            var model = new AccountModel();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(AccountModel model)
+        {
+            // authenciate
+            if (model.Login == "test" && model.Password == "test")
+            {
+                var properties = new AuthenticationProperties
+                {
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(55), // how long it will persist
+                    IsPersistent = true, // has to be set to get 'ExpiresUtc' work
+                    IssuedUtc = DateTime.UtcNow,
+                };
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, model.Login),
+                    new Claim(ClaimTypes.Email, model.Email),
+                    new Claim(ClaimTypes.Role, "Specialist"),
+                };
+                var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(userIdentity),
+                    properties);
+            }
+
+            return RedirectToAction(nameof(SignIn));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            var properties = new AuthenticationProperties
-            {
-                AllowRefresh = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1),
-                IsPersistent = true,
-                IssuedUtc = DateTime.UtcNow,
-                RedirectUri = "www.google.com"
-            };
-
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name,"testUser1"),
-                new Claim(ClaimTypes.Email, "test@test.pl")
-            };
-
-            var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-            HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(userIdentity));
-            var userClaims = HttpContext.User.Claims.ToList();
-
-            return Content("Login user claims:" 
-                + (userClaims.Count == 2 ? 
-                userClaims[0].Value + userClaims[1].Value
-                :
-                userClaims.Count.ToString()
-                ));
-        }
-
-        [HttpGet]
-        public IActionResult Logout()
-        {
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            var userClaims = HttpContext.User.Claims.ToList();
-            var q = HttpContext.User.Claims.ToList();
-
-            return Content("Login user claims:"
-                + (userClaims.Count == 2 ?
-                userClaims[0].Value + userClaims[1].Value
-                :
-                userClaims.Count.ToString()
-                ));
-        }
     }
 }

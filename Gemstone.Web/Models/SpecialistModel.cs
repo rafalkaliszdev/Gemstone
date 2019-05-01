@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Web.Models
 {
-    public class ProfessionalModel
+    public class SpecialistModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public bool IsBusy { get; set; }
-        //public int TakenAssignmentsCount { get; set; }
-        //public int ReceivedReviewsCount { get; set; }
         public DateTime JoinedOn { get; set; }
     }
 }

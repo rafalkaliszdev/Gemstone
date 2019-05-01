@@ -4,33 +4,34 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gemstone.Core.Services;
 using Gemstone.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Controllers
 {
-    public class ProfesionallController : Controller
+    [Authorize]
+    public class SpecialistController : Controller
     {
-        private readonly IProfessionalService professionalService;
+        private readonly ISpecialistService specialistService;
 
-        public ProfesionallController(IProfessionalService professionalService)
+        public SpecialistController(ISpecialistService specialistService)
         {
-            this.professionalService = professionalService;
+            this.specialistService = specialistService;
         }
 
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return RedirectToAction(nameof(List));
         }
 
-        // todo consider making these async
-        public ActionResult List()
+        public async Task<IActionResult> List()
         {
-            var pros = professionalService.GetAll();
-            var model = new List<ProfessionalModel>();
+            var pros = specialistService.GetAll();
+            var model = new List<SpecialistModel>();
             foreach (var pro in pros)
             {
-                model.Add(new ProfessionalModel
+                model.Add(new SpecialistModel
                 {
                     Name = pro.Name,
                     IsBusy = pro.IsBusy,
@@ -42,10 +43,10 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
-            var pro = professionalService.GetById(id);
-            var model = new ProfessionalModel
+            var pro = specialistService.GetById(id);
+            var model = new SpecialistModel
             {
                 Name = pro.Name,
                 IsBusy = pro.IsBusy,
@@ -56,34 +57,34 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProfessionalModel model)
+        public async Task<IActionResult> Create(SpecialistModel model)
         {
-            var pro = professionalService.GetById(model.Id);
+            var pro = specialistService.GetById(model.Id);
             pro.Name = model.Name;
             pro.IsBusy = model.IsBusy;
             pro.JoinedOn = model.JoinedOn;
-            professionalService.Create(pro);
+            specialistService.Create(pro);
 
             return RedirectToAction(nameof(Get), new { id = model.Id });
         }
 
         [HttpPost]
-        public ActionResult Update(ProfessionalModel model)
+        public async Task<IActionResult> Update(SpecialistModel model)
         {
-            var pro = professionalService.GetById(model.Id);
+            var pro = specialistService.GetById(model.Id);
             pro.Name = model.Name;
             pro.IsBusy = model.IsBusy;
             pro.JoinedOn = model.JoinedOn;
-            professionalService.Update(pro);
+            specialistService.Update(pro);
 
             return RedirectToAction(nameof(Get), new { id = model.Id });
         }
 
         [HttpPost]
-        public ActionResult Delete(ProfessionalModel model)
+        public async Task<IActionResult> Delete(SpecialistModel model)
         {
-            var pro = professionalService.GetById(model.Id);
-            professionalService.Delete(pro);
+            var pro = specialistService.GetById(model.Id);
+            specialistService.Delete(pro);
 
             return RedirectToAction(nameof(List));
         }

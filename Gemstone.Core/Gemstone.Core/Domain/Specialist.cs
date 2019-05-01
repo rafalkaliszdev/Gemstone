@@ -6,9 +6,9 @@ using Gemstone.Core.Abstracts;
 namespace Gemstone.Core.Domain
 {
     /// <summary>
-    /// Represents a Professional or Team of Professionals which can receive and get done Assignment 
+    /// Represents a Specialist or Team of Specialists which can receive and get done Assignment 
     /// </summary>
-    public class Professional : EntityBase
+    public class Specialist : EntityBase
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }
