@@ -17,7 +17,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Register()
         {
             var model = new AccountModel();
-            return View(model);
+            return await Task.Run(() => View());
         }
 
         [HttpPost]
@@ -27,21 +27,23 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SignIn()
+        public async Task<IActionResult> LogIn(string returnUrl)
         {
             var model = new AccountModel();
+
+            if (!string.IsNullOrEmpty(returnUrl)) ViewBag.Unauthorized = true;
+
             return await Task.Run(() => View());
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn(AccountModel model)
+        public async Task<IActionResult> LogIn(AccountModel model)
         {
-            // authenciate
             if (model.Login == "test" && model.Password == "test")
             {
                 var properties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddSeconds(55), // how long it will persist
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(55), // how long it will persist
                     IsPersistent = true, // has to be set to get 'ExpiresUtc' work
                     IssuedUtc = DateTime.UtcNow,
                 };
@@ -49,7 +51,6 @@ namespace Gemstone.Web.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, model.Login),
-                    new Claim(ClaimTypes.Email, model.Email),
                     new Claim(ClaimTypes.Role, "Specialist"),
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -60,11 +61,11 @@ namespace Gemstone.Web.Controllers
                     properties);
             }
 
-            return RedirectToAction(nameof(SignIn));
+            return RedirectToAction("Index","Home");
         }
 
         [HttpGet]
-        public async Task<IActionResult> SignOut()
+        public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();

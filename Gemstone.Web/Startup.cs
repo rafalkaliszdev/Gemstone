@@ -39,8 +39,8 @@ namespace Gemstone
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(o =>
                 {
-                    o.LoginPath = "/Account/SignIn";
-                    o.LogoutPath = "/Account/SignOut";
+                    o.LoginPath = "/Account/LogIn";
+                    o.LogoutPath = "/Account/LogOut";
                 });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

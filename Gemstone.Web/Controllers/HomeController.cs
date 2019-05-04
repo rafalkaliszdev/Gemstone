@@ -11,7 +11,12 @@ namespace Gemstone.Web.Controllers
     {
         public async Task<IActionResult> Index()
         {
-            return View();
+            return await Task.Run(() => View());
+        }
+
+        public async Task<IActionResult> About()
+        {
+            return await Task.Run(() => View());
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model Gemstone.Web.Models.AccountModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@{
+    ViewData["PageTitle"] = "Sign In";
+}
+
+@if (ViewBag.Unauthorized != null && ViewBag.Unauthorized)
+{
+    <div class="alert alert-warning">
+        <strong>Unauthorized!</strong> Log in to access restricted resource.
+    </div>
+}
+
+<TagHelper:form asp-controller="Account" asp-action="LogIn" method="post">
+    <div class="form-group">
+        <TagHelper:label asp-for="Login" class="control-label"></TagHelper:label>
+        <TagHelper:input asp-for="Login" class="form-control" />
+    </div>
+    <div class="form-group">
+        <TagHelper:label asp-for="Password" class="control-label"></TagHelper:label>
+        <TagHelper:input asp-for="Password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Sign In" class="btn btn-primary" />
+    </div>
+</TagHelper:form>

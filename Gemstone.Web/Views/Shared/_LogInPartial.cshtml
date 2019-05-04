@@ -1,0 +1,13 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+
+@if (accessor.HttpContext.User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink("Log out", "LogOut", "Account")
+    var user = accessor.HttpContext.User;
+    <span class="badge badge-pill badge-success">Logged as @user.Identity.Name</span>
+}
+else
+{
+    @Html.ActionLink("Log in", "LogIn", "Account")
+    <span class="badge badge-pill badge-warning">Logged Out</span>
+}

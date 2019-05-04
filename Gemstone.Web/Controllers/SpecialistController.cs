@@ -22,7 +22,7 @@ namespace Gemstone.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return RedirectToAction(nameof(List));
+            return await Task.Run(() => RedirectToAction(nameof(List)));
         }
 
         public async Task<IActionResult> List()

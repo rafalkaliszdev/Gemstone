@@ -41,7 +41,7 @@ namespace Gemstone.Core.Services
                 RealizationTime = RealizationTime.BeforeDeadline
             };
 
-            return new List<Specialist>()
+            var data = new List<Specialist>()
             {
                 new Specialist
                 {
@@ -68,6 +68,15 @@ namespace Gemstone.Core.Services
                     //TakenAssignments = new List<Assignment>() { exampleAssignment }
                 },
             };
+
+            var data2 = new List<Specialist>();
+            data2.AddRange(data);
+            data2.AddRange(data);
+            data2.AddRange(data);
+            data2.AddRange(data);
+            data2.AddRange(data);
+            return data2;
+
         }
 
         public void Create(Specialist Specialist)
