@@ -37,13 +37,17 @@ namespace Gemstone
             services.AddMvc();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(o =>
+                .AddCookie(cookieAuthenticationOptions =>
                 {
-                    o.LoginPath = "/Account/LogIn";
-                    o.LogoutPath = "/Account/LogOut";
+                    cookieAuthenticationOptions.LoginPath = "/Account/LogIn";
+                    cookieAuthenticationOptions.LogoutPath = "/Account/LogOut";
+                    cookieAuthenticationOptions.Cookie = new CookieBuilder()
+                    {
+                        Name = "auth"
+                    };
                 });
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor(); // best possible way to register HttpContext
 
             var builder = new ContainerBuilder();
 
