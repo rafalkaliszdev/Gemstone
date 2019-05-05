@@ -43,7 +43,8 @@ namespace Gemstone
                     cookieAuthenticationOptions.LogoutPath = "/Account/LogOut";
                     cookieAuthenticationOptions.Cookie = new CookieBuilder()
                     {
-                        Name = "auth"
+                        Name = "auth",
+                        Domain = "localhost:44352"
                     };
                 });
 
