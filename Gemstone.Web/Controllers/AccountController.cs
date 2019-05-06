@@ -43,7 +43,7 @@ namespace Gemstone.Web.Controllers
             {
                 var properties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(55), // how long it will persist
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1), // how long it will persist
                     IsPersistent = true, // has to be set to get 'ExpiresUtc' work
                     IssuedUtc = DateTime.UtcNow,
                 };
@@ -61,7 +61,7 @@ namespace Gemstone.Web.Controllers
                     properties);
             }
 
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

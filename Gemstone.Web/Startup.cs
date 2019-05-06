@@ -40,12 +40,7 @@ namespace Gemstone
                 .AddCookie(cookieAuthenticationOptions =>
                 {
                     cookieAuthenticationOptions.LoginPath = "/Account/LogIn";
-                    cookieAuthenticationOptions.LogoutPath = "/Account/LogOut";
-                    cookieAuthenticationOptions.Cookie = new CookieBuilder()
-                    {
-                        Name = "auth",
-                        Domain = "localhost:44352"
-                    };
+                    cookieAuthenticationOptions.LogoutPath = "/Account/LogOut";                    
                 });
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext

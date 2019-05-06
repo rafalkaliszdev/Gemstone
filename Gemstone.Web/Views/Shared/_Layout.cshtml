@@ -11,20 +11,33 @@
     <title>@ViewData["PageTitle"]</title>
     @* preserve this css/js order *@
     <link rel="stylesheet" href="@(url +"css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@(url +"css/override.css")">
     <script src="@(url +"/js/jquery-3.4.0.js")"></script>
     <script src="@(url +"js/bootstrap.min.js")"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="@Url.Action("Index","Home")">Main page</a>
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">Start</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div class="collapse navbar-collapse" id="collaps ibleNavbar">
             <ul class="navbar-nav">
+                @if (accessor.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Specialist")">Browse specialists</a>
+                    </li>
+                }
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Index","Specialist")">Specialist list</a>
+                    <a class="nav-link" href="#">Page 01</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Page 02</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Page 03</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("About","Home")">About</a>
