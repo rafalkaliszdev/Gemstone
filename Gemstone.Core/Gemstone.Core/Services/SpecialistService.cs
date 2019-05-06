@@ -3,24 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.Domain;
 using Gemstone.Core.Enums;
+using Gemstone.Core.Interfaces;
 
 namespace Gemstone.Core.Services
 {
     public class SpecialistService : ISpecialistService
     {
-        public Specialist GetById(string id)
+        public Account GetById(string id)
         {
-            return new Specialist
+            return new Account
             {
                 Name = "Michal",
                 IsBusy = true,
                 JoinedOn = new DateTime(2019, 4, 19),
-                //ReceivedReviews = new List<Review>() { new Review { AdditionalRemarks = "moto prepared as expected" } },
-                //TakenAssignments = new List<Assignment>() { new Assignment { ExpectedResult = "prepare moto for long journey" } }
             };
         }
 
-        public IList<Specialist> GetAll()
+        public IList<Account> GetAll()
         {
             var exampleAssignment = new Assignment
             {
@@ -41,35 +40,32 @@ namespace Gemstone.Core.Services
                 RealizationTime = RealizationTime.BeforeDeadline
             };
 
-            var data = new List<Specialist>()
+            var data = new List<Account>()
             {
-                new Specialist
+                new Account
                 {
                     Name = "Michal",
                     IsBusy = true,
                     JoinedOn = new DateTime(2019,4,19),
-                    //ReceivedReviews = new List<Review>() { exampleReview },
-                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
+
                 },
-                new Specialist
+                new Account
                 {
                     Name = "Marcin",
                     IsBusy = false,
                     JoinedOn = new DateTime(2019,4,19),
-                    //ReceivedReviews = new List<Review>() { exampleReview },
-                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
+
                 },
-                new Specialist
+                new Account
                 {
                     Name = "Pawel",
                     IsBusy = false,
                     JoinedOn = new DateTime(2019,4,19),
-                    //ReceivedReviews = new List<Review>() { exampleReview },
-                    //TakenAssignments = new List<Assignment>() { exampleAssignment }
+
                 },
             };
 
-            var data2 = new List<Specialist>();
+            var data2 = new List<Account>();
             data2.AddRange(data);
             data2.AddRange(data);
             data2.AddRange(data);
@@ -79,17 +75,17 @@ namespace Gemstone.Core.Services
 
         }
 
-        public void Create(Specialist Specialist)
+        public void Create(Account Specialist)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Specialist Specialist)
+        public void Update(Account Specialist)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Specialist Specialist)
+        public void Delete(Account Specialist)
         {
             throw new NotImplementedException();
         }

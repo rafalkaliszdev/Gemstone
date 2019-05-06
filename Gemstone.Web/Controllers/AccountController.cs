@@ -1,6 +1,7 @@
 ﻿using Gemstone.Web.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Web.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         [HttpGet]
@@ -51,7 +53,8 @@ namespace Gemstone.Web.Controllers
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, model.Login),
-                    new Claim(ClaimTypes.Role, "Specialist"),
+                    new Claim(ClaimTypes.Role, "Assignor"),
+                    //new Claim(ClaimTypes.Role, "Specialist"), // todo role should be determined basing on additional property
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

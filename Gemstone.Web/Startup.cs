@@ -13,6 +13,10 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Diagnostics;
 using System.IO;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using Gemstone.Core.Interfaces;
 
 namespace Gemstone
 {
@@ -30,18 +34,30 @@ namespace Gemstone
         private void RegisterTypes(ContainerBuilder builder)
         {
             builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
+            builder.RegisterType<ExaminationService>().As<IExaminationService>().InstancePerLifetimeScope();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(mvcOptions =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                mvcOptions.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(cookieAuthenticationOptions =>
                 {
-                    cookieAuthenticationOptions.LoginPath = "/Account/LogIn";
-                    cookieAuthenticationOptions.LogoutPath = "/Account/LogOut";                    
+                    cookieAuthenticationOptions.LoginPath = new PathString("/Account/LogIn");
+                    cookieAuthenticationOptions.LogoutPath = new PathString("/Account/LogOut");
                 });
+
+            services.AddAuthorization(authorizationOptions =>
+            {
+                authorizationOptions.AddPolicy("AssignorOnly", policy => policy.RequireRole("Assignor"));
+            });
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
 

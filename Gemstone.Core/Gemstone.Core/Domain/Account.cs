@@ -6,14 +6,14 @@ using Gemstone.Core.Abstracts;
 namespace Gemstone.Core.Domain
 {
     /// <summary>
-    /// Represents a Specialist or Team of Specialists which can receive and get done Assignment 
+    /// Represents a web app user (Specialist or Assignor)
     /// </summary>
-    public class Specialist : EntityBase
+    public class Account : EntityBase
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }
-        //public IList<Assignment> TakenAssignments { get; set; }
-        //public IList<Review> ReceivedReviews { get; set; }
+        //public IList<Assignment> Assignments { get; set; }
+        //public IList<Review> Reviews { get; set; }
         public DateTime JoinedOn { get; set; }
     }
 }

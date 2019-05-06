@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gemstone.Core.Interfaces;
 using Gemstone.Core.Services;
 using Gemstone.Web.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -10,18 +11,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles = "Assignor")]
     public class SpecialistController : Controller
     {
         private readonly ISpecialistService specialistService;
+        private readonly IExaminationService examinationService;
 
-        public SpecialistController(ISpecialistService specialistService)
+        public SpecialistController(ISpecialistService specialistService, IExaminationService examinationService)
         {
             this.specialistService = specialistService;
+            this.examinationService = examinationService;
         }
 
         public async Task<IActionResult> Index()
         {
+            var claimsPrincipal = HttpContext.User as System.Security.Claims.ClaimsPrincipal;
+            examinationService.ExamineRoles(claimsPrincipal);
             return await Task.Run(() => RedirectToAction(nameof(List)));
         }
 

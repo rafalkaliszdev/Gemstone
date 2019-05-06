@@ -6,13 +6,11 @@
 
   <ItemGroup>
     <None Remove="Domain\Assignment" />
-    <None Remove="Domain\Assignor" />
     <None Remove="Domain\Review" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="Domain\Assignment" />
-    <Compile Include="Domain\Assignor" />
     <Compile Include="Domain\Review" />
   </ItemGroup>
 
