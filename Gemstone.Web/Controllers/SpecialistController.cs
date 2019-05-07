@@ -25,8 +25,10 @@ namespace Gemstone.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var claimsPrincipal = HttpContext.User as System.Security.Claims.ClaimsPrincipal;
-            examinationService.ExamineRoles(claimsPrincipal);
+            examinationService.ExamineRoles(HttpContext.User as System.Security.Claims.ClaimsPrincipal);
+
+
+
             return await Task.Run(() => RedirectToAction(nameof(List)));
         }
 

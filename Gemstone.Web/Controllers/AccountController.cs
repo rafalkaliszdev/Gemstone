@@ -35,17 +35,26 @@ namespace Gemstone.Web.Controllers
 
             if (!string.IsNullOrEmpty(returnUrl)) ViewBag.Unauthorized = true;
 
+            // session - prevent 'forged cookie attack'
+            var sessionVal = HttpContext.Session.GetString("key1");
+            HttpContext.Session.SetString("key1", "value1");
+
             return await Task.Run(() => View());
         }
 
         [HttpPost]
         public async Task<IActionResult> LogIn(AccountModel model)
         {
+            // session - prevent 'forged cookie attack'
+            var sessionVal = HttpContext.Session.GetString("key1");
+            if (string.IsNullOrEmpty(sessionVal) || sessionVal != "value1")
+                throw new UnauthorizedAccessException();
+
             if (model.Login == "test" && model.Password == "test")
             {
                 var properties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(1), // how long it will persist
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60), // how long it will persist
                     IsPersistent = true, // has to be set to get 'ExpiresUtc' work
                     IssuedUtc = DateTime.UtcNow,
                 };
@@ -54,7 +63,7 @@ namespace Gemstone.Web.Controllers
                 {
                     new Claim(ClaimTypes.Name, model.Login),
                     new Claim(ClaimTypes.Role, "Assignor"),
-                    //new Claim(ClaimTypes.Role, "Specialist"), // todo role should be determined basing on additional property
+                    //new Claim(ClaimTypes.Role, "Specialist"), //todo role should be determined basing on additional "Role" property
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

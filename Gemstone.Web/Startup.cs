@@ -61,6 +61,14 @@ namespace Gemstone
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
 
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.IsEssential = true;
+            });
+
+
             var builder = new ContainerBuilder();
 
             RegisterTypes(builder);
@@ -106,10 +114,12 @@ namespace Gemstone
 
             app.UseHttpsRedirection();
 
-            app.UseCookiePolicy();
+            app.UseCookiePolicy(); // adds CookiePolicyMiddleware required by auth
             app.UseAuthentication();
 
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseMvcWithDefaultRoute();
         }
