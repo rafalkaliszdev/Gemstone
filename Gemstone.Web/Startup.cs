@@ -61,11 +61,17 @@ namespace Gemstone
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
 
-            services.AddSession(options =>
+            // todo this is required by session but suprisingly I didnt use it so far and it worked fine
+            services.AddDistributedMemoryCache();
+
+            // todo should be rather part of auth middleware
+            services.AddSession(sessionOptions =>
             {
-                options.Cookie.Name = ".session";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
-                options.Cookie.IsEssential = true;
+                sessionOptions.Cookie.Name = ".session";
+                sessionOptions.Cookie.Path = "/";
+                sessionOptions.Cookie.HttpOnly = true; // client-side scripting won't access cookie, http request only
+                sessionOptions.Cookie.IsEssential = true;
+                sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10); // how long session can be idle before it is abandoned (does not affect cookie on client browser)
             });
 
 
@@ -111,6 +117,13 @@ namespace Gemstone
                     });
                 });
             }
+
+            // todo this example middleware should be moved out from this project
+            app.Use(async (context, next) =>
+            {
+                context.Items["Gemstone"] = true;
+                await next.Invoke();
+            });
 
             app.UseHttpsRedirection();
 

@@ -63,7 +63,7 @@ namespace Gemstone.Web.Controllers
                 {
                     new Claim(ClaimTypes.Name, model.Login),
                     new Claim(ClaimTypes.Role, "Assignor"),
-                    //new Claim(ClaimTypes.Role, "Specialist"), //todo role should be determined basing on additional "Role" property
+                    //new Claim(ClaimTypes.Role, "Specialist"), // todo role should be determined basing on additional "Role" property
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

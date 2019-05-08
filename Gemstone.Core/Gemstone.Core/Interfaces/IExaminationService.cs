@@ -9,5 +9,6 @@ namespace Gemstone.Core.Interfaces
     public interface IExaminationService
     {
         void ExamineRoles(ClaimsPrincipal claimsPrincipal);
+        void ExamineMiddleware(IDictionary<object,object> items);
     }
 }

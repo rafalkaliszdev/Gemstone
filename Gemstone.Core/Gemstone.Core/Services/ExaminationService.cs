@@ -8,6 +8,7 @@ using Gemstone.Core.Interfaces;
 
 namespace Gemstone.Core.Services
 {
+    // todo actually this service shouldn't be here
     public class ExaminationService : IExaminationService
     {
         public void ExamineRoles(ClaimsPrincipal claimsPrincipal)
@@ -20,6 +21,11 @@ namespace Gemstone.Core.Services
             }
 
             var isAssignor = claimsPrincipal.IsInRole("Assignor");
+        }
+
+        public void ExamineMiddleware(IDictionary<object, object> items)
+        {
+            var value = items["Gemstone"];
         }
     }
 }

@@ -25,7 +25,6 @@ namespace Gemstone.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            examinationService.ExamineRoles(HttpContext.User as System.Security.Claims.ClaimsPrincipal);
 
 
 
