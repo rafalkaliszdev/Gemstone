@@ -5,13 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Domain\Assignment" />
-    <None Remove="Domain\Review" />
+    <None Remove="DomainModels\Assignment" />
+    <None Remove="DomainModels\Review" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Domain\Assignment" />
-    <Compile Include="Domain\Review" />
+    <Compile Include="DomainModels\Assignment" />
+    <Compile Include="DomainModels\Review" />
   </ItemGroup>
 
 </Project>

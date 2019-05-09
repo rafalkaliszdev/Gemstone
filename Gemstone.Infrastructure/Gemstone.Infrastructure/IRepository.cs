@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Gemstone.Infrastructure
 {
-    interface IRepository<T> where T : EntityBase
+    interface IRepository<TEntity> where TEntity : EntityBase
     {
-        T GetById(int id);
-        IEnumerable<T> List();
-        void Insert(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        IEnumerable<TEntity> GetAll();
+        TEntity Get(long id);
+        void Add(TEntity entity);
+        void Update(TEntity dbEntity, TEntity entity);
+        void Delete(TEntity entity);
     }
 }

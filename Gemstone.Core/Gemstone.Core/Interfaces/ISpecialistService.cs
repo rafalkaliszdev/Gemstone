@@ -1,4 +1,5 @@
 ﻿using Gemstone.Core.Domain;
+using Gemstone.Core.DomainModels;
 using System;
 using System.Collections.Generic;
 using System.Text;

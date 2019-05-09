@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.Abstracts;
 
-namespace Gemstone.Core.Domain
+namespace Gemstone.Core.DomainModels
 {
     /// <summary>
     /// Represents a web app user (Specialist or Assignor)
@@ -12,8 +12,6 @@ namespace Gemstone.Core.Domain
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }
-        //public IList<Assignment> Assignments { get; set; }
-        //public IList<Review> Reviews { get; set; }
         public DateTime JoinedOn { get; set; }
     }
 }

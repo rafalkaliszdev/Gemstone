@@ -34,11 +34,20 @@ namespace Gemstone
         private void RegisterTypes(ContainerBuilder builder)
         {
             builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
-            builder.RegisterType<ExaminationService>().As<IExaminationService>().InstancePerLifetimeScope();
+        }
+
+        private void AddRepositories(IServiceCollection services)
+        {
+            services.AddScoped<IRepository<Tree>, TreeRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
+    dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("GemstoneDatabase")));
+
+            AddRepositories(services);
+
             services.AddMvc(mvcOptions =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -118,13 +127,6 @@ namespace Gemstone
                 });
             }
 
-            // todo this example middleware should be moved out from this project
-            app.Use(async (context, next) =>
-            {
-                context.Items["Gemstone"] = true;
-                await next.Invoke();
-            });
-
             app.UseHttpsRedirection();
 
             app.UseCookiePolicy(); // adds CookiePolicyMiddleware required by auth
@@ -136,7 +138,5 @@ namespace Gemstone
 
             app.UseMvcWithDefaultRoute();
         }
-
-
     }
 }

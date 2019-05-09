@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.Domain;
+using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
 
 namespace Gemstone.Core.Services
 {
+    // todo very much to do here
     public class SpecialistService : ISpecialistService
     {
         public Account GetById(string id)
@@ -21,24 +23,24 @@ namespace Gemstone.Core.Services
 
         public IList<Account> GetAll()
         {
-            var exampleAssignment = new Assignment
-            {
-                AddedOn = new DateTime(2019, 4, 9),
-                AssignmentStatus = AssignmentStatus.Done,
-                ExpectedDoneOn = new DateTime(2019, 4, 15),
-                ValidUntil = new DateTime(2019, 4, 9),
-                ExpectedResult = "prepare moto for long journey",
-                MaxAcceptablePrice = 12.34M,
-            };
-            var exampleReview = new Review
-            {
-                Assignment = exampleAssignment,
-                AddedOn = new DateTime(2019, 4, 9),
-                AdditionalRemarks = "moto prepared as expected",
-                CommunicationQuality = CommunicationQuality.OftenAndDetailed,
-                RealizationQuality = RealizationQuality.ConditionsMet,
-                RealizationTime = RealizationTime.BeforeDeadline
-            };
+            //var exampleAssignment = new Assignment
+            //{
+            //    AddedOn = new DateTime(2019, 4, 9),
+            //    AssignmentStatus = AssignmentStatus.Done,
+            //    ExpectedDoneOn = new DateTime(2019, 4, 15),
+            //    ValidUntil = new DateTime(2019, 4, 9),
+            //    ExpectedResult = "prepare moto for long journey",
+            //    MaxAcceptablePrice = 12.34M,
+            //};
+            //var exampleReview = new Review
+            //{
+            //    Assignment = exampleAssignment,
+            //    AddedOn = new DateTime(2019, 4, 9),
+            //    AdditionalRemarks = "moto prepared as expected",
+            //    CommunicationQuality = CommunicationQuality.OftenAndDetailed,
+            //    RealizationQuality = RealizationQuality.ConditionsMet,
+            //    RealizationTime = RealizationTime.BeforeDeadline
+            //};
 
             var data = new List<Account>()
             {

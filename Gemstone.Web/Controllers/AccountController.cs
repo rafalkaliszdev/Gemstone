@@ -1,4 +1,4 @@
-﻿using Gemstone.Web.Models;
+﻿using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -35,21 +35,13 @@ namespace Gemstone.Web.Controllers
 
             if (!string.IsNullOrEmpty(returnUrl)) ViewBag.Unauthorized = true;
 
-            // session - prevent 'forged cookie attack'
-            var sessionVal = HttpContext.Session.GetString("key1");
-            HttpContext.Session.SetString("key1", "value1");
-
             return await Task.Run(() => View());
         }
 
         [HttpPost]
         public async Task<IActionResult> LogIn(AccountModel model)
         {
-            // session - prevent 'forged cookie attack'
-            var sessionVal = HttpContext.Session.GetString("key1");
-            if (string.IsNullOrEmpty(sessionVal) || sessionVal != "value1")
-                throw new UnauthorizedAccessException();
-
+            // todo make it use db
             if (model.Login == "test" && model.Password == "test")
             {
                 var properties = new AuthenticationProperties
@@ -79,9 +71,10 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
+            var isInRole = (HttpContext.User as System.Security.Claims.ClaimsPrincipal).IsInRole("Assignor");
+
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
-
     }
 }

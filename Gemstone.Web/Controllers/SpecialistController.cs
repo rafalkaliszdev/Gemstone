@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gemstone.Core.Interfaces;
 using Gemstone.Core.Services;
-using Gemstone.Web.Models;
+using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,19 +15,14 @@ namespace Gemstone.Web.Controllers
     public class SpecialistController : Controller
     {
         private readonly ISpecialistService specialistService;
-        private readonly IExaminationService examinationService;
 
-        public SpecialistController(ISpecialistService specialistService, IExaminationService examinationService)
+        public SpecialistController(ISpecialistService specialistService)
         {
             this.specialistService = specialistService;
-            this.examinationService = examinationService;
         }
 
         public async Task<IActionResult> Index()
         {
-
-
-
             return await Task.Run(() => RedirectToAction(nameof(List)));
         }
 
