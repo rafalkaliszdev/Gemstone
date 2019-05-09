@@ -17,6 +17,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Gemstone.Core.Interfaces;
+using Gemstone.Infrastructure.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Gemstone.Infrastructure;
+using Gemstone.Core.DomainModels;
 
 namespace Gemstone
 {
@@ -24,11 +28,11 @@ namespace Gemstone
     {
         public IContainer ApplicationContainer { get; private set; }
 
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration configuration;
 
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            this.configuration = configuration;
         }
 
         private void RegisterTypes(ContainerBuilder builder)
@@ -38,13 +42,13 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
-            //services.AddScoped<IRepository<Tree>, TreeRepository>();
+            services.AddScoped<IRepository<Account>, AccountRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-    //        services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
-    //dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("GemstoneDatabase")));
+            services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
+                dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("GemstoneDatabase")));
 
             AddRepositories(services);
 

@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gemstone.Infrastructure.DataAccess
 {
-    class GemstoneDbContext : DbContext
+    public class GemstoneDbContext : DbContext
     {
         public GemstoneDbContext(DbContextOptions<GemstoneDbContext> options) : base(options)
         {
         }
 
-        public DbSet<Account> Tree { get; set; }
+        public DbSet<Account> Account { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Account>().tab("Account");
+            modelBuilder.Entity<Account>().ToTable("Account");
         }
     }
 }

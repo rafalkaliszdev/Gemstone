@@ -7,6 +7,6 @@ namespace Gemstone.Core.Abstracts
 {
     public abstract class EntityBase
     {
-        public string Id { get; set; }
+        public long Id { get; set; }
     }
 }

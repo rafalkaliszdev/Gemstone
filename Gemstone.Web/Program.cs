@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Gemstone.Infrastructure.DataAccess;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Gemstone
@@ -15,19 +17,19 @@ namespace Gemstone
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-            //using (var scope = host.Services.CreateScope())
-            //{
-            //    var services = scope.ServiceProvider;
-            //    try
-            //    {
-            //        var context = services.GetRequiredService<GemstoneDbContext>();
-            //        GemstoneDbInitializer.Initialize(context);
-            //    }
-            //    catch
-            //    {
-            //        throw;
-            //    }
-            //}
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<GemstoneDbContext>();
+                    DatabaseInitializer.Initialize(context);
+                }
+                catch
+                {
+                    throw;
+                }
+            }
             host.Run();
         }
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Gemstone.Infrastructure
 {
-    interface IRepository<TEntity> where TEntity : EntityBase
+    public interface IRepository<TEntity> where TEntity : EntityBase
     {
         IEnumerable<TEntity> GetAll();
         TEntity Get(long id);
