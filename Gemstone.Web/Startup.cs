@@ -38,13 +38,13 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
-            services.AddScoped<IRepository<Tree>, TreeRepository>();
+            //services.AddScoped<IRepository<Tree>, TreeRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
-    dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("GemstoneDatabase")));
+    //        services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
+    //dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("GemstoneDatabase")));
 
             AddRepositories(services);
 
