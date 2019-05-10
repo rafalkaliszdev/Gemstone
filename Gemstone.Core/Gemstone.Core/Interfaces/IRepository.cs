@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Gemstone.Infrastructure
+namespace Gemstone.Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : EntityBase
     {

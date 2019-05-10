@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Gemstone.Core.DomainModels;
+using Gemstone.Core.Interfaces;
 using Gemstone.Core.Services;
+using Gemstone.Infrastructure;
+using Gemstone.Infrastructure.DataInitialization;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Autofac.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Diagnostics;
-using System.IO;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Authorization;
-using Gemstone.Core.Interfaces;
-using Gemstone.Infrastructure.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using Gemstone.Infrastructure;
-using Gemstone.Core.DomainModels;
+using System;
 
 namespace Gemstone
 {
@@ -74,20 +68,6 @@ namespace Gemstone
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
 
-            // todo this is required by session but suprisingly I didnt use it so far and it worked fine
-            services.AddDistributedMemoryCache();
-
-            // todo should be rather part of auth middleware
-            services.AddSession(sessionOptions =>
-            {
-                sessionOptions.Cookie.Name = ".session";
-                sessionOptions.Cookie.Path = "/";
-                sessionOptions.Cookie.HttpOnly = true; // client-side scripting won't access cookie, http request only
-                sessionOptions.Cookie.IsEssential = true;
-                sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10); // how long session can be idle before it is abandoned (does not affect cookie on client browser)
-            });
-
-
             var builder = new ContainerBuilder();
 
             RegisterTypes(builder);
@@ -107,28 +87,7 @@ namespace Gemstone
             }
             else
             {
-                app.UseExceptionHandler(error =>
-                {
-                    error.Run(async context =>
-                    {
-                        context.Response.StatusCode = 500;
-                        context.Response.ContentType = "text/html";
-
-                        await context.Response.WriteAsync("<html lang=\"en\"><body>\r\n");
-                        await context.Response.WriteAsync("Exception<br><br>\r\n");
-
-                        var exceptionHandlerPathFeature =
-                            context.Features.Get<IExceptionHandlerPathFeature>();
-
-                        if (exceptionHandlerPathFeature?.Error is Exception)
-                        {
-                            await context.Response.WriteAsync("Generic exception thrown<br><br>\r\n");
-                        }
-
-                        await context.Response.WriteAsync("<a href=\"/\">Home</a><br>\r\n");
-                        await context.Response.WriteAsync("</body></html>\r\n");
-                    });
-                });
+                throw new NotImplementedException();
             }
 
             app.UseHttpsRedirection();

@@ -5,7 +5,7 @@ using Gemstone.Core.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Gemstone.Infrastructure.DataAccess
+namespace Gemstone.Infrastructure.DataInitialization
 {
     public class GemstoneDbContext : DbContext
     {

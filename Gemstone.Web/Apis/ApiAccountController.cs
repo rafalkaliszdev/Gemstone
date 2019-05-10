@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gemstone.Core.DomainModels;
+using Gemstone.Core.Interfaces;
 using Gemstone.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,15 +20,13 @@ namespace Gemstone.Web.Apis
             this.repository = repository;
         }
 
-        // GET: api/Employee
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Account> employees = repository.GetAll();
-            return Ok(employees);
+            IEnumerable<Account> accounts = repository.GetAll();
+            return Ok(accounts);
         }
 
-        // GET: api/Account/5
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(long id)
         {
@@ -38,7 +37,6 @@ namespace Gemstone.Web.Apis
             return Ok(Account);
         }
 
-        // POST: api/Account
         [HttpPost]
         public IActionResult Post([FromBody] Account model)
         {
@@ -50,7 +48,6 @@ namespace Gemstone.Web.Apis
             return CreatedAtRoute("Get", new { Id = model.Id }, model);
         }
 
-        // PUT: api/Account/5
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] Account model)
         {
@@ -65,7 +62,6 @@ namespace Gemstone.Web.Apis
             return NoContent();
         }
 
-        // DELETE: api/Account/5
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {

@@ -5,7 +5,8 @@ using System.Text;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Gemstone.Core.DomainModels;
-using Gemstone.Infrastructure.DataAccess;
+using Gemstone.Infrastructure.DataInitialization;
+using Gemstone.Core.Interfaces;
 
 namespace Gemstone.Infrastructure
 {

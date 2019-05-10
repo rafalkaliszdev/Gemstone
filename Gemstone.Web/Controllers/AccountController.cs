@@ -32,9 +32,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> LogIn(string returnUrl)
         {
             var model = new AccountModel();
-
-            if (!string.IsNullOrEmpty(returnUrl)) ViewBag.Unauthorized = true;
-
+            if (!string.IsNullOrEmpty(returnUrl)) ViewData["unauthorized"] = true;
             return await Task.Run(() => View());
         }
 
@@ -71,9 +69,8 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            var isInRole = (HttpContext.User as System.Security.Claims.ClaimsPrincipal).IsInRole("Assignor");
-
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            if ((HttpContext.User as System.Security.Claims.ClaimsPrincipal).IsInRole("Assignor"))
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return View();
         }
     }

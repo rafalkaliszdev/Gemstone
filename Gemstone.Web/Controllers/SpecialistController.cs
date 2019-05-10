@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Controllers
 {
-    //[Authorize(Roles = "Assignor")]
+    [Authorize(Roles = "Assignor")]
     public class SpecialistController : Controller
     {
         private readonly ISpecialistService specialistService;
@@ -30,13 +30,13 @@ namespace Gemstone.Web.Controllers
         {
             var pros = specialistService.GetAll();
             var model = new List<SpecialistModel>();
-            foreach (var pro in pros)
+            foreach (var specialist in pros)
             {
                 model.Add(new SpecialistModel
                 {
-                    Name = pro.Name,
-                    IsBusy = pro.IsBusy,
-                    JoinedOn = pro.JoinedOn,
+                    Name = specialist.Name,
+                    IsBusy = specialist.IsBusy,
+                    JoinedOn = specialist.JoinedOn,
                 });
             }
 
@@ -44,14 +44,15 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get(long id)
         {
-            var pro = specialistService.GetById(id);
+            var specialist = specialistService.GetById(id);
+            // todo automapper suggested
             var model = new SpecialistModel
             {
-                Name = pro.Name,
-                IsBusy = pro.IsBusy,
-                JoinedOn = pro.JoinedOn,
+                Name = specialist.Name,
+                IsBusy = specialist.IsBusy,
+                JoinedOn = specialist.JoinedOn,
             };
 
             return View(model);
@@ -60,11 +61,11 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SpecialistModel model)
         {
-            var pro = specialistService.GetById(model.Id);
-            pro.Name = model.Name;
-            pro.IsBusy = model.IsBusy;
-            pro.JoinedOn = model.JoinedOn;
-            specialistService.Create(pro);
+            var specialist = specialistService.GetById(model.Id);
+            specialist.Name = model.Name;
+            specialist.IsBusy = model.IsBusy;
+            specialist.JoinedOn = model.JoinedOn;
+            specialistService.Create(specialist);
 
             return RedirectToAction(nameof(Get), new { id = model.Id });
         }
@@ -72,11 +73,11 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SpecialistModel model)
         {
-            var pro = specialistService.GetById(model.Id);
-            pro.Name = model.Name;
-            pro.IsBusy = model.IsBusy;
-            pro.JoinedOn = model.JoinedOn;
-            specialistService.Update(pro);
+            var specialist = specialistService.GetById(model.Id);
+            specialist.Name = model.Name;
+            specialist.IsBusy = model.IsBusy;
+            specialist.JoinedOn = model.JoinedOn;
+            specialistService.Update(specialist);
 
             return RedirectToAction(nameof(Get), new { id = model.Id });
         }
@@ -84,8 +85,8 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(SpecialistModel model)
         {
-            var pro = specialistService.GetById(model.Id);
-            specialistService.Delete(pro);
+            var specialist = specialistService.GetById(model.Id);
+            specialistService.Delete(specialist);
 
             return RedirectToAction(nameof(List));
         }

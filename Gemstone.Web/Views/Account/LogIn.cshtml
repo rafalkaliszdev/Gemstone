@@ -4,7 +4,7 @@
     ViewData["PageTitle"] = "Sign In";
 }
 
-@if (ViewBag.Unauthorized != null && ViewBag.Unauthorized)
+@if (ViewData["unauthorized"] != null && (bool)ViewData["unauthorized"])
 {
     <div class="alert alert-warning">
         <strong>Unauthorized!</strong> Log in to access restricted resource.

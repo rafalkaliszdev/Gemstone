@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Gemstone.Infrastructure.DataAccess
+namespace Gemstone.Infrastructure.DataInitialization
 {
     public static class DatabaseInitializer
     {

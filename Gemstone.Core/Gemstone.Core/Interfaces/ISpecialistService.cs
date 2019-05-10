@@ -1,17 +1,14 @@
-﻿using Gemstone.Core.Domain;
-using Gemstone.Core.DomainModels;
-using System;
+﻿using Gemstone.Core.DomainModels;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gemstone.Core.Interfaces
 {
     public interface ISpecialistService
     {
-        Account GetById(string id);
+        Account GetById(long id);
         IList<Account> GetAll();
-        void Create(Account Specialist);
-        void Update(Account Specialist);
-        void Delete(Account Specialist);
+        void Create(Account specialist);
+        void Update(Account specialist);
+        void Delete(Account specialist);
     }
 }

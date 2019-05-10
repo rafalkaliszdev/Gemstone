@@ -1,8 +1,16 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
 @{
     ViewData["PageTitle"] = "Logged out";
+    var url = $"{accessor.HttpContext.Request.Scheme}://{accessor.HttpContext.Request.Host}/";
 }
 
 <div class="alert alert-success">
     <strong>Logged out!</strong> Remember to log out after you end your work to prevent someone to use your identity.
 </div>
+
+<script>
+    setTimeout(reload, 2000);
+    function reload(){
+        window.location = '@(url)';
+    }
+</script>

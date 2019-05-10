@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Gemstone.Core.Domain;
 using Gemstone.Core.DomainModels;
@@ -8,88 +9,42 @@ using Gemstone.Core.Interfaces;
 
 namespace Gemstone.Core.Services
 {
-    // todo very much to do here
     public class SpecialistService : ISpecialistService
     {
-        public Account GetById(string id)
+        private readonly IRepository<Account> repository;
+
+        public SpecialistService(IRepository<Account> repository)
         {
-            return new Account
-            {
-                Name = "Michal",
-                IsBusy = true,
-                JoinedOn = new DateTime(2019, 4, 19),
-            };
+            this.repository = repository;
+        }
+
+        public Account GetById(long id)
+        {
+            var record = repository.Get(id);
+            return record;
         }
 
         public IList<Account> GetAll()
         {
-            //var exampleAssignment = new Assignment
-            //{
-            //    AddedOn = new DateTime(2019, 4, 9),
-            //    AssignmentStatus = AssignmentStatus.Done,
-            //    ExpectedDoneOn = new DateTime(2019, 4, 15),
-            //    ValidUntil = new DateTime(2019, 4, 9),
-            //    ExpectedResult = "prepare moto for long journey",
-            //    MaxAcceptablePrice = 12.34M,
-            //};
-            //var exampleReview = new Review
-            //{
-            //    Assignment = exampleAssignment,
-            //    AddedOn = new DateTime(2019, 4, 9),
-            //    AdditionalRemarks = "moto prepared as expected",
-            //    CommunicationQuality = CommunicationQuality.OftenAndDetailed,
-            //    RealizationQuality = RealizationQuality.ConditionsMet,
-            //    RealizationTime = RealizationTime.BeforeDeadline
-            //};
-
-            var data = new List<Account>()
-            {
-                new Account
-                {
-                    Name = "Michal",
-                    IsBusy = true,
-                    JoinedOn = new DateTime(2019,4,19),
-
-                },
-                new Account
-                {
-                    Name = "Marcin",
-                    IsBusy = false,
-                    JoinedOn = new DateTime(2019,4,19),
-
-                },
-                new Account
-                {
-                    Name = "Pawel",
-                    IsBusy = false,
-                    JoinedOn = new DateTime(2019,4,19),
-
-                },
-            };
-
-            var data2 = new List<Account>();
-            data2.AddRange(data);
-            data2.AddRange(data);
-            data2.AddRange(data);
-            data2.AddRange(data);
-            data2.AddRange(data);
-            return data2;
-
+            var records = repository.GetAll().ToList();
+            return records;
         }
 
-        public void Create(Account Specialist)
+        public void Create(Account specialist)
         {
-            throw new NotImplementedException();
+            repository.Add(specialist);
         }
 
-        public void Update(Account Specialist)
+        public void Update(Account specialist)
         {
-            throw new NotImplementedException();
+            var record = repository.Get(specialist.Id);
+            repository.Update(record, specialist);
         }
 
-        public void Delete(Account Specialist)
+        public void Delete(Account specialist)
         {
-            throw new NotImplementedException();
+            var record = repository.Get(specialist.Id);
+            repository.Delete(specialist);
         }
     }
 }
