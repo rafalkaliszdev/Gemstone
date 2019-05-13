@@ -54,6 +54,16 @@ namespace Gemstone
                 mvcOptions.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddSession(sessionOptions =>
+            {
+                sessionOptions.Cookie.Name = ".session";
+                sessionOptions.Cookie.Path = "/";
+                sessionOptions.Cookie.HttpOnly = true; // client-side scripting won't access cookie, http request only
+                sessionOptions.Cookie.IsEssential = true;
+                sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10); // how long session can be idle before it is abandoned (does not affect cookie on client browser)
+            });
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(cookieAuthenticationOptions =>
                 {
