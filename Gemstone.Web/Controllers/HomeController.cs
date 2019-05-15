@@ -10,6 +10,7 @@ namespace Gemstone.Web.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return await Task.Run(() => View());

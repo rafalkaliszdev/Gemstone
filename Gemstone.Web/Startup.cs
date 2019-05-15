@@ -36,6 +36,8 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
+            // todo which is actually better
+            //services.AddSingleton<IRepository<Account>, AccountRepository>();
             services.AddScoped<IRepository<Account>, AccountRepository>();
         }
 

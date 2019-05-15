@@ -38,8 +38,9 @@ namespace Gemstone.Infrastructure
 
         public void Update(Account model, Account entity)
         {
-            model.Name = entity.Name;
-            model.IsBusy = entity.IsBusy;
+            model.UserName = entity.UserName;
+            model.AccountRole = entity.AccountRole;
+            model.Password = entity.Password;
             model.JoinedOn = entity.JoinedOn;
 
             _context.SaveChanges();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
 using Gemstone.Core.Services;
 using Gemstone.Web.ViewModels;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Controllers
 {
-    [Authorize(Roles = "Assignor")]
+    [Authorize(Roles = nameof(AccountRole.AssignorRole))]
     public class SpecialistController : Controller
     {
         private readonly ISpecialistService specialistService;
@@ -34,8 +35,7 @@ namespace Gemstone.Web.Controllers
             {
                 model.Add(new SpecialistModel
                 {
-                    Name = specialist.Name,
-                    IsBusy = specialist.IsBusy,
+                    Name = specialist.UserName,
                     JoinedOn = specialist.JoinedOn,
                 });
             }
@@ -50,8 +50,7 @@ namespace Gemstone.Web.Controllers
             // todo automapper suggested
             var model = new SpecialistModel
             {
-                Name = specialist.Name,
-                IsBusy = specialist.IsBusy,
+                Name = specialist.UserName,
                 JoinedOn = specialist.JoinedOn,
             };
 
@@ -62,8 +61,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Create(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
-            specialist.Name = model.Name;
-            specialist.IsBusy = model.IsBusy;
+            specialist.UserName = model.Name;
             specialist.JoinedOn = model.JoinedOn;
             specialistService.Create(specialist);
 
@@ -74,8 +72,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Update(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
-            specialist.Name = model.Name;
-            specialist.IsBusy = model.IsBusy;
+            specialist.UserName = model.Name;
             specialist.JoinedOn = model.JoinedOn;
             specialistService.Update(specialist);
 

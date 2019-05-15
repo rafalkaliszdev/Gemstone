@@ -14,4 +14,8 @@
     <Compile Include="DomainModels\Review" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Constants\" />
+  </ItemGroup>
+
 </Project>

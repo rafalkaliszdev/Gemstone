@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Account\LogOut.cshtml">
+    <Content Update="Views\Account\AccessDenied.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Account\LogIn.cshtml">

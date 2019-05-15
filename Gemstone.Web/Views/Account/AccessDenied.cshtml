@@ -1,0 +1,20 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@{
+    ViewData["PageTitle"] = "Access denied";
+    var user = ViewData["deniedUser"] as System.Security.Claims.ClaimsPrincipal;
+
+
+}
+
+<h1>
+    Not authorized
+</h1>
+<div>
+    Name : @user.Identity.Name
+</div>
+<div>
+    Auth type : @user.Identity.AuthenticationType
+</div>
+<div>
+    Is authenciated : @user.Identity.IsAuthenticated
+</div>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.DomainModels;
-using Microsoft.EntityFrameworkCore;
+using Gemstone.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gemstone.Infrastructure.DataInitialization
@@ -17,7 +17,10 @@ namespace Gemstone.Infrastructure.DataInitialization
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>().ToTable("Account");
+            modelBuilder.Entity<Account>()
+                .HasDiscriminator<AccountRole>("AccountRole")
+                .HasValue<Specialist>(AccountRole.SpecialistRole)
+                .HasValue<Assignor>(AccountRole.AssignorRole);
         }
     }
 }

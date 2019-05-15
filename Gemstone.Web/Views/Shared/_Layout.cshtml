@@ -40,11 +40,33 @@
                     <a class="nav-link" href="@Url.Action("About","Home")">About</a>
                 </li>
             </ul>
-            <span class="navbar-text" >
+            <span class="navbar-text">
                 <th:partial name="_LogInPartial">
             </span>
         </div>
     </nav>
+
+
+
+
+    @* todo consider making it partial *@
+    @if (TempData["loggedOut"] != null && (bool)TempData["loggedOut"])
+    {
+        <div class="alert alert-success" id="loggedOut">
+            <strong>Logged out!</strong> Remember to log out after you end your work to prevent someone to use your identity.
+        </div>
+        <script>
+            setTimeout(reload, 5000);
+            function reload() {
+                $('#loggedOut').hide();
+            }
+        </script>
+    }
+
+
+
+
+
 
     <div class="container">
         <div class="row">

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.Abstracts;
 
+using Gemstone.Core.Enums;
+
 namespace Gemstone.Core.DomainModels
 {
     /// <summary>
     /// Represents a web app user (Specialist or Assignor)
     /// </summary>
-    public class Account : EntityBase
+    public abstract class Account : EntityBase
     {
-        public string Name { get; set; }
-        public bool IsBusy { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public AccountRole AccountRole { get; set; }
         public DateTime JoinedOn { get; set; }
     }
 }

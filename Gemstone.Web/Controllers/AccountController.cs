@@ -1,4 +1,8 @@
-﻿using Gemstone.Web.ViewModels;
+﻿using Gemstone.Core.DomainModels;
+using Gemstone.Core.Enums;
+using Gemstone.Core.Interfaces;
+using Gemstone.Infrastructure;
+using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -15,9 +19,17 @@ namespace Gemstone.Web.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        private readonly IRepository<Account> accountRepository;
+
+        public AccountController(IRepository<Account> accountRepository)
+        {
+            this.accountRepository = accountRepository;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Register()
         {
+            // todo currently no one can't register into app
             var model = new AccountModel();
             return await Task.Run(() => View());
         }
@@ -39,21 +51,28 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(AccountModel model)
         {
-            // todo make it use db
-            if (model.Login == "test" && model.Password == "test")
+            // todo make it in repository
+            var accounts = accountRepository.GetAll();
+            var account = accounts
+                .SingleOrDefault(
+                acc => acc.UserName.ToLowerInvariant() == model.Username.ToLowerInvariant() &&
+                acc.Password.ToLowerInvariant() == model.Password.ToLowerInvariant());
+
+            if (account != null)
             {
                 var properties = new AuthenticationProperties
                 {
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60), // how long it will persist
-                    IsPersistent = true, // has to be set to get 'ExpiresUtc' work
+                    // how long it will persist
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
+                    // has to be set to get 'ExpiresUtc' work
+                    IsPersistent = true, 
                     IssuedUtc = DateTime.UtcNow,
                 };
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, model.Login),
-                    new Claim(ClaimTypes.Role, "Assignor"),
-                    //new Claim(ClaimTypes.Role, "Specialist"), // todo role should be determined basing on additional "Role" property
+                    new Claim(ClaimTypes.Name, account.UserName),
+                    new Claim(ClaimTypes.Role, account.AccountRole.ToString()),
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -69,9 +88,21 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LogOut()
         {
-            if ((HttpContext.User as System.Security.Claims.ClaimsPrincipal).IsInRole("Assignor"))
+            var claimsPrincipal = (HttpContext.User as System.Security.Claims.ClaimsPrincipal);
+            if (claimsPrincipal.IsInRole(nameof(AccountRole.AssignorRole)) ||
+                claimsPrincipal.IsInRole(nameof(AccountRole.SpecialistRole)))
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return View();
+
+            TempData["loggedOut"] = true;
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AccessDenied()
+        {
+            var claimsPrincipal = (HttpContext.User as System.Security.Claims.ClaimsPrincipal);
+            ViewData["deniedUser"] = claimsPrincipal;
+            return await Task.Run(() => View());
         }
     }
 }
