@@ -11,16 +11,16 @@
     </div>
 }
 
-<TagHelper:form asp-controller="Account" asp-action="LogIn" method="post">
+<th:form asp-controller="Account" asp-action="LogIn" method="post">
     <div class="form-group">
-        <TagHelper:label asp-for="Login" class="control-label"></TagHelper:label>
-        <TagHelper:input asp-for="Login" class="form-control" />
+        <th:label asp-for="Login" class="control-label"></th:label>
+        <th:input asp-for="Login" class="form-control" />
     </div>
     <div class="form-group">
-        <TagHelper:label asp-for="Password" class="control-label"></TagHelper:label>
-        <TagHelper:input asp-for="Password" class="form-control" />
+        <th:label asp-for="Password" class="control-label"></th:label>
+        <th:input asp-for="Password" class="form-control" />
     </div>
     <div class="form-group">
         <input type="submit" value="Log in" class="btn btn-primary" />
     </div>
-</TagHelper:form>
+</th:form>

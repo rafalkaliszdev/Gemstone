@@ -4,16 +4,23 @@
     ViewData["PageTitle"] = "Register";
 }
 
+@* consider these pieces which are currently commented *@
 
-<TagHelper:form asp-controller="Account" asp-action="Register" method="post">
+
+@*<th:form asp-action="Register">*@
+<th:form asp-controller="Account" asp-action="Register" method="post">
+    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
     <div class="form-group">
-        <TagHelper:label asp-for="Login" class="control-label"></TagHelper:label>
-        <TagHelper:input asp-for="Login" class="form-control" />
+        <th:label asp-for="Login" class="control-label"></th:label>
+        <th:input asp-for="Login" class="form-control" />
+        @*<span asp-validation-for="Name" class="text-danger"></span>*@
     </div>
     <div class="form-group">
-        <TagHelper:label asp-for="Password" class="control-label"></TagHelper:label>
-        <TagHelper:input asp-for="Password" class="form-control" />
+        <th:label asp-for="Password" class="control-label"></th:label>
+        <th:input asp-for="Password" class="form-control" />
+        @*<span asp-validation-for="Name" class="text-danger"></span>*@
     </div>
+    @*<input type="submit" value="Create" class="btn btn-default" />*@
     <button type="submit" class="btn btn-primary">Submit</button>
-</TagHelper:form>
+</th:form>
 
