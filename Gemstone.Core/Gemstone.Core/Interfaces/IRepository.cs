@@ -9,11 +9,10 @@ namespace Gemstone.Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : EntityBase
     {
-        // todo make them async - but first do some research
-        IEnumerable<TEntity> GetAll();
-        TEntity Get(long id);
-        Task /*void */Add(TEntity entity);
-        void Update(TEntity dbEntity, TEntity entity);
-        void Delete(TEntity entity);
+        Task<IEnumerable<TEntity>> GetAll();
+        Task<TEntity> Get(long id);
+        Task Add(TEntity entity);
+        Task Update(TEntity dbEntity, TEntity entity);
+        Task Delete(TEntity entity);
     }
 }
