@@ -4,9 +4,6 @@
     ViewData["PageTitle"] = "Register";
 }
 
-@* todo test this form *@
-
-
 <th:form asp-controller="Account" asp-action="Register" method="post">
     <th:div asp-validation-summary="All" class="text-danger"></th:div>
     <div class="form-group">
@@ -19,18 +16,14 @@
         <th:input asp-for="Password" class="form-control" />
         <th:span asp-validation-for="Password" class="text-danger"></th:span>
     </div>
-
     <div class="form-group">
         <th:label asp-for="ConfirmPassword" class="control-label"></th:label>
         <th:input asp-for="ConfirmPassword" class="form-control" />
         <th:span asp-validation-for="ConfirmPassword" class="text-danger"></th:span>
     </div>
-
-
     <div class="form-group">
         <th:label asp-for="SelectedRole" class="control-label"></th:label>
         <th:select asp-for="SelectedRole" class="form-control" asp-items="Model.AvailableRoles">
-            @*<th:option value="">-- Select Your Role --</th:option>*@
         </th:select>
         <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
     </div>

@@ -12,10 +12,15 @@ namespace Gemstone.Web.ViewModels
     {
         [Required]
         public string Username { get; set; }
+
         [Required]
+        [DataType(DataType.Password)]
+        [Compare("ConfirmPassword")]
         public string Password { get; set; }
+
         [Required]
         public string ConfirmPassword { get; set; }
+
         [Required]
         public string SelectedRole { get; set; }
 

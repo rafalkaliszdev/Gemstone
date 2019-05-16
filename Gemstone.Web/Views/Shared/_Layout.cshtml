@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collaps ibleNavbar">
-                <ul class="navbar-nav navbar-collapse">
+            <ul class="navbar-nav navbar-collapse">
                 @if (accessor.HttpContext.User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
@@ -34,7 +34,7 @@
                     <a class="nav-link" href="@Url.Action("About","Home")">User stories</a>
                 </li>
             </ul>
-            <th:partial name="_LogInPartial">
+            <th:partial name="_LoginPartial">
 
 
         </div>

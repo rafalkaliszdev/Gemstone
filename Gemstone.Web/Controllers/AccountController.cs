@@ -73,7 +73,7 @@ namespace Gemstone.Web.Controllers
                 accountService.AddNewAccount(dmodel);
 
                 TempData["accountCreated"] = true;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             }
 
             model.AvailableRoles = new AccountRole().ToSelectList();
