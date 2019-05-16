@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Gemstone.Core.Domain;
 using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
@@ -20,31 +21,32 @@ namespace Gemstone.Core.Services
 
         public Account GetById(long id)
         {
-            var record = repository.Get(id);
+            var record = repository.GetByIdAsync(id).Result;
             return record;
         }
 
         public IList<Account> GetAll()
         {
-            var records = repository.GetAll().ToList();
-            return records;
+            var records = repository.GetAllAsync().Result;
+            return records.ToList();
         }
 
-        public void Create(Account Assignor)
+        public void Create(Account assignor)
         {
-            repository.Add(Assignor);
+            repository.AddAsync(assignor);
         }
 
-        public void Update(Account Assignor)
+        public void Update(Account assignor)
         {
-            var record = repository.Get(Assignor.ID);
-            repository.Update(record, Assignor);
+            var record = repository.GetByIdAsync(assignor.ID).Result;
+            record = assignor;
+            repository.UpdateAsync(record);
         }
 
-        public void Delete(Account Assignor)
+        public void Delete(Account assignor)
         {
-            var record = repository.Get(Assignor.ID);
-            repository.Delete(Assignor);
+            var record = repository.GetByIdAsync(assignor.ID);
+            repository.DeleteAsync(assignor);
         }
     }
 }

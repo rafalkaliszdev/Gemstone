@@ -11,10 +11,7 @@
     </div>
 }
 
-@* todo test this form *@
-
-
-<th:form asp-controller="Account" asp-action="LogIn" method="post">
+<th:form asp-controller="Account" asp-action="Login" method="post">
     <th:div asp-validation-summary="ModelOnly" class="text-danger"></th:div>
     <div class="form-group">
         <th:label asp-for="Username" class="control-label"></th:label>
@@ -26,14 +23,5 @@
         <th:input asp-for="Password" class="form-control" />
         <th:span asp-validation-for="Password" class="text-danger"></th:span>
     </div>
-
-
-
-    <div class="form-group">
-        <input type="submit" value="Log in" class="btn btn-primary" />
-    </div>
-    
-    
-    
     <input type="submit" value="Log in" class="btn btn-primary" />
 </th:form>

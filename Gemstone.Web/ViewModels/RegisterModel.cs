@@ -8,11 +8,19 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Web.ViewModels
 {
-    public class LoginModel
+    public class RegisterModel
     {
         [Required]
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string ConfirmPassword { get; set; }
+        [Required]
+        public string SelectedRole { get; set; }
+
+        public AccountRole AccountRole { get; set; }
+        public SelectList AvailableRoles { get; set; }
+
     }
 }

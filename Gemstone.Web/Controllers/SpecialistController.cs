@@ -22,12 +22,12 @@ namespace Gemstone.Web.Controllers
             this.specialistService = specialistService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return await Task.Run(() => RedirectToAction(nameof(List)));
+            return RedirectToAction(nameof(List));
         }
 
-        public async Task<IActionResult> List()
+        public IActionResult List()
         {
             var pros = specialistService.GetAll();
             var model = new List<SpecialistModel>();
@@ -44,7 +44,7 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(long id)
+        public IActionResult Get(long id)
         {
             var specialist = specialistService.GetById(id);
             // todo automapper suggested
@@ -58,7 +58,7 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SpecialistModel model)
+        public IActionResult Create(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
             specialist.Username = model.Name;
@@ -69,7 +69,7 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(SpecialistModel model)
+        public IActionResult Update(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
             specialist.Username = model.Name;
@@ -80,7 +80,7 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(SpecialistModel model)
+        public IActionResult Delete(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
             specialistService.Delete(specialist);

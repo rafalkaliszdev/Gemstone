@@ -20,34 +20,31 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-        public async Task<IEnumerable<Account>> GetAll()
+        public async Task<IEnumerable<Account>> GetAllAsync()
         {
             return await _context.Account.ToListAsync();
         }
 
-        public async Task<Account> Get(long id)
+        public async Task<Account> GetByIdAsync(long id)
         {
             return await _context.Account
                   .FirstOrDefaultAsync(e => e.ID == id);
         }
 
-        public async Task Add(Account entity)
+        public async Task AddAsync(Account entity)
         {
             await _context.Account.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Update(Account model, Account entity)
+        public async Task UpdateAsync(Account entity)
         {
-            model.Username = entity.Username;
-            model.AccountRole = entity.AccountRole;
-            model.Password = entity.Password;
-            model.JoinedOn = entity.JoinedOn;
-
+            // todo ensure it works correctly
+            _context.Account.Update(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(Account model)
+        public async Task DeleteAsync(Account model)
         {
             _context.Account.Remove(model);
             await _context.SaveChangesAsync();

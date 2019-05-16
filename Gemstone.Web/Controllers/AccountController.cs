@@ -32,17 +32,18 @@ namespace Gemstone.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            var model = new AccountModel();
-            model.AccountRole = AccountRole.None;
+            var model = new RegisterModel();
             model.AvailableRoles = new AccountRole().ToSelectList();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(AccountModel model)
+        public IActionResult Register(RegisterModel model)
         {
             if (model.Password != null && model.Password != model.ConfirmPassword)
-                ModelState.AddModelError("password", "Password mismatch");
+                ModelState.AddModelError("", "Password mismatch");
+            if (string.IsNullOrEmpty(model.SelectedRole))
+                ModelState.AddModelError("", "Role not selected");
 
             if (ModelState.IsValid)
             {
@@ -68,24 +69,27 @@ namespace Gemstone.Web.Controllers
                         JoinedOn = DateTime.UtcNow
                     };
                 }
-                await accountService.AddNewAccount(dmodel);
+
+                accountService.AddNewAccount(dmodel);
 
                 TempData["accountCreated"] = true;
                 return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction(nameof(Register));
+
+            model.AvailableRoles = new AccountRole().ToSelectList();
+            return View(model);
         }
 
         [HttpGet]
-        public IActionResult LogIn(string returnUrl)
+        public IActionResult Login(string returnUrl)
         {
-            var model = new AccountModel();
+            var model = new LoginModel();
             if (!string.IsNullOrEmpty(returnUrl)) ViewData["unauthorized"] = true;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(AccountModel model)
+        public async Task<IActionResult> Login(LoginModel model)
         {
             var account = accountService.AuthenciateAccount(model.Username, model.Password);
             if (account != null)

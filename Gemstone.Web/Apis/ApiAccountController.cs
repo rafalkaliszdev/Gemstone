@@ -21,16 +21,16 @@ namespace Gemstone.Web.Apis
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            IEnumerable<Account> accounts = repository.GetAll();
+            IEnumerable<Account> accounts = await repository.GetAllAsync();
             return Ok(accounts);
         }
 
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(long id)
+        public async Task<IActionResult> Get(long id)
         {
-            Account Account = repository.Get(id);
+            Account Account = await repository.GetByIdAsync(id);
             if (Account == null)
                 return NotFound("The Account record couldn't be found.");
 
@@ -38,38 +38,37 @@ namespace Gemstone.Web.Apis
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Account model)
+        public async Task<IActionResult> Post([FromBody] Account model)
         {
             if (model == null)
                 return BadRequest("Account is null.");
 
-            repository.Add(model);
-            //return Created(new Uri($"https://localhost:44384/api/Account/{Account.Id}"), Account);
+            await repository.AddAsync(model);
             return CreatedAtRoute("Get", new { Id = model.ID }, model);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(long id, [FromBody] Account model)
+        public async Task<IActionResult> Put(long id, [FromBody] Account model)
         {
             if (model == null)
                 return BadRequest("Account is null.");
 
-            Account record = repository.Get(id);
+            Account record = await repository.GetByIdAsync(id);
             if (record == null)
                 return NotFound("The Account record couldn't be found.");
 
-            repository.Update(record, model);
+            await repository.UpdateAsync(model);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public async Task<IActionResult> Delete(long id)
         {
-            Account record = repository.Get(id);
+            Account record = await repository.GetByIdAsync(id);
             if (record == null)
                 return NotFound("The Account record couldn't be found.");
 
-            repository.Delete(record);
+            await repository.DeleteAsync(record);
             return NoContent();
         }
     }

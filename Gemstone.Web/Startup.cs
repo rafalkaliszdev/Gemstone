@@ -71,7 +71,7 @@ namespace Gemstone
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(cookieAuthenticationOptions =>
                 {
-                    cookieAuthenticationOptions.LoginPath = new PathString("/Account/LogIn");
+                    cookieAuthenticationOptions.LoginPath = new PathString("/Account/Login");
                     cookieAuthenticationOptions.LogoutPath = new PathString("/Account/LogOut");
                 });
 

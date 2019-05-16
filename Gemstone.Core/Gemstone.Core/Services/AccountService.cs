@@ -19,15 +19,14 @@ namespace Gemstone.Core.Services
             this.accountRepository = accountRepository;
         }
 
-        public async Task AddNewAccount(Account account)
+        public void AddNewAccount(Account account)
         {
-            await accountRepository.Add(account);
+            accountRepository.AddAsync(account);
         }
 
-        // todo make it async
         public Account AuthenciateAccount(string username, string password)
         {
-            var accounts = accountRepository.GetAll();
+            var accounts = accountRepository.GetAllAsync().Result;
             var account = accounts
                 .SingleOrDefault(
                 acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant() &&

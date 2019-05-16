@@ -9,7 +9,7 @@ namespace Gemstone.Core.Interfaces
         /// <summary>
         /// Registers new Account
         /// </summary>
-        Task AddNewAccount(Account account);
+        void AddNewAccount(Account account);
         /// <summary>
         /// Returns Account record if exist, null if not
         /// </summary>
