@@ -12,7 +12,7 @@ namespace Gemstone.Core.DomainModels
     /// </summary>
     public abstract class Account : EntityBase
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public string Password { get; set; }
         public AccountRole AccountRole { get; set; }
         public DateTime JoinedOn { get; set; }

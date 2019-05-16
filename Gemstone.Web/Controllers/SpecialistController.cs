@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Controllers
 {
-    [Authorize(Roles = nameof(AccountRole.AssignorRole))]
+    [Authorize(Roles = nameof(AccountRole.Assignor))]
     public class SpecialistController : Controller
     {
         private readonly ISpecialistService specialistService;
@@ -35,7 +35,7 @@ namespace Gemstone.Web.Controllers
             {
                 model.Add(new SpecialistModel
                 {
-                    Name = specialist.UserName,
+                    Name = specialist.Username,
                     JoinedOn = specialist.JoinedOn,
                 });
             }
@@ -50,7 +50,7 @@ namespace Gemstone.Web.Controllers
             // todo automapper suggested
             var model = new SpecialistModel
             {
-                Name = specialist.UserName,
+                Name = specialist.Username,
                 JoinedOn = specialist.JoinedOn,
             };
 
@@ -61,7 +61,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Create(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
-            specialist.UserName = model.Name;
+            specialist.Username = model.Name;
             specialist.JoinedOn = model.JoinedOn;
             specialistService.Create(specialist);
 
@@ -72,7 +72,7 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Update(SpecialistModel model)
         {
             var specialist = specialistService.GetById(model.Id);
-            specialist.UserName = model.Name;
+            specialist.Username = model.Name;
             specialist.JoinedOn = model.JoinedOn;
             specialistService.Update(specialist);
 

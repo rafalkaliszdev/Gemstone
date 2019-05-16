@@ -23,7 +23,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collaps ibleNavbar">
-            <ul class="navbar-nav">
+                <ul class="navbar-nav navbar-collapse">
                 @if (accessor.HttpContext.User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
@@ -31,18 +31,12 @@
                     </li>
                 }
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Page 01</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page 02</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About","Home")">About</a>
+                    <a class="nav-link" href="@Url.Action("About","Home")">User stories</a>
                 </li>
             </ul>
-            <span class="navbar-text">
-                <th:partial name="_LogInPartial">
-            </span>
+            <th:partial name="_LogInPartial">
+
+
         </div>
     </nav>
 
@@ -63,6 +57,19 @@
         </script>
     }
 
+    @* todo consider making it partial *@
+    @if (TempData["accountCreated"] != null && (bool)TempData["accountCreated"])
+    {
+        <div class="alert alert-success" id="accountCreated">
+            <strong>Account created!</strong> Basing on your identity you have now access to specific parts of application.
+        </div>
+        <script>
+            setTimeout(reload, 5000);
+            function reload() {
+                $('#accountCreated').hide();
+            }
+        </script>
+    }
 
 
 

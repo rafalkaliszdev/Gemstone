@@ -45,7 +45,7 @@ namespace Gemstone.Web.Apis
 
             repository.Add(model);
             //return Created(new Uri($"https://localhost:44384/api/Account/{Account.Id}"), Account);
-            return CreatedAtRoute("Get", new { Id = model.Id }, model);
+            return CreatedAtRoute("Get", new { Id = model.ID }, model);
         }
 
         [HttpPut("{id}")]

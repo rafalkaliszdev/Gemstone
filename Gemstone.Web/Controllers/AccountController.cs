@@ -1,6 +1,7 @@
 ﻿using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
+using Gemstone.Core.Services;
 using Gemstone.Infrastructure;
 using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -8,56 +9,85 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Gemstone.Web.Extensions;
 
 namespace Gemstone.Web.Controllers
 {
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly IRepository<Account> accountRepository;
+        private readonly IAccountService accountService;
 
-        public AccountController(IRepository<Account> accountRepository)
+        public AccountController(IAccountService accountService)
         {
-            this.accountRepository = accountRepository;
+            this.accountService = accountService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            // todo currently no one can't register into app
             var model = new AccountModel();
-            return await Task.Run(() => View());
+            model.AccountRole = AccountRole.None;
+            model.AvailableRoles = new AccountRole().ToSelectList();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(AccountModel model)
         {
-            return await Task.Run(() => View());
+            if (model.Password != null && model.Password != model.ConfirmPassword)
+                ModelState.AddModelError("password", "Password mismatch");
+
+            if (ModelState.IsValid)
+            {
+                Account dmodel;
+                if (model.SelectedRole == nameof(AccountRole.Assignor))
+                {
+                    // todo consider adding mapping
+                    dmodel = new Assignor()
+                    {
+                        AccountRole = AccountRole.Assignor,
+                        Username = model.Username,
+                        Password = model.Password,
+                        JoinedOn = DateTime.UtcNow
+                    };
+                }
+                else
+                {
+                    dmodel = new Specialist()
+                    {
+                        AccountRole = AccountRole.Specialist,
+                        Username = model.Username,
+                        Password = model.Password,
+                        JoinedOn = DateTime.UtcNow
+                    };
+                }
+                await accountService.AddNewAccount(dmodel);
+
+                TempData["accountCreated"] = true;
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction(nameof(Register));
         }
 
         [HttpGet]
-        public async Task<IActionResult> LogIn(string returnUrl)
+        public IActionResult LogIn(string returnUrl)
         {
             var model = new AccountModel();
             if (!string.IsNullOrEmpty(returnUrl)) ViewData["unauthorized"] = true;
-            return await Task.Run(() => View());
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> LogIn(AccountModel model)
         {
-            // todo make it in repository
-            var accounts = accountRepository.GetAll();
-            var account = accounts
-                .SingleOrDefault(
-                acc => acc.UserName.ToLowerInvariant() == model.Username.ToLowerInvariant() &&
-                acc.Password.ToLowerInvariant() == model.Password.ToLowerInvariant());
-
+            var account = accountService.AuthenciateAccount(model.Username, model.Password);
             if (account != null)
             {
                 var properties = new AuthenticationProperties
@@ -65,13 +95,13 @@ namespace Gemstone.Web.Controllers
                     // how long it will persist
                     ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
                     // has to be set to get 'ExpiresUtc' work
-                    IsPersistent = true, 
+                    IsPersistent = true,
                     IssuedUtc = DateTime.UtcNow,
                 };
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, account.UserName),
+                    new Claim(ClaimTypes.Name, account.Username),
                     new Claim(ClaimTypes.Role, account.AccountRole.ToString()),
                 };
                 var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -89,8 +119,8 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> LogOut()
         {
             var claimsPrincipal = (HttpContext.User as System.Security.Claims.ClaimsPrincipal);
-            if (claimsPrincipal.IsInRole(nameof(AccountRole.AssignorRole)) ||
-                claimsPrincipal.IsInRole(nameof(AccountRole.SpecialistRole)))
+            if (claimsPrincipal.IsInRole(nameof(AccountRole.Assignor)) ||
+                claimsPrincipal.IsInRole(nameof(AccountRole.Specialist)))
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             TempData["loggedOut"] = true;
@@ -98,11 +128,11 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AccessDenied()
+        public IActionResult AccessDenied()
         {
             var claimsPrincipal = (HttpContext.User as System.Security.Claims.ClaimsPrincipal);
             ViewData["deniedUser"] = claimsPrincipal;
-            return await Task.Run(() => View());
+            return View();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Gemstone.Core.Domain;
 using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
@@ -11,40 +12,27 @@ namespace Gemstone.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<Account> repository;
+        private readonly IRepository<Account> accountRepository;
 
-        public AccountService(IRepository<Account> repository)
+        public AccountService(IRepository<Account> accountRepository)
         {
-            this.repository = repository;
+            this.accountRepository = accountRepository;
         }
 
-        public Account GetById(long id)
+        public async Task AddNewAccount(Account account)
         {
-            var record = repository.Get(id);
-            return record;
+            await accountRepository.Add(account);
         }
 
-        public IList<Account> GetAll()
+        // todo make it async
+        public Account AuthenciateAccount(string username, string password)
         {
-            var records = repository.GetAll().ToList();
-            return records;
-        }
-
-        public void Create(Account Account)
-        {
-            repository.Add(Account);
-        }
-
-        public void Update(Account Account)
-        {
-            var record = repository.Get(Account.Id);
-            repository.Update(record, Account);
-        }
-
-        public void Delete(Account Account)
-        {
-            var record = repository.Get(Account.Id);
-            repository.Delete(Account);
+            var accounts = accountRepository.GetAll();
+            var account = accounts
+                .SingleOrDefault(
+                acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant() &&
+                acc.Password.ToLowerInvariant() == password.ToLowerInvariant());
+            return account;
         }
     }
 }

@@ -19,8 +19,8 @@ namespace Gemstone.Infrastructure.DataInitialization
         {
             modelBuilder.Entity<Account>()
                 .HasDiscriminator<AccountRole>("AccountRole")
-                .HasValue<Specialist>(AccountRole.SpecialistRole)
-                .HasValue<Assignor>(AccountRole.AssignorRole);
+                .HasValue<Specialist>(AccountRole.Specialist)
+                .HasValue<Assignor>(AccountRole.Assignor);
         }
     }
 }

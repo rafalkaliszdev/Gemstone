@@ -4,23 +4,35 @@
     ViewData["PageTitle"] = "Register";
 }
 
-@* todo consider these pieces which are currently commented *@
+@* todo test this form *@
 
 
-@*<th:form asp-action="Register">*@
 <th:form asp-controller="Account" asp-action="Register" method="post">
-    @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+    <th:div asp-validation-summary="ModelOnly" class="text-danger"></th:div>
     <div class="form-group">
         <th:label asp-for="Username" class="control-label"></th:label>
         <th:input asp-for="Username" class="form-control" />
-        @*<span asp-validation-for="Name" class="text-danger"></span>*@
+        <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
     </div>
     <div class="form-group">
         <th:label asp-for="Password" class="control-label"></th:label>
         <th:input asp-for="Password" class="form-control" />
-        @*<span asp-validation-for="Name" class="text-danger"></span>*@
+        <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
     </div>
-    @*<input type="submit" value="Create" class="btn btn-default" />*@
-    <button type="submit" class="btn btn-primary">Submit</button>
-</th:form>
 
+    <div class="form-group">
+        <th:label asp-for="ConfirmPassword" class="control-label"></th:label>
+        <th:input asp-for="ConfirmPassword" class="form-control" />
+        <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
+    </div>
+
+
+    <div class="form-group">
+        <th:label asp-for="SelectedRole" class="control-label"></th:label>
+        <th:select asp-for="SelectedRole" class="form-control" asp-items="Model.AvailableRoles">
+            <th:option value="">-- Select Your Role --</th:option>
+        </th:select>
+        <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+</th:form>

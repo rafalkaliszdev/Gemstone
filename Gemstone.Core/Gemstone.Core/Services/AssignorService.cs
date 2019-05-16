@@ -37,13 +37,13 @@ namespace Gemstone.Core.Services
 
         public void Update(Account Assignor)
         {
-            var record = repository.Get(Assignor.Id);
+            var record = repository.Get(Assignor.ID);
             repository.Update(record, Assignor);
         }
 
         public void Delete(Account Assignor)
         {
-            var record = repository.Get(Assignor.Id);
+            var record = repository.Get(Assignor.ID);
             repository.Delete(Assignor);
         }
     }

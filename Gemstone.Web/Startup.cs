@@ -32,6 +32,8 @@ namespace Gemstone
         private void RegisterTypes(ContainerBuilder builder)
         {
             builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
+            builder.RegisterType<AssignorService>().As<IAssignorService>().InstancePerLifetimeScope();
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
         }
 
         private void AddRepositories(IServiceCollection services)

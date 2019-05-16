@@ -37,13 +37,13 @@ namespace Gemstone.Core.Services
 
         public void Update(Account specialist)
         {
-            var record = repository.Get(specialist.Id);
+            var record = repository.Get(specialist.ID);
             repository.Update(record, specialist);
         }
 
         public void Delete(Account specialist)
         {
-            var record = repository.Get(specialist.Id);
+            var record = repository.Get(specialist.ID);
             repository.Delete(specialist);
         }
     }

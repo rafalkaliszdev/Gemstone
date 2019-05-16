@@ -7,6 +7,7 @@ using System.Linq;
 using Gemstone.Core.DomainModels;
 using Gemstone.Infrastructure.DataInitialization;
 using Gemstone.Core.Interfaces;
+using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
@@ -27,18 +28,18 @@ namespace Gemstone.Infrastructure
         public Account Get(long id)
         {
             return _context.Account
-                  .FirstOrDefault(e => e.Id == id);
+                  .FirstOrDefault(e => e.ID == id);
         }
 
-        public void Add(Account entity)
+        public async Task Add(Account entity)
         {
-            _context.Account.Add(entity);
+            await _context.Account.AddAsync(entity);
             _context.SaveChanges();
         }
 
         public void Update(Account model, Account entity)
         {
-            model.UserName = entity.UserName;
+            model.Username = entity.Username;
             model.AccountRole = entity.AccountRole;
             model.Password = entity.Password;
             model.JoinedOn = entity.JoinedOn;
