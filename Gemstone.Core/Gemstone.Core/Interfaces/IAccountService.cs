@@ -14,5 +14,9 @@ namespace Gemstone.Core.Interfaces
         /// Returns Account record if exist, null if not
         /// </summary>
         Account AuthenciateAccount(string username, string password);
+        /// <summary>
+        /// Returns true if given string is unique in database
+        /// </summary>
+        bool UsernameIsUnique(string username);
     }
 }

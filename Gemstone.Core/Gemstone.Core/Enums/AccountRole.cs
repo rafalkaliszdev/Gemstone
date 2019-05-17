@@ -2,7 +2,7 @@
 {
     public enum AccountRole
     {
-        Assignor = 1,
-        Specialist = 2
+        Assignor = 0,
+        Specialist
     }
 }

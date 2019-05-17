@@ -42,15 +42,16 @@ namespace Gemstone.Web.Controllers
         {
             if (model.Password != null && model.Password != model.ConfirmPassword)
                 ModelState.AddModelError("", "Password mismatch");
-            if (string.IsNullOrEmpty(model.SelectedRole))
+            if (string.IsNullOrEmpty(model.SelectedRoleName))
                 ModelState.AddModelError("", "Role not selected");
+            if (!accountService.UsernameIsUnique(model.Username))
+                ModelState.AddModelError("", "Username string is not unique");
 
             if (ModelState.IsValid)
             {
                 Account dmodel;
-                if (model.SelectedRole == nameof(AccountRole.Assignor))
+                if (model.SelectedRoleName == nameof(AccountRole.Assignor))
                 {
-                    // todo consider adding mapping
                     dmodel = new Assignor()
                     {
                         AccountRole = AccountRole.Assignor,
@@ -103,9 +104,7 @@ namespace Gemstone.Web.Controllers
                 {
                     var properties = new AuthenticationProperties
                     {
-                        // how long it will persist
                         ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
-                        // has to be set to get 'ExpiresUtc' work
                         IsPersistent = true,
                         IssuedUtc = DateTime.UtcNow,
                     };

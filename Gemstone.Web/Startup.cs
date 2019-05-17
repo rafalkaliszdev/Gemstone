@@ -38,8 +38,6 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
-            // todo which is actually better
-            //services.AddSingleton<IRepository<Account>, AccountRepository>();
             services.AddScoped<IRepository<Account>, AccountRepository>();
         }
 
@@ -72,7 +70,7 @@ namespace Gemstone
                 .AddCookie(cookieAuthenticationOptions =>
                 {
                     cookieAuthenticationOptions.LoginPath = new PathString("/Account/Login");
-                    cookieAuthenticationOptions.LogoutPath = new PathString("/Account/LogOut");
+                    cookieAuthenticationOptions.LogoutPath = new PathString("/Account/Logout");
                 });
 
             services.AddAuthorization(authorizationOptions =>

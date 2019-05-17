@@ -10,24 +10,21 @@ namespace Gemstone.Web.ViewModels
 {
     public class RegisterModel
     {
-        // todo test this attribute
         [Required(ErrorMessage = "Username field is required")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Invalid")]
+        [StringLength(10, MinimumLength = 2, ErrorMessage = "Username should be between 2 and 10 characters")]
         public string Username { get; set; }
 
         [Required]
-        // todo test this attributes
         [DataType(DataType.Password)]
         [Compare("ConfirmPassword")]
         public string Password { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
         [Required]
-        public string SelectedRole { get; set; }
-
-        public AccountRole AccountRole { get; set; }
+        public string SelectedRoleName { get; set; }
         public SelectList AvailableRoles { get; set; }
     }
 }

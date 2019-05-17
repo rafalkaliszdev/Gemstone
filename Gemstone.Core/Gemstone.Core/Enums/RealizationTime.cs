@@ -3,8 +3,8 @@
     public enum RealizationTime
     {
         BeforeDeadline = 0,
-        JustOnDeadline = 10,
-        MinorDelay = 20,
-        MajorDelay = 30,
+        JustOnDeadline,
+        MinorDelay,
+        MajorDelay
     }
 }

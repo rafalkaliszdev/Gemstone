@@ -5,6 +5,5 @@ namespace Gemstone.Core.Interfaces
 {
     public interface IAssignorService
     {
-
     }
 }

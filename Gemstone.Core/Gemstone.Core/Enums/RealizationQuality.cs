@@ -3,7 +3,7 @@
     public enum RealizationQuality
     {
         ConditionsMet = 0,
-        MinorMisconducts = 10,
-        MajorMisconducts = 20
+        MinorMisconducts ,
+        MajorMisconducts 
     }
 }

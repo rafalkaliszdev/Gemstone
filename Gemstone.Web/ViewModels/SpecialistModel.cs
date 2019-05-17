@@ -7,7 +7,6 @@ namespace Gemstone.Web.ViewModels
 {
     public class SpecialistModel
     {
-        // todo add data annotations validation
         public long Id { get; set; }
         public string Name { get; set; }
         public bool IsBusy { get; set; }

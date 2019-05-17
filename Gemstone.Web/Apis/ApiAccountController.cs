@@ -32,7 +32,7 @@ namespace Gemstone.Web.Apis
         {
             Account Account = await repository.GetByIdAsync(id);
             if (Account == null)
-                return NotFound("The Account record couldn't be found.");
+                return NotFound("Record not found");
 
             return Ok(Account);
         }
@@ -41,7 +41,7 @@ namespace Gemstone.Web.Apis
         public async Task<IActionResult> Post([FromBody] Account model)
         {
             if (model == null)
-                return BadRequest("Account is null.");
+                return BadRequest("Record is null");
 
             await repository.AddAsync(model);
             return CreatedAtRoute("Get", new { Id = model.ID }, model);
@@ -51,11 +51,11 @@ namespace Gemstone.Web.Apis
         public async Task<IActionResult> Put(long id, [FromBody] Account model)
         {
             if (model == null)
-                return BadRequest("Account is null.");
+                return BadRequest("Record is null");
 
             Account record = await repository.GetByIdAsync(id);
             if (record == null)
-                return NotFound("The Account record couldn't be found.");
+                return NotFound("Record not found");
 
             await repository.UpdateAsync(model);
             return NoContent();
@@ -66,7 +66,7 @@ namespace Gemstone.Web.Apis
         {
             Account record = await repository.GetByIdAsync(id);
             if (record == null)
-                return NotFound("The Account record couldn't be found.");
+                return NotFound("Record not found");
 
             await repository.DeleteAsync(record);
             return NoContent();

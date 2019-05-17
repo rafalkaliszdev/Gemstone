@@ -33,5 +33,12 @@ namespace Gemstone.Core.Services
                 acc.Password.ToLowerInvariant() == password.ToLowerInvariant());
             return account;
         }
+
+        public bool UsernameIsUnique(string username)
+        {
+            var accounts = accountRepository.GetAllAsync().Result;
+            var account = accounts.SingleOrDefault(acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant());
+            return account == null;
+        }
     }
 }

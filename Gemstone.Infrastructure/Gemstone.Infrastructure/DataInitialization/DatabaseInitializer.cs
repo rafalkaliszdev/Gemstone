@@ -11,7 +11,6 @@ namespace Gemstone.Infrastructure.DataInitialization
     {
         public static void Initialize(GemstoneDbContext context)
         {
-            // todo for testing - im going often to create and recreate db
             //context.Database.EnsureDeleted();
             //context.Database.EnsureCreated();
 
@@ -29,15 +28,15 @@ namespace Gemstone.Infrastructure.DataInitialization
 
             var specialists = new Account[]
             {
-                new Specialist { Username = "Marcin" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2017-09-01") },
-                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",   JoinedOn = DateTime.Parse("2015-12-01") },
-                new Specialist { Username = "Pawel" ,  AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2018-09-15") },
-                new Specialist { Username = "Grzegorz" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2017-09-01") },
-                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",   JoinedOn = DateTime.Parse("2015-05-01") },
-                new Specialist { Username = "Jan" ,  AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2018-09-15") },
-                new Specialist { Username = "Jozef" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2011-09-01") },
-                new Specialist { Username = "Marek" , AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",   JoinedOn = DateTime.Parse("2015-12-01") },
-                new Specialist { Username = "Bogdan" ,  AccountRole = AccountRole.Specialist,CraftAreaName = "motorcycles",  Password = "specpass",  JoinedOn = DateTime.Parse("2018-09-15") },
+                new Specialist { Username = "Marcin" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2017-09-01") },
+                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-12-01") },
+                new Specialist { Username = "Pawel" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
+                new Specialist { Username = "Grzegorz" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2017-09-01") },
+                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-05-01") },
+                new Specialist { Username = "Jan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
+                new Specialist { Username = "Jozef" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2011-09-01") },
+                new Specialist { Username = "Marek" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-12-01") },
+                new Specialist { Username = "Bogdan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
             };
 
             foreach (var specialist in specialists)
