@@ -17,6 +17,7 @@ namespace Gemstone.Infrastructure.DataInitialization
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // todo consider adding domain model data annotation fluent API
             modelBuilder.Entity<Account>()
                 .HasDiscriminator<AccountRole>("AccountRole")
                 .HasValue<Specialist>(AccountRole.Specialist)

@@ -91,32 +91,40 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
-            var account = accountService.AuthenciateAccount(model.Username, model.Password);
-            if (account != null)
+            if (ModelState.IsValid)
             {
-                var properties = new AuthenticationProperties
+                var account = accountService.AuthenciateAccount(model.Username, model.Password);
+                if (account == null)
                 {
-                    // how long it will persist
-                    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
-                    // has to be set to get 'ExpiresUtc' work
-                    IsPersistent = true,
-                    IssuedUtc = DateTime.UtcNow,
-                };
+                    ModelState.AddModelError("", "User not recognized");
+                    return View(model);
+                }
+                else
+                {
+                    var properties = new AuthenticationProperties
+                    {
+                        // how long it will persist
+                        ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
+                        // has to be set to get 'ExpiresUtc' work
+                        IsPersistent = true,
+                        IssuedUtc = DateTime.UtcNow,
+                    };
 
-                var claims = new List<Claim>
+                    var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, account.Username),
                     new Claim(ClaimTypes.Role, account.AccountRole.ToString()),
                 };
-                var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(userIdentity),
-                    properties);
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(userIdentity),
+                        properties);
+                }
+                return RedirectToAction("Index", "Home");
             }
-
-            return RedirectToAction("Index", "Home");
+            return View(model);
         }
 
         [HttpGet]

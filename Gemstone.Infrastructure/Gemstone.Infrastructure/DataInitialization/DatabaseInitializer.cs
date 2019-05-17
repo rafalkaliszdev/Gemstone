@@ -12,8 +12,8 @@ namespace Gemstone.Infrastructure.DataInitialization
         public static void Initialize(GemstoneDbContext context)
         {
             // todo for testing - im going often to create and recreate db
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
+            //context.Database.EnsureDeleted();
+            //context.Database.EnsureCreated();
 
             if (context.Account.Any())
                 return;
