@@ -22,10 +22,10 @@
         <th:span asp-validation-for="ConfirmPassword" class="text-danger"></th:span>
     </div>
     <div class="form-group">
-        <th:label asp-for="SelectedRole" class="control-label"></th:label>
-        <th:select asp-for="SelectedRole" class="form-control" asp-items="Model.AvailableRoles">
+        <th:label asp-for="SelectedRoleName" class="control-label"></th:label>
+        <th:select asp-for="SelectedRoleName" class="form-control" asp-items="Model.AvailableRoles">
         </th:select>
-        <th:span asp-validation-for="SelectedRole" class="text-danger"></th:span>
+        <th:span asp-validation-for="SelectedRoleName" class="text-danger"></th:span>
     </div>
     <input type="submit" value="Submit" class="btn btn-primary">
 </th:form>

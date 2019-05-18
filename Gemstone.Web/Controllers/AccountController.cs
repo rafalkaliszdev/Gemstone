@@ -40,12 +40,14 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public IActionResult Register(RegisterModel model)
         {
+            #if false
             if (model.Password != null && model.Password != model.ConfirmPassword)
                 ModelState.AddModelError("", "Password mismatch");
+            #endif
             if (string.IsNullOrEmpty(model.SelectedRoleName))
                 ModelState.AddModelError("", "Role not selected");
             if (!accountService.UsernameIsUnique(model.Username))
-                ModelState.AddModelError("", "Username string is not unique");
+                ModelState.AddModelError("", "Username already taken");
 
             if (ModelState.IsValid)
             {

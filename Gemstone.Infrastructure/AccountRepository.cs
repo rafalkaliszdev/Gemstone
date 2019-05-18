@@ -22,6 +22,11 @@ namespace Gemstone.Infrastructure
 
         public async Task<IEnumerable<Account>> GetAllAsync()
         {
+            // todo make it returning iqueryable instead of ienumerable
+            //var query = from acc in _context.Account
+            //            where acc.AccountRole == Core.Enums.AccountRole.Specialist
+            //            select acc;
+
             return await _context.Account.ToListAsync();
         }
 

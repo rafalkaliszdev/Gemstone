@@ -21,9 +21,11 @@ namespace Gemstone.Web.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name ="Confirm password")]
         public string ConfirmPassword { get; set; }
 
         [Required]
+        [Display(Name ="Select role")]
         public string SelectedRoleName { get; set; }
         public SelectList AvailableRoles { get; set; }
     }

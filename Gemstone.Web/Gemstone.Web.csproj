@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Gemstone.Core\Gemstone.Core\Gemstone.Core.csproj" />
-    <ProjectReference Include="..\Gemstone.Infrastructure\Gemstone.Infrastructure\Gemstone.Infrastructure.csproj" />
+    <ProjectReference Include="..\Gemstone.Core\Gemstone.Core.csproj" />
+    <ProjectReference Include="..\Gemstone.Infrastructure\Gemstone.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
