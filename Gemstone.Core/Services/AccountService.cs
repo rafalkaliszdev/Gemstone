@@ -21,12 +21,12 @@ namespace Gemstone.Core.Services
 
         public void AddNewAccount(Account account)
         {
-            accountRepository.AddAsync(account);
+            accountRepository.CreateAsync(account);
         }
 
-        public Account AuthenciateAccount(string username, string password)
+        public async Task<Account> AuthenciateAccount(string username, string password)
         {
-            var accounts = accountRepository.GetAllAsync().Result;
+            var accounts = await accountRepository.ReadAllAsync();
             var account = accounts
                 .SingleOrDefault(
                 acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant() &&
@@ -34,9 +34,9 @@ namespace Gemstone.Core.Services
             return account;
         }
 
-        public bool UsernameIsUnique(string username)
+        public async Task<bool> UsernameIsUnique(string username)
         {
-            var accounts = accountRepository.GetAllAsync().Result;
+            var accounts = await accountRepository.ReadAllAsync();
             var account = accounts.SingleOrDefault(acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant());
             return account == null;
         }

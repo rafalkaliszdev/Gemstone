@@ -22,8 +22,8 @@ namespace Gemstone
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<GemstoneDbContext>();
-                    DatabaseInitializer.Initialize(context);
+                    var context = services.GetRequiredService<EfDbContext>();
+                    DbInitializer.SeedData(context);
                 }
                 catch
                 {

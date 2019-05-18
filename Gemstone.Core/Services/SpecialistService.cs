@@ -12,41 +12,42 @@ namespace Gemstone.Core.Services
 {
     public class SpecialistService : ISpecialistService
     {
-        private readonly IRepository<Account> repository;
+        private readonly IRepository<Account> accountRepository;
 
         public SpecialistService(IRepository<Account> repository)
         {
-            this.repository = repository;
+            this.accountRepository = repository;
         }
 
-        public Account GetById(long id)
+        public Account GetSpecialistById(long id)
         {
-            var record = repository.GetByIdAsync(id).Result;
+            var record = accountRepository.ReadByIdAsync(id).Result;
             return record;
         }
 
-        public IList<Account> GetAll()
+        public async Task<IReadOnlyCollection<Account>> GetAllSpecialists()
         {
-            var records = repository.GetAllAsync().Result;
-            return records.ToList();
+            // todo test it
+            var records = await accountRepository.ReadAllAsync();
+            return records;
         }
 
-        public void Create(Account specialist)
+        public void CreateSpecialist(Account specialist)
         {
-            repository.AddAsync(specialist);
+            accountRepository.CreateAsync(specialist);
         }
 
-        public void Update(Account specialist)
+        public void UpdateSpecialist(Account specialist)
         {
-            var record = repository.GetByIdAsync(specialist.ID).Result;
+            var record = accountRepository.ReadByIdAsync(specialist.ID).Result;
             record = specialist;
-            repository.UpdateAsync(record);
+            accountRepository.UpdateAsync(record);
         }
 
-        public void Delete(Account specialist)
+        public void DeleteSpecialist(Account specialist)
         {
-            var record = repository.GetByIdAsync(specialist.ID);
-            repository.DeleteAsync(specialist);
+            var record = accountRepository.ReadByIdAsync(specialist.ID);
+            accountRepository.DeleteAsync(specialist);
         }
     }
 }

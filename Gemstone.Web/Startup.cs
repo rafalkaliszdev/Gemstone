@@ -43,7 +43,7 @@ namespace Gemstone
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<GemstoneDbContext>(dbContextOptionsBuilder =>
+            services.AddDbContext<EfDbContext>(dbContextOptionsBuilder =>
                 dbContextOptionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             AddRepositories(services);

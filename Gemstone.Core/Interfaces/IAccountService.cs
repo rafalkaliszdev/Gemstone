@@ -13,10 +13,10 @@ namespace Gemstone.Core.Interfaces
         /// <summary>
         /// Returns Account record if exist, null if not
         /// </summary>
-        Account AuthenciateAccount(string username, string password);
+        Task<Account> AuthenciateAccount(string username, string password);
         /// <summary>
         /// Returns true if given string is unique in database
         /// </summary>
-        bool UsernameIsUnique(string username);
+        Task<bool> UsernameIsUnique(string username);
     }
 }

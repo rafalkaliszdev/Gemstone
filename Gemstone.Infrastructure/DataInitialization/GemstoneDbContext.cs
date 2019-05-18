@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gemstone.Infrastructure.DataInitialization
 {
-    public class GemstoneDbContext : DbContext
+    public class EfDbContext : DbContext
     {
-        public GemstoneDbContext(DbContextOptions<GemstoneDbContext> options) : base(options)
+        public EfDbContext(DbContextOptions<EfDbContext> options) : base(options)
         {
         }
 

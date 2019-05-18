@@ -8,47 +8,51 @@ using Gemstone.Core.DomainModels;
 using Gemstone.Infrastructure.DataInitialization;
 using Gemstone.Core.Interfaces;
 using System.Threading.Tasks;
+using Gemstone.Core.Enums;
 
 namespace Gemstone.Infrastructure
 {
-    public class AccountRepository : IRepository<Account>
+    public class AssignorRepository : IRepository<Assignor>
     {
         private readonly EfDbContext _context;
 
-        public AccountRepository(EfDbContext context)
+        public AssignorRepository(EfDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Account>> ReadAllAsync()
+
+        public async Task<IReadOnlyCollection<Assignor>> ReadAllAsync()
         {
             var records = await (from acc in _context.Account
-                                 select acc).AsNoTracking().ToListAsync();
+                                 where acc.AccountRole == AccountRole.Assignor
+                                 select acc as Assignor).AsNoTracking().ToListAsync();
             return records.AsReadOnly();
         }
 
-        public async Task<Account> ReadByIdAsync(long id)
+        public async Task<Assignor> ReadByIdAsync(long id)
         {
             var record = await (from acc in _context.Account
+                                where acc.AccountRole == AccountRole.Assignor
                                 where acc.ID == id
-                                select acc ).SingleOrDefaultAsync();
+                                select acc as Assignor).SingleOrDefaultAsync();
             return record;
         }
 
-        public async Task CreateAsync(Account entity)
+        public async Task CreateAsync(Assignor entity)
         {
             await _context.Account.AddAsync(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Account entity)
+        public async Task UpdateAsync(Assignor entity)
         {
             // todo ensure it works correctly
             _context.Account.Update(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Account model)
+        public async Task DeleteAsync(Assignor model)
         {
             _context.Account.Remove(model);
             await _context.SaveChangesAsync();

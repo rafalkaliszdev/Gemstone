@@ -6,10 +6,10 @@ namespace Gemstone.Core.Interfaces
 {
     public interface ISpecialistService
     {
-        Account GetById(long id);
-        IList<Account> GetAll();
-        void Create(Account specialist);
-        void Update(Account specialist);
-        void Delete(Account specialist);
+        Account GetSpecialistById(long id);
+        Task<IReadOnlyCollection<Account>> GetAllSpecialists();
+        void CreateSpecialist(Account specialist);
+        void UpdateSpecialist(Account specialist);
+        void DeleteSpecialist(Account specialist);
     }
 }

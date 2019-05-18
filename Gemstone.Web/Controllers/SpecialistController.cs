@@ -22,16 +22,11 @@ namespace Gemstone.Web.Controllers
             this.specialistService = specialistService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return RedirectToAction(nameof(List));
-        }
-
-        public IActionResult List()
-        {
-            var pros = specialistService.GetAll();
+            var specialists = await specialistService.GetAllSpecialists();
             var model = new List<SpecialistModel>();
-            foreach (var specialist in pros)
+            foreach (var specialist in specialists)
             {
                 model.Add(new SpecialistModel
                 {
@@ -44,9 +39,9 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(long id)
+        public IActionResult Details(long id)
         {
-            var specialist = specialistService.GetById(id);
+            var specialist = specialistService.GetSpecialistById(id);
             // todo automapper suggested
             var model = new SpecialistModel
             {
@@ -55,37 +50,6 @@ namespace Gemstone.Web.Controllers
             };
 
             return View(model);
-        }
-
-        [HttpPost]
-        public IActionResult Create(SpecialistModel model)
-        {
-            var specialist = specialistService.GetById(model.Id);
-            specialist.Username = model.Name;
-            specialist.JoinedOn = model.JoinedOn;
-            specialistService.Create(specialist);
-
-            return RedirectToAction(nameof(Get), new { id = model.Id });
-        }
-
-        [HttpPost]
-        public IActionResult Update(SpecialistModel model)
-        {
-            var specialist = specialistService.GetById(model.Id);
-            specialist.Username = model.Name;
-            specialist.JoinedOn = model.JoinedOn;
-            specialistService.Update(specialist);
-
-            return RedirectToAction(nameof(Get), new { id = model.Id });
-        }
-
-        [HttpPost]
-        public IActionResult Delete(SpecialistModel model)
-        {
-            var specialist = specialistService.GetById(model.Id);
-            specialistService.Delete(specialist);
-
-            return RedirectToAction(nameof(List));
         }
     }
 }

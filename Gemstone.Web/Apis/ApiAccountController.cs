@@ -21,16 +21,16 @@ namespace Gemstone.Web.Apis
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            IEnumerable<Account> accounts = await repository.GetAllAsync();
+            IEnumerable<Account> accounts = repository.ReadAllAsync().ToList();
             return Ok(accounts);
         }
 
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> Get(long id)
         {
-            Account Account = await repository.GetByIdAsync(id);
+            Account Account = await repository.ReadByIdAsync(id);
             if (Account == null)
                 return NotFound("Record not found");
 
@@ -43,7 +43,7 @@ namespace Gemstone.Web.Apis
             if (model == null)
                 return BadRequest("Record is null");
 
-            await repository.AddAsync(model);
+            await repository.CreateAsync(model);
             return CreatedAtRoute("Get", new { Id = model.ID }, model);
         }
 
@@ -53,7 +53,7 @@ namespace Gemstone.Web.Apis
             if (model == null)
                 return BadRequest("Record is null");
 
-            Account record = await repository.GetByIdAsync(id);
+            Account record = await repository.ReadByIdAsync(id);
             if (record == null)
                 return NotFound("Record not found");
 
@@ -64,7 +64,7 @@ namespace Gemstone.Web.Apis
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
-            Account record = await repository.GetByIdAsync(id);
+            Account record = await repository.ReadByIdAsync(id);
             if (record == null)
                 return NotFound("Record not found");
 

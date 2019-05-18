@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Gemstone.Infrastructure.DataInitialization
 {
-    public static class DatabaseInitializer
+    public static class DbInitializer
     {
-        public static void Initialize(GemstoneDbContext context)
+        public static void SeedData(EfDbContext context)
         {
             //context.Database.EnsureDeleted();
             //context.Database.EnsureCreated();

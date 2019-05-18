@@ -12,41 +12,45 @@ namespace Gemstone.Core.Services
 {
     public class AssignorService : IAssignorService
     {
-        private readonly IRepository<Account> repository;
+        private readonly IRepository<Account> accountRepository;
 
         public AssignorService(IRepository<Account> repository)
         {
-            this.repository = repository;
+            this.accountRepository = repository;
         }
 
-        public Account GetById(long id)
+        public Account GetAssignorById(long id)
         {
-            var record = repository.GetByIdAsync(id).Result;
+            var record = accountRepository.ReadByIdAsync(id).Result;
             return record;
         }
 
-        public IList<Account> GetAll()
+        public IList<Account> GetAllAssignors()
         {
-            var records = repository.GetAllAsync().Result;
-            return records.ToList();
+            // todo test it
+            var query = from acc in accountRepository.ReadAllAsync()
+                        where acc.AccountRole == AccountRole.Assignor
+                        select acc;
+
+            return query.ToList();
         }
 
-        public void Create(Account assignor)
+        public void CreateAssignor(Account assignor)
         {
-            repository.AddAsync(assignor);
+            accountRepository.CreateAsync(assignor);
         }
 
-        public void Update(Account assignor)
+        public void UpdateAssignor(Account assignor)
         {
-            var record = repository.GetByIdAsync(assignor.ID).Result;
+            var record = accountRepository.ReadByIdAsync(assignor.ID).Result;
             record = assignor;
-            repository.UpdateAsync(record);
+            accountRepository.UpdateAsync(record);
         }
 
-        public void Delete(Account assignor)
+        public void DeleteAssignor(Account assignor)
         {
-            var record = repository.GetByIdAsync(assignor.ID);
-            repository.DeleteAsync(assignor);
+            var record = accountRepository.ReadByIdAsync(assignor.ID);
+            accountRepository.DeleteAsync(assignor);
         }
     }
 }
