@@ -38,15 +38,11 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model)
         {
-            #if false
-            if (model.Password != null && model.Password != model.ConfirmPassword)
-                ModelState.AddModelError("", "Password mismatch");
-            #endif
             if (string.IsNullOrEmpty(model.SelectedRoleName))
                 ModelState.AddModelError("", "Role not selected");
-            if (!accountService.UsernameIsUnique(model.Username))
+            if (!(await accountService.UsernameIsUnique(model.Username)))
                 ModelState.AddModelError("", "Username already taken");
 
             if (ModelState.IsValid)
@@ -96,7 +92,7 @@ namespace Gemstone.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var account = accountService.AuthenciateAccount(model.Username, model.Password);
+                var account = await accountService.AuthenciateAccount(model.Username, model.Password);
                 if (account == null)
                 {
                     ModelState.AddModelError("", "User not recognized");

@@ -23,7 +23,7 @@ namespace Gemstone.Web.Apis
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Account> accounts = repository.ReadAllAsync().ToList();
+            IEnumerable<Account> accounts =  repository.ReadAllAsync().Result;
             return Ok(accounts);
         }
 

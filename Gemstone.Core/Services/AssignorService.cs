@@ -25,14 +25,10 @@ namespace Gemstone.Core.Services
             return record;
         }
 
-        public IList<Account> GetAllAssignors()
+        // todo it was IList, changed to IEnumerable
+        public async Task<IEnumerable<Account>> GetAllAssignors()
         {
-            // todo test it
-            var query = from acc in accountRepository.ReadAllAsync()
-                        where acc.AccountRole == AccountRole.Assignor
-                        select acc;
-
-            return query.ToList();
+            return await accountRepository.ReadAllAsync();
         }
 
         public void CreateAssignor(Account assignor)
