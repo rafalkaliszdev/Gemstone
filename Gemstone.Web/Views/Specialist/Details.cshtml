@@ -1,0 +1,26 @@
+﻿@model Gemstone.Web.ViewModels.SpecialistModel
+
+@{
+    ViewData["Title"] = $"Details {Model.Name}";
+}
+
+<h4>Specialist details</h4>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <td>@Html.DisplayFor(model => model.Id)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <td>@Html.DisplayFor(model => model.Name)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.IsBusy)</th>
+        <td>@Html.DisplayFor(model => model.IsBusy)</td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.JoinedOn)</th>
+        <td>@Html.DisplayFor(model => model.JoinedOn)</td>
+    </tr>
+</table>

@@ -7,17 +7,33 @@ using System.Text;
 
 namespace Gemstone.Infrastructure.DataInitialization
 {
-    public static class DbInitializer
+    public class DbInitializer
     {
+        private static Random _gen = new Random();
+        private static DateTime _startDate = new DateTime(2000, 1, 1);
+        private static int _range = 0;
+
+        private static DateTime RandomDateTime()
+        {
+            _range = (DateTime.Today - _startDate).Days;
+            return _startDate.AddDays(_gen.Next(_range));
+        }
+
         public static void SeedData(EfDbContext context)
         {
-            //context.Database.EnsureDeleted();
-            //context.Database.EnsureCreated();
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
 
             if (context.Account.Any())
                 return;
 
             // not seeded yet
+
+
+            //  todo test this
+            var randomDateTime1 = RandomDateTime();
+            var randomDateTime2 = RandomDateTime();
+            var randomDateTime3 = RandomDateTime();
 
             var assignors = new Account[]
             {

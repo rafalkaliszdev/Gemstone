@@ -7,6 +7,7 @@ namespace Gemstone.Web.ViewModels
 {
     public class SpecialistModel
     {
+        // todo change to ID
         public long Id { get; set; }
         public string Name { get; set; }
         public bool IsBusy { get; set; }

@@ -39,6 +39,8 @@ namespace Gemstone
         private void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IRepository<Account>, AccountRepository>();
+            services.AddScoped<IRepository<Specialist>, SpecialistRepository>();
+            services.AddScoped<IRepository<Assignor>, AssignorRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)

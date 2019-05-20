@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
 using Gemstone.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Gemstone.Web.Apis
 {
     [Route("api/account")]
     [ApiController]
+    [AllowAnonymous]
     public class ApiAccountController : Controller
     {
         private readonly IRepository<Account> repository;
@@ -23,7 +25,7 @@ namespace Gemstone.Web.Apis
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Account> accounts =  repository.ReadAllAsync().Result;
+            IEnumerable<Account> accounts = repository.ReadAllAsync().Result;
             return Ok(accounts);
         }
 

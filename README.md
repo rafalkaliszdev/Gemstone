@@ -9,5 +9,5 @@ This application development is wrapped around an idead of the solution for real
 - ASP.NET Core 2.2
 - EntityFrameworkCore
 - MS SQL Server
-- Autofac
+- Autofac, AutoMapper
 - JavaScript ES6, jQuery, HTML5, CSS, Bootstrap4, Razor

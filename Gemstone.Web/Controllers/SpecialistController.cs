@@ -30,6 +30,7 @@ namespace Gemstone.Web.Controllers
             {
                 model.Add(new SpecialistModel
                 {
+                    Id = specialist.ID,
                     Name = specialist.Username,
                     JoinedOn = specialist.JoinedOn,
                 });
@@ -45,6 +46,7 @@ namespace Gemstone.Web.Controllers
             // todo automapper suggested
             var model = new SpecialistModel
             {
+                Id = specialist.ID,
                 Name = specialist.Username,
                 JoinedOn = specialist.JoinedOn,
             };
