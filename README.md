@@ -1,7 +1,7 @@
 # proof of concept application
 ## (application remains under development and is not finished yet)
 
-This application development is wrapped around an idead of the solution for real-life problem (find suitable specialist in not so far proximity basing on quality/time/price triangle), but I have developed this app mainly for a proof-of-concept purpose.
+Development of this proof-of-foncept app is wrapped around building useable solution for real-life problem (find suitable specialist in not so far proximity basing on quality/time/price triangle)
 
 ## list of used languages and technologies
 
