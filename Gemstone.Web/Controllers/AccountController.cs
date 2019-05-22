@@ -16,6 +16,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Gemstone.Web.Extensions;
+using Microsoft.Extensions.Primitives;
 
 namespace Gemstone.Web.Controllers
 {
@@ -37,13 +38,18 @@ namespace Gemstone.Web.Controllers
             return View(model);
         }
 
+        [ActionName("CheckUsernameNotTaken")]
+        public async Task<IActionResult> Register(string username)
+        {
+            var isUnique = await accountService.UsernameIsUnique(username);
+            return Json(isUnique);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel model)
+        public IActionResult Register(RegisterModel model)
         {
             if (string.IsNullOrEmpty(model.SelectedRoleName))
                 ModelState.AddModelError("", "Role not selected");
-            if (!(await accountService.UsernameIsUnique(model.Username)))
-                ModelState.AddModelError("", "Username already taken");
 
             if (ModelState.IsValid)
             {
@@ -75,6 +81,7 @@ namespace Gemstone.Web.Controllers
                 return RedirectToAction("Login");
             }
 
+            // todo test it
             model.AvailableRoles = new AccountRole().ToSelectList();
             return View(model);
         }

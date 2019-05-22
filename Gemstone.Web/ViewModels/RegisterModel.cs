@@ -1,4 +1,5 @@
 ﻿using Gemstone.Core.Enums;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Gemstone.Web.ViewModels
     {
         [Required(ErrorMessage = "Username field is required")]
         [StringLength(10, MinimumLength = 2, ErrorMessage = "Username should be between 2 and 10 characters")]
+        [Remote("CheckUsernameNotTaken", "Account", ErrorMessage = "Username already taken")]
         public string Username { get; set; }
 
         [Required]
