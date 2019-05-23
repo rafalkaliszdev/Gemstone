@@ -16,7 +16,7 @@ namespace Gemstone.Infrastructure.DataInitialization
         private static DateTime RandomDateTime()
         {
             _range = (DateTime.Today - _startDate).Days;
-            return _startDate.AddDays(_gen.Next(_range));
+            return _startDate.AddDays(_gen.Next(_range)).AddSeconds(_gen.Next(_range));
         }
 
         public static void SeedData(EfDbContext context)
@@ -27,32 +27,24 @@ namespace Gemstone.Infrastructure.DataInitialization
             if (context.Account.Any())
                 return;
 
-            // not seeded yet
-
-
-            //  todo test this
-            var randomDateTime1 = RandomDateTime();
-            var randomDateTime2 = RandomDateTime();
-            var randomDateTime3 = RandomDateTime();
-
             var assignors = new Account[]
             {
-                new Assignor { Username = "Rafal", Password = "pass", AccountRole = AccountRole.Assignor, SomeFieldDescribingAssingor = "looking for moto mechanic", JoinedOn = DateTime.Parse("2019-05-14") },
+                new Assignor { Username = "Rafal", Password = "pass", AccountRole = AccountRole.Assignor, SomeFieldDescribingAssingor = "looking for moto mechanic", JoinedOn = RandomDateTime() },
             };
             foreach (var assignor in assignors)
                 context.Account.Add(assignor);
 
             var specialists = new Account[]
             {
-                new Specialist { Username = "Marcin" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2017-09-01") },
-                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-12-01") },
-                new Specialist { Username = "Pawel" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
-                new Specialist { Username = "Grzegorz" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2017-09-01") },
-                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-05-01") },
-                new Specialist { Username = "Jan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
-                new Specialist { Username = "Jozef" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2011-09-01") },
-                new Specialist { Username = "Marek" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass", JoinedOn = DateTime.Parse("2015-12-01") },
-                new Specialist { Username = "Bogdan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",JoinedOn = DateTime.Parse("2018-09-15") },
+                new Specialist { Username = "Marcin" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",    JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",    JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Pawel" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",      JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Grzegorz" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",  JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Michal" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",    JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Jan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",        JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Jozef" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",     JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Marek" , AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",     JoinedOn = RandomDateTime() },
+                new Specialist { Username = "Bogdan" ,AccountRole = AccountRole.Specialist, CraftAreaName = "motorcycle workshop/repair",Password = "specpass",     JoinedOn = RandomDateTime() },
             };
 
             foreach (var specialist in specialists)

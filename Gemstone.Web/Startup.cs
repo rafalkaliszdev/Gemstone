@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using AutoMapper;
+using Gemstone.Web.Extensions;
 
 namespace Gemstone
 {
@@ -81,6 +83,16 @@ namespace Gemstone
             });
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
+
+            //services.AddAutoMapper();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             var builder = new ContainerBuilder();
 

@@ -17,6 +17,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Gemstone.Web.Extensions;
 using Microsoft.Extensions.Primitives;
+using AutoMapper;
 
 namespace Gemstone.Web.Controllers
 {
@@ -24,10 +25,12 @@ namespace Gemstone.Web.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService accountService;
+        private readonly IMapper mapper;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IMapper mapper)
         {
             this.accountService = accountService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -99,6 +102,9 @@ namespace Gemstone.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                Assignor mappedAccount = mapper.Map<Assignor>(model);
+                //Specialist mappedAccount = mapper.Map<Specialist>(model);
+
                 var account = await accountService.AuthenciateAccount(model.Username, model.Password);
                 if (account == null)
                 {

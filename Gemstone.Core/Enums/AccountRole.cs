@@ -2,7 +2,8 @@
 {
     public enum AccountRole
     {
-        Assignor = 0,
+        None = 0, // required - otherwise implicit Assignor role can cause shadow issues
+        Assignor,
         Specialist
     }
 }
