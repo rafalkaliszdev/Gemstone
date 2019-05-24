@@ -11,5 +11,6 @@ namespace Gemstone.Core.DomainModels
     public class Specialist : Account
     {
         public string CraftAreaName { get; set; }
+        public bool IsBusy { get; set; }
     }
 }

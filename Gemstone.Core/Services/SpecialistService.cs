@@ -12,42 +12,42 @@ namespace Gemstone.Core.Services
 {
     public class SpecialistService : ISpecialistService
     {
-        private readonly IRepository<Account> accountRepository;
+        private readonly IRepository<Specialist> specialistRepository;
 
-        public SpecialistService(IRepository<Account> repository)
+        public SpecialistService(IRepository<Specialist> repository)
         {
-            this.accountRepository = repository;
+            this.specialistRepository = repository;
         }
 
-        public Account GetSpecialistById(long id)
+        public Specialist GetSpecialistById(long id)
         {
-            var record = accountRepository.ReadByIdAsync(id).Result;
+            var record = specialistRepository.ReadByIdAsync(id).Result;
             return record;
         }
 
-        public async Task<IReadOnlyCollection<Account>> GetAllSpecialists()
+        public async Task<IReadOnlyCollection<Specialist>> GetAllSpecialists()
         {
             // todo test it
-            var records = await accountRepository.ReadAllAsync();
+            var records = await specialistRepository.ReadAllAsync();
             return records;
         }
 
-        public void CreateSpecialist(Account specialist)
+        public void CreateSpecialist(Specialist specialist)
         {
-            accountRepository.CreateAsync(specialist);
+            specialistRepository.CreateAsync(specialist);
         }
 
-        public void UpdateSpecialist(Account specialist)
+        public void UpdateSpecialist(Specialist specialist)
         {
-            var record = accountRepository.ReadByIdAsync(specialist.ID).Result;
+            var record = specialistRepository.ReadByIdAsync(specialist.ID).Result;
             record = specialist;
-            accountRepository.UpdateAsync(record);
+            specialistRepository.UpdateAsync(record);
         }
 
-        public void DeleteSpecialist(Account specialist)
+        public void DeleteSpecialist(Specialist specialist)
         {
-            var record = accountRepository.ReadByIdAsync(specialist.ID);
-            accountRepository.DeleteAsync(specialist);
+            var record = specialistRepository.ReadByIdAsync(specialist.ID);
+            specialistRepository.DeleteAsync(specialist);
         }
     }
 }
