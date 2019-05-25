@@ -143,7 +143,7 @@ namespace Gemstone.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> Logout()
         {
             var claimsPrincipal = (HttpContext.User as System.Security.Claims.ClaimsPrincipal);
             if (claimsPrincipal.IsInRole(nameof(AccountRole.Assignor)) ||

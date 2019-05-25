@@ -5,12 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DomainModels\Assignment" />
     <None Remove="DomainModels\Review" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="DomainModels\Assignment" />
     <Compile Include="DomainModels\Review" />
   </ItemGroup>
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Gemstone.Core.Abstracts;
+using Gemstone.Core.Domain;
 
 namespace Gemstone.Core.DomainModels
 {
@@ -12,5 +13,8 @@ namespace Gemstone.Core.DomainModels
     {
         public string CraftAreaName { get; set; }
         public bool IsBusy { get; set; }
+
+        // navigation properties
+        public ICollection<Assignment> ReceivedAssignments { get; set; }
     }
 }

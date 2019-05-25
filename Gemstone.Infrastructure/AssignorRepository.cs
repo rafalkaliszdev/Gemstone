@@ -21,7 +21,6 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-
         public async Task<IReadOnlyCollection<Assignor>> ReadAllAsync()
         {
             var records = await (from acc in _context.Account
@@ -41,21 +40,17 @@ namespace Gemstone.Infrastructure
 
         public async Task CreateAsync(Assignor entity)
         {
-            await _context.Account.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task UpdateAsync(Assignor entity)
         {
-            // todo ensure it works correctly
-            _context.Account.Update(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task DeleteAsync(Assignor model)
         {
-            _context.Account.Remove(model);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }

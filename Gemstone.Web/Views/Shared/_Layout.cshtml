@@ -31,7 +31,10 @@
                     </li>
                 }
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("About","Home")">User stories</a>
+                    <a class="nav-link" href="@Url.Action("About","Home")">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("UserStories","Home")">User stories</a>
                 </li>
             </ul>
             <th:partial name="_LoginPartial">
@@ -39,8 +42,6 @@
 
         </div>
     </nav>
-
-
 
 
     @* todo consider making it partial *@

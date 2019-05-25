@@ -43,7 +43,6 @@ namespace Gemstone.Infrastructure
 
         public async Task UpdateAsync(Account entity)
         {
-            // todo ensure it works correctly
             _context.Account.Update(entity);
             await _context.SaveChangesAsync();
         }

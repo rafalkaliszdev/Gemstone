@@ -17,5 +17,10 @@ namespace Gemstone.Web.Controllers
         {
             return await Task.Run(() => View());
         }
+
+        public async Task<IActionResult> UserStories()
+        {
+            return await Task.Run(() => View());
+        }
     }
 }

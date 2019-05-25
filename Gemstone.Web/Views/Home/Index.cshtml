@@ -1,39 +1,43 @@
-﻿@{
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@using Gemstone.Core.Enums
+@{
     ViewData["PageTitle"] = "Home";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <h4>The background concept</h4>
+@if (accessor.HttpContext.User.Identity.IsAuthenticated)
+{
+    if (accessor.HttpContext.User.IsInRole(nameof(AccountRole.Assignor)))
+    {
+        <div class="d-flex justify-content-center">
+            <div class="card bg-light">
+                <div class="card-body text-center">
+                    <p class="card-text">Look for available Specialists in close proximity</p>
+                    <a href="@Url.Action("Index","Specialist")" class="btn btn-primary btn-block" role="button">Browse specialists</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-8">
-            <h6>Imagine:</h6>
-            <p>
-                You are going for long trip on your motorcycle.
-                You need to get your machine into perfect state before departure - making it impossible for any failure to occur, which could surely ruin your joureny experience.
-                Because getting motorcycle into perfect state is not an easy task,
-                de facto it is easily spoilable by low-quality mechanics, that won't be honest with you and
-                say they are not suitable for this task.
-            </p>
+    }
+    if (accessor.HttpContext.User.IsInRole(nameof(AccountRole.Specialist)))
+    {
+        <p>(Specialist)</p>
+    }
+}
+else
+{
+    <div class="d-flex justify-content-center">
+        <div class="card bg-light">
+            <div class="card-body text-center">
+                <p class="card-text">Login as Assignor or Specialist</p>
+                <a href="@Url.Action("Login","Account")" class="btn btn-primary btn-block" role="button">Login</a>
+            </div>
         </div>
-        <div class="col-md-4">
-            <h4>The need of</h4>
-        </div>
-        <div class="col-md-8">
-            <p>
-                You need a simple tool, a simple device to easily find and assign the task of any type.
-                You care about quality of work and the time and you also know this type of work won't stay anywhere near "cheap".
-            </p>
-      </div>
-        <div class="col-md-4">
-            <h4>The solution</h4>
-        </div>
-        <div class="col-md-8">
-            <p>
-                So here you are - register as Assignor, provide the desired range for work quality, worktime length and price,
-                and application will compute and figure out best option in suitable proximity basing on colleted data.
-            </p>
-     </div>
     </div>
-</div>
+    <div class="d-flex justify-content-center">
+        <div class="card bg-light">
+            <div class="card-body text-center">
+                <p class="card-text">Register to gain access to app</p>
+                <a href="@Url.Action("Register","Account")" class="btn btn-primary btn-block" role="button">Register</a>
+            </div>
+        </div>
+    </div>
+}

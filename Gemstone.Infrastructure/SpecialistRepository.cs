@@ -29,30 +29,27 @@ namespace Gemstone.Infrastructure
 
         public async Task<Specialist> ReadByIdAsync(long id)
         {
-            var record = await (from acc in _context.Account
-                                where acc.AccountRole == AccountRole.Specialist
-                                where acc.ID == id
-                                select acc as Specialist).SingleOrDefaultAsync();
-            return record;
+            // todo right way to handle exceptions in Repositories
+            // issue somehow i can't cast it the same way as in ReadAllAync()
+            var account = await (from acc in _context.Account
+                                 where acc.ID == id
+                                 select acc).SingleOrDefaultAsync();
+            return account.AccountRole == AccountRole.Specialist ? account as Specialist : null;
         }
 
         public async Task CreateAsync(Specialist entity)
         {
-            await _context.Account.AddAsync(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task UpdateAsync(Specialist entity)
         {
-            // todo ensure it works correctly
-            _context.Account.Update(entity);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
 
         public async Task DeleteAsync(Specialist model)
         {
-            _context.Account.Remove(model);
-            await _context.SaveChangesAsync();
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,15 +1,12 @@
 ﻿@model IList<Gemstone.Web.ViewModels.SpecialistModel>
 
-
-@* todo check if it looks good *@
-
-
 <table class="table">
     <thead class="thead-light">
         <tr>
             <th>@Html.DisplayNameFor(model => model.First().Name)</th>
             <th>@Html.DisplayNameFor(model => model.First().IsBusy)</th>
             <th>@Html.DisplayNameFor(model => model.First().JoinedOn)</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
@@ -21,7 +18,8 @@
                     <td>@Html.DisplayFor(modelItem => element.Name)</td>
                     <td>@Html.DisplayFor(modelItem => element.IsBusy)</td>
                     <td>@Html.DisplayFor(modelItem => element.JoinedOn) </td>
-                    <td>@Html.ActionLink("See details", "Details", new { id = element.ID })</td>
+                    <td>@Html.ActionLink("Details", nameof(SpecialistController.Details), new { id = element.ID })</td>
+                    <td>@Html.ActionLink("Assign", nameof(SpecialistController.DirectAssign), new { id = element.ID })</td>
                 </tr>
             }
         }

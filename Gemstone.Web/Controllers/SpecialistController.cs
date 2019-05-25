@@ -5,6 +5,7 @@ using Gemstone.Web.Abstracts;
 using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,32 +29,38 @@ namespace Gemstone.Web.Controllers
             var models = new List<SpecialistModel>();
             foreach (var specialist in specialists)
             {
-                // todo test mapping
                 var model = mapper.Map<SpecialistModel>(specialist);
                 models.Add(model);
-                //model.Add(new SpecialistModel
-                //{
-                //    ID = specialist.ID,
-                //    Name = specialist.Username,
-                //    JoinedOn = specialist.JoinedOn,
-                //});
             }
 
             return View(models);
         }
 
-        [HttpGet]
-        public IActionResult Details(long id)
+        public async Task<IActionResult> Details(long id)
         {
-            var specialist = specialistService.GetSpecialistById(id);
-            // todo test mapping
+            var specialist = await specialistService.GetSpecialistById(id);
             var model = mapper.Map<SpecialistModel>(specialist);
-            //var model = new SpecialistModel
-            //{
-            //    ID = specialist.ID,
-            //    Name = specialist.Username,
-            //    JoinedOn = specialist.JoinedOn,
-            //};
+            return View(model);
+        }
+
+        public IActionResult DirectAssign(long id)
+        {
+            var specialist = specialistService.GetSpecialistById(id).Result;
+            var model = new DirectAssignmentModel
+            {
+                SpecialistID = specialist.ID,
+                SpecialistName = specialist.Username,
+                ExpectedDoneOn = DateTime.Now.AddDays(7),
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DirectAssign(DirectAssignmentModel model)
+        {
+
+
 
             return View(model);
         }

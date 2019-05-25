@@ -66,9 +66,9 @@ namespace Gemstone
             {
                 sessionOptions.Cookie.Name = ".session";
                 sessionOptions.Cookie.Path = "/";
-                sessionOptions.Cookie.HttpOnly = true; // client-side scripting won't access cookie, http request only
+                sessionOptions.Cookie.HttpOnly = true; 
                 sessionOptions.Cookie.IsEssential = true;
-                sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10); // how long session can be idle before it is abandoned (does not affect cookie on client browser)
+                sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10);
             });
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -83,7 +83,7 @@ namespace Gemstone
                 authorizationOptions.AddPolicy("AssignorOnly", policy => policy.RequireRole("Assignor"));
             });
 
-            services.AddHttpContextAccessor(); // best possible way to register HttpContext
+            services.AddHttpContextAccessor();
 
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -111,7 +111,7 @@ namespace Gemstone
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage(); // detailed info, stack trace etc
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -120,7 +120,7 @@ namespace Gemstone
 
             app.UseHttpsRedirection();
 
-            app.UseCookiePolicy(); // adds CookiePolicyMiddleware required by auth
+            app.UseCookiePolicy();
             app.UseAuthentication();
 
             app.UseStaticFiles();

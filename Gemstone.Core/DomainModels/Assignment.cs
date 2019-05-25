@@ -14,9 +14,12 @@ namespace Gemstone.Core.Domain
         public decimal MaxAcceptablePrice { get; set; }
         public DateTime AddedOn { get; set; }
         public DateTime ValidUntil { get; set; }
-        public AssignmentStatus AssignmentStatus { get; set; }
+
         public string ExpectedResult { get; set; }
         public DateTime ExpectedDoneOn { get; set; }
-        public Review Review { get; set; }
+
+        public AssignmentStatus AssignmentStatus { get; set; }
+
+        //public Review Review { get; set; }
     }
 }

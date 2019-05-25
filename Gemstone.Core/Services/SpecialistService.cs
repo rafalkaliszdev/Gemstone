@@ -19,15 +19,14 @@ namespace Gemstone.Core.Services
             this.specialistRepository = repository;
         }
 
-        public Specialist GetSpecialistById(long id)
+        public async Task<Specialist> GetSpecialistById(long id)
         {
-            var record = specialistRepository.ReadByIdAsync(id).Result;
+            var record = await specialistRepository.ReadByIdAsync(id);
             return record;
         }
 
         public async Task<IReadOnlyCollection<Specialist>> GetAllSpecialists()
         {
-            // todo test it
             var records = await specialistRepository.ReadAllAsync();
             return records;
         }

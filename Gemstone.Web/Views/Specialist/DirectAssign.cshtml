@@ -1,0 +1,46 @@
+﻿@model Gemstone.Web.ViewModels.DirectAssignmentModel
+
+@{
+    ViewData["Title"] = "Assign";
+}
+
+<div class="alert alert-primary">
+    Directly assign a task to @Model.SpecialistName
+</div>
+
+<th:form asp-controller="Account" asp-action="Register" method="post">
+    <th:input type="hidden" asp-for="SpecialistID" />
+    <th:input type="hidden" asp-for="SpecialistName" />
+    <th:div asp-validation-summary="All" class="text-danger"></th:div>
+    <div class="form-group">
+        <th:label asp-for="ExpectedResult" class="control-label"></th:label>
+        <th:textarea asp-for="ExpectedResult" class="form-control" />
+        <th:span asp-validation-for="ExpectedResult" class="text-danger"></th:span>
+    </div>
+    <div class="form-group">
+        <th:label asp-for="MaxAcceptablePrice" class="control-label"></th:label>
+        <th:input asp-for="MaxAcceptablePrice" class="form-control" />
+        <th:span asp-validation-for="MaxAcceptablePrice" class="text-danger"></th:span>
+    </div>
+    <div class="form-group">
+        <th:label asp-for="ExpectedDoneOn" class="control-label"></th:label>
+        <th:input asp-for="ExpectedDoneOn" class="form-control" />
+        <th:span asp-validation-for="ExpectedDoneOn" class="text-danger"></th:span>
+    </div>
+    <div class="form-group">
+        <th:label asp-for="ValidUntil" class="control-label"></th:label>
+        <th:input asp-for="ValidUntil" class="form-control" />
+        <th:span asp-validation-for="ValidUntil" class="text-danger"></th:span>
+    </div>
+
+
+
+    <input type="submit" value="Submit" class="btn btn-primary">
+</th:form>
+
+
+
+<div>
+    <th:a asp-action="Index">Back to List</th:a>
+</div>
+
