@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
 using Gemstone.Infrastructure;
+using Gemstone.Web.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,8 @@ namespace Gemstone.Web.Apis
     [Route("api/account")]
     [ApiController]
     [AllowAnonymous]
-    public class ApiAccountController : Controller
+    [ApiExplorerSettings(IgnoreApi = false)]
+    public class ApiAccountController : AbstractController
     {
         private readonly IRepository<Account> repository;
 
@@ -23,10 +25,12 @@ namespace Gemstone.Web.Apis
         }
 
         [HttpGet]
+        [Produces("application/json", Type = typeof(Account[]))]
         public IActionResult Get()
         {
             IEnumerable<Account> accounts = repository.ReadAllAsync().Result;
-            return Ok(accounts);
+            return new JsonResult(accounts);
+            //return Ok(accounts);
         }
 
         [HttpGet("{id}", Name = "Get")]
@@ -34,7 +38,7 @@ namespace Gemstone.Web.Apis
         {
             Account Account = await repository.ReadByIdAsync(id);
             if (Account == null)
-                return NotFound("Record not found");
+                return NotFound("Account not found");
 
             return Ok(Account);
         }
@@ -43,7 +47,7 @@ namespace Gemstone.Web.Apis
         public async Task<IActionResult> Post([FromBody] Account model)
         {
             if (model == null)
-                return BadRequest("Record is null");
+                return BadRequest("Account is null");
 
             await repository.CreateAsync(model);
             return CreatedAtRoute("Get", new { Id = model.ID }, model);
@@ -53,11 +57,11 @@ namespace Gemstone.Web.Apis
         public async Task<IActionResult> Put(long id, [FromBody] Account model)
         {
             if (model == null)
-                return BadRequest("Record is null");
+                return BadRequest("Account is null");
 
             Account record = await repository.ReadByIdAsync(id);
             if (record == null)
-                return NotFound("Record not found");
+                return NotFound("Account not found");
 
             await repository.UpdateAsync(model);
             return NoContent();
@@ -68,7 +72,7 @@ namespace Gemstone.Web.Apis
         {
             Account record = await repository.ReadByIdAsync(id);
             if (record == null)
-                return NotFound("Record not found");
+                return NotFound("Account not found");
 
             await repository.DeleteAsync(record);
             return NoContent();

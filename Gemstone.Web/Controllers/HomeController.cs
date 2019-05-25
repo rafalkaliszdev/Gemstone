@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gemstone.Core.Interfaces;
+﻿using Gemstone.Web.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Gemstone.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AbstractController
     {
         [AllowAnonymous]
         public async Task<IActionResult> Index()

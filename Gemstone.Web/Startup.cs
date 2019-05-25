@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using AutoMapper;
 using Gemstone.Web.Extensions;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Gemstone
 {
@@ -84,15 +85,16 @@ namespace Gemstone
 
             services.AddHttpContextAccessor(); // best possible way to register HttpContext
 
-            //services.AddAutoMapper();
-
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
             });
+            services.AddSingleton(mappingConfig.CreateMapper());
 
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1", new Info { Title = "Account Entity API", Description = "Account is base abstract class for all instantiated users" });
+            });
 
             var builder = new ContainerBuilder();
 
@@ -124,6 +126,9 @@ namespace Gemstone
             app.UseStaticFiles();
 
             app.UseSession();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(x => x.SwaggerEndpoint("/swagger/v1/swagger.json", "Account API"));
 
             app.UseMvcWithDefaultRoute();
         }

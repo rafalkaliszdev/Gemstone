@@ -18,11 +18,12 @@ using System.Threading.Tasks;
 using Gemstone.Web.Extensions;
 using Microsoft.Extensions.Primitives;
 using AutoMapper;
+using Gemstone.Web.Abstracts;
 
 namespace Gemstone.Web.Controllers
 {
     [AllowAnonymous]
-    public class AccountController : Controller
+    public class AccountController : AbstractController
     {
         private readonly IAccountService accountService;
         private readonly IMapper mapper;

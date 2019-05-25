@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
-using Gemstone.Core.Services;
+using Gemstone.Web.Abstracts;
 using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gemstone.Web.Controllers
 {
     [Authorize(Roles = nameof(AccountRole.Assignor))]
-    public class SpecialistController : Controller
+    public class SpecialistController : AbstractController
     {
         private readonly ISpecialistService specialistService;
         private readonly IMapper mapper;

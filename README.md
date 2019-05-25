@@ -11,3 +11,4 @@ Development of this proof-of-foncept app is wrapped around building useable solu
 - MS SQL Server
 - Autofac, AutoMapper
 - JavaScript ES6, jQuery, HTML5, CSS, Bootstrap4, Razor
+- Swagger
