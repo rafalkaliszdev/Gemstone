@@ -12,7 +12,7 @@ namespace Gemstone.Infrastructure.DataInitialization
         private static Random _random = new Random();
         private static DateTime _startDate = new DateTime(2000, 1, 1);
         private static int _range = 0;
-        private static bool _recreateDb = true;
+        private static bool _recreateDb = false;
 
         private static DateTime RandomDateTime()
         {
