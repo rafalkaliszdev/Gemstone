@@ -37,17 +37,22 @@ namespace Gemstone.Infrastructure
             return account.AccountRole == AccountRole.Specialist ? account as Specialist : null;
         }
 
-        public async Task CreateAsync(Specialist entity)
+        public Task CreateAsync(Specialist entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(Specialist entity)
+        public Task UpdateAsync(Specialist entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task DeleteAsync(Specialist model)
+        public Task DeleteAsync(Specialist model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExistsById(long id)
         {
             throw new NotImplementedException();
         }

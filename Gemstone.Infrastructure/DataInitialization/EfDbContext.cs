@@ -14,14 +14,19 @@ namespace Gemstone.Infrastructure.DataInitialization
         }
 
         public DbSet<Account> Account { get; set; }
+        public DbSet<Assignment> Assignment { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // todo consider adding domain model data annotation fluent API
+            // todo fluent API
             modelBuilder.Entity<Account>()
                 .HasDiscriminator<AccountRole>("AccountRole")
                 .HasValue<Specialist>(AccountRole.Specialist)
                 .HasValue<Assignor>(AccountRole.Assignor);
+
+            modelBuilder.Entity<Assignment>()
+                .HasOne<Specialist>(a => a.Specialist)
+                .WithMany(a => a.Assignments);
         }
     }
 }

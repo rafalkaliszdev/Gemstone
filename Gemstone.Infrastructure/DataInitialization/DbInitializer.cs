@@ -14,17 +14,6 @@ namespace Gemstone.Infrastructure.DataInitialization
         private static int _range = 0;
         private static bool _recreateDb = false;
 
-        private static DateTime RandomDateTime()
-        {
-            _range = (DateTime.Today - _startDate).Days;
-            return _startDate.AddDays(_random.Next(_range)).AddSeconds(_random.Next(_range));
-        }
-
-        private static bool RandomBool()
-        {
-            return _random.NextDouble() > 0.5;
-        }
-
         public static void SeedData(EfDbContext context)
         {
             if (_recreateDb)
@@ -36,10 +25,18 @@ namespace Gemstone.Infrastructure.DataInitialization
             if (context.Account.Any())
                 return;
 
+            SeedAccounts(context);
+            SeedAssignments(context);
+
+            context.SaveChanges();
+        }
+
+        private static void SeedAccounts(EfDbContext context)
+        {
             var assignors = new Account[]
-            {
+{
                 new Assignor { Username = "Rafal", Password = "pass", AccountRole = AccountRole.Assignor, SomeFieldDescribingAssingor = "looking for moto mechanic", JoinedOn = RandomDateTime() },
-            };
+};
             foreach (var assignor in assignors)
                 context.Account.Add(assignor);
 
@@ -57,8 +54,32 @@ namespace Gemstone.Infrastructure.DataInitialization
             };
             foreach (var specialist in specialists)
                 context.Account.Add(specialist);
+        }
 
-            context.SaveChanges();
+        private static void SeedAssignments(EfDbContext context)
+        {
+            context.Assignment.Add(new Assignment
+            {
+                AddedOn = RandomDateTime(),
+                AssignmentStatus = AssignmentStatus.Awaiting,
+                notAssignorID = 1,
+                notSpecialistID = 5,
+                ResultDescription = "machine ready for long journey (fixes, repairs and standard checks)",
+                ExpiresOn = RandomDateTime(),
+                ProposedDoneOn = RandomDateTime(),
+                ProposedMaxPrice = 1200,
+            });
+        }
+
+        private static DateTime RandomDateTime()
+        {
+            _range = (DateTime.Today - _startDate).Days;
+            return _startDate.AddDays(_random.Next(_range)).AddSeconds(_random.Next(_range));
+        }
+
+        private static bool RandomBool()
+        {
+            return _random.NextDouble() > 0.5;
         }
     }
 }

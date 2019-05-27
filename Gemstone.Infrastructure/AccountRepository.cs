@@ -52,5 +52,10 @@ namespace Gemstone.Infrastructure
             _context.Account.Remove(model);
             await _context.SaveChangesAsync();
         }
+
+        public Task<bool> ExistsById(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

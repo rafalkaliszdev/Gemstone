@@ -5,14 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DomainModels\Review" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="DomainModels\Review" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Constants\" />
   </ItemGroup>
 

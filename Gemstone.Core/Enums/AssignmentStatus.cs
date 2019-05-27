@@ -2,9 +2,9 @@
 {
     public enum AssignmentStatus
     {
-        Unassigned = 0,
+        Awaiting = 0,
         Assigned, 
-        Spoiled,
+        Rejected,
         Done
     }
 }

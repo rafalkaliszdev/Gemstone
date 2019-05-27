@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
 using Gemstone.Web.Abstracts;
@@ -15,11 +16,15 @@ namespace Gemstone.Web.Controllers
     public class SpecialistController : AbstractController
     {
         private readonly ISpecialistService specialistService;
+        private readonly IAssignorService assignorService;
+        private readonly IAssignmentService assignmentService;
         private readonly IMapper mapper;
 
-        public SpecialistController(ISpecialistService specialistService, IMapper mapper)
+        public SpecialistController(ISpecialistService specialistService, IAssignorService assignorService, IAssignmentService assignmentService,IMapper mapper)
         {
             this.specialistService = specialistService;
+            this.assignorService = assignorService;
+            this.assignmentService = assignmentService;
             this.mapper = mapper;
         }
 
@@ -50,18 +55,21 @@ namespace Gemstone.Web.Controllers
             {
                 SpecialistID = specialist.ID,
                 SpecialistName = specialist.Username,
-                ExpectedDoneOn = DateTime.Now.AddDays(7),
+                ProposedDoneOn = DateTime.Now.AddDays(7),
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult DirectAssign(DirectAssignmentModel model)
+        public async Task<IActionResult> DirectAssign(DirectAssignmentModel model)
         {
-
-
-
+            if (ModelState.IsValid)
+            {
+                var assignment = mapper.Map<Assignment>(model);
+                await assignmentService.CreateAssignment(assignment);
+                return RedirectToAction(nameof(Index));
+            }
             return View(model);
         }
     }

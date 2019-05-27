@@ -34,9 +34,10 @@ namespace Gemstone
 
         private void RegisterTypes(ContainerBuilder builder)
         {
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
             builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
             builder.RegisterType<AssignorService>().As<IAssignorService>().InstancePerLifetimeScope();
-            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
+            builder.RegisterType<AssignmentService>().As<IAssignmentService>().InstancePerLifetimeScope();
         }
 
         private void AddRepositories(IServiceCollection services)
@@ -44,6 +45,7 @@ namespace Gemstone
             services.AddScoped<IRepository<Account>, AccountRepository>();
             services.AddScoped<IRepository<Specialist>, SpecialistRepository>();
             services.AddScoped<IRepository<Assignor>, AssignorRepository>();
+            services.AddScoped<IRepository<Assignment>, AssignmentRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
@@ -66,7 +68,7 @@ namespace Gemstone
             {
                 sessionOptions.Cookie.Name = ".session";
                 sessionOptions.Cookie.Path = "/";
-                sessionOptions.Cookie.HttpOnly = true; 
+                sessionOptions.Cookie.HttpOnly = true;
                 sessionOptions.Cookie.IsEssential = true;
                 sessionOptions.IdleTimeout = TimeSpan.FromSeconds(10);
             });

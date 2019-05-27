@@ -38,17 +38,22 @@ namespace Gemstone.Infrastructure
             return record;
         }
 
-        public async Task CreateAsync(Assignor entity)
+        public Task CreateAsync(Assignor entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task UpdateAsync(Assignor entity)
+        public Task UpdateAsync(Assignor entity)
         {
             throw new NotImplementedException();
         }
 
-        public async Task DeleteAsync(Assignor model)
+        public Task DeleteAsync(Assignor model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ExistsById(long id)
         {
             throw new NotImplementedException();
         }
