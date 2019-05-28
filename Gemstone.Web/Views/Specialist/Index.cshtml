@@ -18,8 +18,8 @@
                     <td>@Html.DisplayFor(modelItem => element.Name)</td>
                     <td>@Html.DisplayFor(modelItem => element.IsBusy)</td>
                     <td>@Html.DisplayFor(modelItem => element.JoinedOn) </td>
-                    <td>@Html.ActionLink("Details", nameof(SpecialistController.Details), new { id = element.ID })</td>
-                    <td>@Html.ActionLink("Assign", nameof(SpecialistController.DirectAssign), new { id = element.ID })</td>
+                    <td>@Html.ActionLink("Show details", nameof(SpecialistController.Details), new { id = element.ID })</td>
+                    <td>@Html.ActionLink("Assign directly", nameof(SpecialistController.DirectAssign), new { id = element.ID })</td>
                 </tr>
             }
         }

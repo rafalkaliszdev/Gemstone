@@ -12,8 +12,8 @@ namespace Gemstone.Core.DomainModels
     /// </summary>
     public class Assignment : EntityBase
     {
-        public long  notAssignorID { get; set; }
-        public long  notSpecialistID { get; set; }
+        public long notAssignorID { get; set; }
+        public long notSpecialistID { get; set; }
 
         public decimal ProposedMaxPrice { get; set; }
         public DateTime ProposedDoneOn { get; set; }
@@ -26,7 +26,6 @@ namespace Gemstone.Core.DomainModels
         // navigation properties
         public Assignor Assignor { get; set; }
         public Specialist Specialist { get; set; }
-
 
         //public Review Review { get; set; }
     }
