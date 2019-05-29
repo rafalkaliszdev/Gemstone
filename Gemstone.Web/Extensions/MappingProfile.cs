@@ -15,18 +15,14 @@ namespace Gemstone.Web.Extensions
         public MappingProfile()
         {
             CreateMap<Assignor, LoginModel>().ReverseMap();
-            //CreateMap<LoginModel, Assignor>();
 
             CreateMap<Specialist, LoginModel>().ReverseMap();
-            //CreateMap<LoginModel, Specialist>();
 
             // RegisterModel does not require mapping
 
             CreateMap<Specialist, SpecialistModel>()
                 .ForMember(dest => dest.Name, option => option.MapFrom(src => src.Username))
                 .ReverseMap();
-            //CreateMap<SpecialistModel, Specialist>()
-            //    .ForMember(dest => dest.Username, option => option.MapFrom(src => src.Name));
 
             CreateMap<DirectAssignmentModel, Assignment>()
                 .Ignore(m => m.notAssignorID)
