@@ -23,7 +23,6 @@ namespace Gemstone.Core.DomainModels
 
         public AssignmentStatus AssignmentStatus { get; set; }
 
-        // navigation properties
         public Assignor Assignor { get; set; }
         public Specialist Specialist { get; set; }
 

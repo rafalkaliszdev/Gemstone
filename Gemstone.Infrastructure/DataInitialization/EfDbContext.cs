@@ -17,15 +17,9 @@ namespace Gemstone.Infrastructure.DataInitialization
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // todo fluent API
             modelBuilder.Entity<Account>(BuildAccount);
-            //.HasDiscriminator<AccountRole>("AccountRole")
-            //.HasValue<Specialist>(AccountRole.Specialist)
-            //.HasValue<Assignor>(AccountRole.Assignor);
 
             modelBuilder.Entity<Assignment>(BuildAssignment);
-            //.HasOne<Specialist>(a => a.Specialist)
-            //.WithMany(a => a.Assignments);
         }
 
         private void BuildAccount(EntityTypeBuilder<Account> entityTypeBuilder)
@@ -34,6 +28,10 @@ namespace Gemstone.Infrastructure.DataInitialization
                 .HasDiscriminator<AccountRole>("AccountRole")
                 .HasValue<Specialist>(AccountRole.Specialist)
                 .HasValue<Assignor>(AccountRole.Assignor);
+            entityTypeBuilder
+                .Property(acc => acc.Username)
+                .HasMaxLength(40)
+                .IsRequired();
         }
 
         private void BuildAssignment(EntityTypeBuilder<Assignment> entityTypeBuilder)
