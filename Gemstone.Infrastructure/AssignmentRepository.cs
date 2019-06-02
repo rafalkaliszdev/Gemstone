@@ -31,8 +31,7 @@ namespace Gemstone.Infrastructure
 
         public async Task<bool> ExistsById(long id)
         {
-            var result = await _context.Assignment.AnyAsync(p => p.ID == id);
-            return result;
+            return await _context.Assignment.AnyAsync(p => p.ID == id);
         }
 
         public Task<IReadOnlyCollection<Assignment>> ReadAllAsync()

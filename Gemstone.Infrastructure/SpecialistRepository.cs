@@ -80,9 +80,9 @@ namespace Gemstone.Infrastructure
             throw new NotImplementedException();
         }
 
-        public Task<bool> ExistsById(long id)
+        public async Task<bool> ExistsById(long id)
         {
-            throw new NotImplementedException();
+            return await _context.Account.AnyAsync(p => p.ID == id);
         }
     }
 }
