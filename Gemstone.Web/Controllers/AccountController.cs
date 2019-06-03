@@ -57,33 +57,18 @@ namespace Gemstone.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                // todo test this mapping
                 Account dmodel;
                 if (model.SelectedRoleName == nameof(AccountRole.Assignor))
                 {
                     dmodel = mapper.Map<Assignor>(model);
                     dmodel.AccountRole = AccountRole.Specialist;
                     dmodel.JoinedOn = DateTime.UtcNow;
-                    //dmodel = new Assignor()
-                    //{
-                    //    AccountRole = AccountRole.Assignor,
-                    //    Username = model.Username,
-                    //    Password = model.Password,
-                    //    JoinedOn = DateTime.UtcNow
-                    //};
                 }
                 else
                 {
                     dmodel = mapper.Map<Specialist>(model);
                     dmodel.AccountRole = AccountRole.Specialist;
                     dmodel.JoinedOn = DateTime.UtcNow;
-                    //dmodel = new Specialist()
-                    //{
-                    //    AccountRole = AccountRole.Specialist,
-                    //    Username = model.Username,
-                    //    Password = model.Password,
-                    //    JoinedOn = DateTime.UtcNow
-                    //};
                 }
 
                 accountService.AddNewAccount(dmodel);
