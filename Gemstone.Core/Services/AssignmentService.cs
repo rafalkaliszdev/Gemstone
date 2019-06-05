@@ -35,9 +35,9 @@ namespace Gemstone.Core.Services
         }
         public async Task CreateAssignment(Assignment assignment)
         {
-            if (await specialistService.SpecialistExistsById(assignment.notSpecialistID))
+            if (await specialistService.SpecialistExistsById(assignment.SpecialistID))
                 throw new InvalidOperationException();
-            if (await assignorService.AssignorExistsById(assignment.notAssignorID))
+            if (await assignorService.AssignorExistsById(assignment.AssignorID))
                 throw new InvalidOperationException();
 
             await assignmentRepository.CreateAsync(assignment);

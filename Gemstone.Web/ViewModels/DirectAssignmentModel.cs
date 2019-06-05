@@ -11,16 +11,16 @@ namespace Gemstone.Web.ViewModels
         public string SpecialistName { get; set; }
 
         [Required]
-        [DisplayName("Proposed max price")]
+        [DisplayName("Proposed Max Price")]
         public decimal ProposedMaxPrice { get; set; }
         [Required]
-        [DisplayName("Proposed done on")]
+        [DisplayName("Proposed Done On")]
         public DateTime ProposedDoneOn { get; set; }
         [Required]
-        [DisplayName("Expires on")]
+        [DisplayName("Expires On")]
         public DateTime ExpiresOn { get; set; }
         [Required]
-        [DisplayName("Result description")]
+        [DisplayName("Result Description")]
         public string ResultDescription { get; set; }
     }
 }

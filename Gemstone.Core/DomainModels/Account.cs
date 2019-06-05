@@ -16,5 +16,7 @@ namespace Gemstone.Core.DomainModels
         public string Password { get; set; }
         public AccountRole AccountRole { get; set; }
         public DateTime JoinedOn { get; set; }
+
+        public ICollection<Assignment> Assignments { get; set; }
     }
 }

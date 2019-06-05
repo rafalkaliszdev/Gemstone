@@ -12,8 +12,5 @@ namespace Gemstone.Core.DomainModels
     {
         public string CraftAreaName { get; set; }
         public bool IsBusy { get; set; }
-
-        // navigation properties
-        public ICollection<Assignment> Assignments { get; set; }
     }
 }

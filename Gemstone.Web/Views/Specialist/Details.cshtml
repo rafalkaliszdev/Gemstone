@@ -22,3 +22,39 @@
         <td>@Html.DisplayFor(model => model.JoinedOn)</td>
     </tr>
 </table>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().AssignorID)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().AssignorName)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().AddedOn)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().AssignmentStatus)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().ExpiresOn)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().ProposedDoneOn)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().ProposedMaxPrice)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().ResultDescription)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Assignments.First().SpecialistID)</th>
+            <th>@Html.DisplayNameFor(model => model.Assignments.First().SpecialistName)</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var element in Model.Assignments)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => element.AssignorID)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.AssignorName)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.AddedOn)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.AssignmentStatus)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.ExpiresOn)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.ProposedDoneOn)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.ProposedMaxPrice)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.ResultDescription)                  </td>
+                    @*<td>@Html.DisplayFor(modelItem => element.SpecialistID)                  </td>
+                    <td>@Html.DisplayFor(modelItem => element.SpecialistName)                       </td>*@
+                </tr>
+            }
+        }
+    </tbody>
+</table>

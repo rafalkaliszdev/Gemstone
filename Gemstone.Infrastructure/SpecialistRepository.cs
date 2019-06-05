@@ -29,40 +29,14 @@ namespace Gemstone.Infrastructure
 
         public async Task<Specialist> ReadByIdAsync(long id)
         {
-
-            var specs = _context.Account.Cast<Specialist>();
-
-            var spec = specs
-                 .Where(acc => acc.ID == id)
-                 //.Include(x => x.Assignments)
-                 .SingleOrDefault();
-
-            return spec;
-
-            // todo right way to handle exceptions in Repositories
-            // issue somehow i can't cast it the same way as in ReadAllAync()
-            var accounts = (from acc in _context.Account
-                            where acc.ID == id
-                            select acc);// as IQueryable<Specialist>;
-
-
-            var account = accounts
+            var specialist = await _context.Account
+                .Cast<Specialist>()
                 .Where(acc => acc.ID == id)
-                .Select(fffff).SingleOrDefault();
+                .Include(spec => spec.Assignments)
+                .ThenInclude(assignment => assignment.Assignor)
+                .SingleOrDefaultAsync();
 
-            return account;// account.AccountRole == AccountRole.Specialist ? account as Specialist : null;
-        }
-
-        public Specialist fffff(Account acc)
-        {
-            return new Specialist
-            {
-                AccountRole = acc.AccountRole,
-                Assignments = (acc as Specialist).Assignments,
-                CraftAreaName = (acc as Specialist).CraftAreaName,
-                IsBusy = (acc as Specialist).IsBusy,
-                ID = acc.ID,
-            };
+            return specialist;
         }
 
         public Task CreateAsync(Specialist entity)

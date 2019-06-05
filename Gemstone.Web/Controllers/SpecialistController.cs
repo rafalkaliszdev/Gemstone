@@ -44,6 +44,9 @@ namespace Gemstone.Web.Controllers
         public async Task<IActionResult> Details(long id)
         {
             var specialist = await specialistService.GetSpecialistById(id);
+            if (specialist == null)
+                return NotFound();
+
             var model = mapper.Map<SpecialistModel>(specialist);
             return View(model);
         }

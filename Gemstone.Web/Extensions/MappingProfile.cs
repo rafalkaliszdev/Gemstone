@@ -22,16 +22,24 @@ namespace Gemstone.Web.Extensions
 
             CreateMap<Specialist, SpecialistModel>()
                 .ForMember(dest => dest.Name, option => option.MapFrom(src => src.Username))
+                .ForMember(dest => dest.Assignments, option => option.MapFrom(src => src.Assignments))
                 .ReverseMap();
 
             CreateMap<DirectAssignmentModel, Assignment>()
-                .Ignore(m => m.notAssignorID)
-                .Ignore(m => m.notSpecialistID)
+                .Ignore(m => m.AssignorID)
+                .Ignore(m => m.SpecialistID)
                 .Ignore(m => m.AddedOn)
                 .Ignore(m => m.AssignmentStatus)
                 .Ignore(m => m.Assignor)
                 .Ignore(m => m.Specialist)
                 .Ignore(m => m.ID);
+
+            CreateMap<Assignment, ReadonlyAssignmentModel>()
+                .ForMember(dest => dest.AssignorName, option => option.MapFrom(src => src.Assignor.Username))
+                //.Ignore(m => m.AssignorID)
+                .Ignore(m => m.SpecialistID)
+                .Ignore(m => m.SpecialistName);
+
 
         }
     }

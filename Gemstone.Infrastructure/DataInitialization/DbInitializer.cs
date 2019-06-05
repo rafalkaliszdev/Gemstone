@@ -34,9 +34,9 @@ namespace Gemstone.Infrastructure.DataInitialization
         private static void SeedAccounts(EfDbContext context)
         {
             var assignors = new Account[]
-{
+            {
                 new Assignor { Username = "Rafal", Password = "pass", AccountRole = AccountRole.Assignor, SomeFieldDescribingAssingor = "looking for moto mechanic", JoinedOn = RandomDateTime() },
-};
+            };
             foreach (var assignor in assignors)
                 context.Account.Add(assignor);
 
@@ -58,17 +58,44 @@ namespace Gemstone.Infrastructure.DataInitialization
 
         private static void SeedAssignments(EfDbContext context)
         {
-            context.Assignment.Add(new Assignment
+            var assignments = new Assignment[]
             {
-                AddedOn = RandomDateTime(),
-                AssignmentStatus = AssignmentStatus.Awaiting,
-                notAssignorID = 1,
-                notSpecialistID = 5,
-                ResultDescription = "machine ready for long journey (fixes, repairs and standard checks)",
-                ExpiresOn = RandomDateTime(),
-                ProposedDoneOn = RandomDateTime(),
-                ProposedMaxPrice = 1200,
-            });
+                new Assignment
+                {
+                    AddedOn = RandomDateTime(),
+                    AssignmentStatus = AssignmentStatus.Awaiting,
+                    AssignorID = 1,
+                    SpecialistID = 5,
+                    ResultDescription = "machine ready for long journey (fixes, repairs and standard checks)",
+                    ExpiresOn = RandomDateTime(),
+                    ProposedDoneOn = RandomDateTime(),
+                    ProposedMaxPrice = 1200,
+                },
+                new Assignment
+                {
+                    AddedOn = RandomDateTime(),
+                    AssignmentStatus = AssignmentStatus.Done,
+                    AssignorID = 1,
+                    SpecialistID = 5,
+                    ResultDescription = "bring back engine to life",
+                    ExpiresOn = RandomDateTime(),
+                    ProposedDoneOn = RandomDateTime(),
+                    ProposedMaxPrice = 2200,
+                },
+                new Assignment
+                {
+                    AddedOn = RandomDateTime(),
+                    AssignmentStatus = AssignmentStatus.Done,
+                    AssignorID = 1,
+                    SpecialistID = 5,
+                    ResultDescription = "just routine chackes",
+                    ExpiresOn = RandomDateTime(),
+                    ProposedDoneOn = RandomDateTime(),
+                    ProposedMaxPrice = 200,
+                }
+            };
+            foreach (var assignment in assignments)
+                context.Assignment.Add(assignment);
         }
 
         private static DateTime RandomDateTime()

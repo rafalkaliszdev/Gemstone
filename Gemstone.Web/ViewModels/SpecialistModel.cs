@@ -12,5 +12,8 @@ namespace Gemstone.Web.ViewModels
         public bool IsBusy { get; set; }
         public string CraftAreaName { get; set; }
         public DateTime JoinedOn { get; set; }
+
+        public ICollection<ReadonlyAssignmentModel> Assignments { get; set; }
+
     }
 }
