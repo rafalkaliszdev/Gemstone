@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Gemstone.Web.ViewModels
 {
@@ -14,6 +12,5 @@ namespace Gemstone.Web.ViewModels
         public DateTime JoinedOn { get; set; }
 
         public ICollection<ReadonlyAssignmentModel> Assignments { get; set; }
-
     }
 }

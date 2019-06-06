@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using Gemstone.Core.DomainModels;
 using Gemstone.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace Gemstone.Web.Extensions
 {
@@ -36,11 +30,8 @@ namespace Gemstone.Web.Extensions
 
             CreateMap<Assignment, ReadonlyAssignmentModel>()
                 .ForMember(dest => dest.AssignorName, option => option.MapFrom(src => src.Assignor.Username))
-                //.Ignore(m => m.AssignorID)
                 .Ignore(m => m.SpecialistID)
                 .Ignore(m => m.SpecialistName);
-
-
         }
     }
 }
