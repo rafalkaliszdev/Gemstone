@@ -43,6 +43,8 @@ namespace Gemstone.Web.Controllers
 
         public async Task<IActionResult> Details(long id)
         {
+            if(id == 0)
+                return NotFound();
             var specialist = await specialistService.GetSpecialistById(id);
             if (specialist == null)
                 return NotFound();
@@ -51,9 +53,13 @@ namespace Gemstone.Web.Controllers
             return View(model);
         }
 
-        public IActionResult DirectAssign(long id)
+        public async Task<IActionResult> DirectAssign(long id)
         {
-            var specialist = specialistService.GetSpecialistById(id).Result;
+            if (id == 0)
+                return NotFound();
+            var specialist = await specialistService.GetSpecialistById(id);
+            if (specialist == null)
+                return NotFound();
             var model = new DirectAssignmentModel
             {
                 SpecialistID = specialist.ID,
