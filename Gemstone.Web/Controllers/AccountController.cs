@@ -1,24 +1,19 @@
-﻿using Gemstone.Core.DomainModels;
+﻿using AutoMapper;
+using Gemstone.Core.DomainModels;
 using Gemstone.Core.Enums;
 using Gemstone.Core.Interfaces;
-using Gemstone.Core.Services;
-using Gemstone.Infrastructure;
+using Gemstone.Web.Abstracts;
+using Gemstone.Web.Extensions;
 using Gemstone.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Gemstone.Web.Extensions;
-using Microsoft.Extensions.Primitives;
-using AutoMapper;
-using Gemstone.Web.Abstracts;
 
 namespace Gemstone.Web.Controllers
 {

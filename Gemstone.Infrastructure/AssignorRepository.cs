@@ -1,14 +1,12 @@
-﻿using Gemstone.Core.Abstracts;
+﻿using Gemstone.Core.DomainModels;
+using Gemstone.Core.Enums;
+using Gemstone.Core.Interfaces;
+using Gemstone.Infrastructure.DataInitialization;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Gemstone.Core.DomainModels;
-using Gemstone.Infrastructure.DataInitialization;
-using Gemstone.Core.Interfaces;
 using System.Threading.Tasks;
-using Gemstone.Core.Enums;
 
 namespace Gemstone.Infrastructure
 {

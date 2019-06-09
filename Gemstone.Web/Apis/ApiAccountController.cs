@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gemstone.Core.DomainModels;
+﻿using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
-using Gemstone.Infrastructure;
 using Gemstone.Web.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gemstone.Web.Apis
 {
