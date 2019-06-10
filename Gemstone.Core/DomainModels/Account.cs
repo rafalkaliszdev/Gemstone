@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Gemstone.Core.Abstracts;
-
+﻿using Gemstone.Core.Abstracts;
 using Gemstone.Core.Enums;
+using System;
+using System.Collections.Generic;
 
 namespace Gemstone.Core.DomainModels
 {

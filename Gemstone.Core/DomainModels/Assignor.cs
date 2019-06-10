@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Gemstone.Core.Abstracts;
-
-namespace Gemstone.Core.DomainModels
+﻿namespace Gemstone.Core.DomainModels
 {
     /// <summary>
     /// Represents a Assignor web app user
