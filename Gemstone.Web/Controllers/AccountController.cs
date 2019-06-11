@@ -33,7 +33,11 @@ namespace Gemstone.Web.Controllers
         public IActionResult Register()
         {
             var model = new RegisterModel();
-            model.AvailableRoles = new AccountRole().ToSelectList();
+
+            // todo make this ViewBag - and test it
+            //model.AvailableRoles = new AccountRole().ToSelectList();
+            ViewBag.AvailableRoles = new AccountRole().ToSelectList();
+
             return View(model);
         }
 
