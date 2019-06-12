@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Core.Interfaces
 {
+    // todo create async generic repository
     public interface IRepository<TEntity> where TEntity : EntityBase
     {
         Task<bool> ExistsById(long id);
