@@ -9,7 +9,7 @@ namespace Gemstone.Core.DomainModels
     /// </summary>
     public class Assignment : EntityBase
     {
-        public string ResultDescription { get; set; }
+        public string WorkResultDescription { get; set; }
         public decimal ProposedMaxPrice { get; set; }
         public DateTime ProposedDoneOn { get; set; }
         public DateTime ExpiresOn { get; set; }

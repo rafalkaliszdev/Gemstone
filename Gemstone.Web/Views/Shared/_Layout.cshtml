@@ -40,20 +40,20 @@
         </div>
     </nav>
 
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        @*<span class="navbar-text">
-                Actions:
-            </span>*@
-        <span class="navbar-text">
-            <span class="badge badge-pill badge-success">
-                @accessor.HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Role).Value
+    @if (accessor.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            @*<span class="navbar-text">
+                    Actions:
+                </span>*@
+            <span class="navbar-text">
+                <span class="badge badge-pill badge-success">
+                    @accessor.HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Role).Value
+                </span>
             </span>
-        </span>
-        <div class="collapse navbar-collapse" id="collaps ibleNavbar">
-            <ul class="navbar-nav navbar-collapse">
-                @if (accessor.HttpContext.User.Identity.IsAuthenticated)
-                {
+            <div class="collapse navbar-collapse" id="collaps ibleNavbar">
+                <ul class="navbar-nav navbar-collapse">
+
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index", "Specialist")">Manual Assignment</a>
                     </li>
@@ -64,12 +64,24 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("", "")"> <strike> Auction Assignment </strike> </a>
                     </li>
-                }
 
-            </ul>
-        </div>
-    </nav>
+                </ul>
+            </div>
+        </nav>
+    }
 
+
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Photos</a></li>
+        <li class="breadcrumb-item"><a href="#">Summer 2017</a></li>
+        <li class="breadcrumb-item"><a href="#">Italy</a></li>
+        <li class="breadcrumb-item active">Rome</li>
+    </ul>
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Specialist</a></li>
+        <li class="breadcrumb-item"><a href="#">Index</a></li>
+        <li class="breadcrumb-item active"><a href="#">Details</a></li>
+    </ul>
 
 
 

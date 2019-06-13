@@ -26,6 +26,6 @@ namespace Gemstone.Web.ViewModels
 
         [Required]
         [DisplayName("Result Description")]
-        public string ResultDescription { get; set; }
+        public string WorkResultDescription { get; set; }
     }
 }
