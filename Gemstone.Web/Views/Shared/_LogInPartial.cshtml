@@ -6,10 +6,10 @@
     <span class="navbar-text">
         &nbsp;
         @Html.ActionLink("Log out", nameof(AccountController.Logout), nameof(AccountController).Short())
-        <span class="badge badge-pill badge-success">Logged as<br /> @accessor.HttpContext.User.Identity.Name</span>
-        <span class="badge badge-pill badge-success">
+        <span class="badge badge-pill badge-success">Logged as @accessor.HttpContext.User.Identity.Name</span>
+        @*<span class="badge badge-pill badge-success">
             As role<br /> @accessor.HttpContext.User.Claims.SingleOrDefault(x=>x.Type == ClaimTypes.Role).Value
-        </span>
+        </span>*@
     </span>
 }
 else

@@ -33,11 +33,7 @@ namespace Gemstone.Web.Controllers
         public IActionResult Register()
         {
             var model = new RegisterModel();
-
-            // todo make this ViewBag - and test it
-            //model.AvailableRoles = new AccountRole().ToSelectList();
             ViewBag.AvailableRoles = new AccountRole().ToSelectList();
-
             return View(model);
         }
 
@@ -51,7 +47,8 @@ namespace Gemstone.Web.Controllers
         [HttpPost]
         public IActionResult Register(RegisterModel model)
         {
-            if (string.IsNullOrEmpty(model.SelectedRoleName))
+            // todo find better mechanism to validate SelectedRoleName, it passes on value "None"
+            if (model.SelectedRoleName.Equals("None", StringComparison.OrdinalIgnoreCase))
                 ModelState.AddModelError("", "Role not selected");
 
             if (ModelState.IsValid)
@@ -76,8 +73,7 @@ namespace Gemstone.Web.Controllers
                 return RedirectToAction("Login");
             }
 
-            // todo test it
-            model.AvailableRoles = new AccountRole().ToSelectList();
+            ViewBag.AvailableRoles = new AccountRole().ToSelectList();
             return View(model);
         }
 
@@ -113,6 +109,7 @@ namespace Gemstone.Web.Controllers
                 {
                     new Claim(ClaimTypes.Name, account.Username),
                     new Claim(ClaimTypes.Role, account.AccountRole.ToString()),
+                    new Claim(ClaimTypes.NameIdentifier, account.ID.ToString())
                 };
                     var userIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

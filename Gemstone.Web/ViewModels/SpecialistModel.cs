@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Gemstone.Web.ViewModels
 {
@@ -9,6 +10,8 @@ namespace Gemstone.Web.ViewModels
         public string Name { get; set; }
         public bool IsBusy { get; set; }
         public string CraftAreaName { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime JoinedOn { get; set; }
 
         public ICollection<ReadonlyAssignmentModel> Assignments { get; set; }

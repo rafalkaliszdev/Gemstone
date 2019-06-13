@@ -13,12 +13,17 @@ namespace Gemstone.Web.ViewModels
         [Required]
         [DisplayName("Proposed Max Price")]
         public decimal ProposedMaxPrice { get; set; }
+
         [Required]
         [DisplayName("Proposed Done On")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime ProposedDoneOn { get; set; }
+
         [Required]
         [DisplayName("Expires On")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime ExpiresOn { get; set; }
+
         [Required]
         [DisplayName("Result Description")]
         public string ResultDescription { get; set; }

@@ -15,8 +15,7 @@ namespace Gemstone.Core.Services
 
         public async Task<bool> AssignorExistsById(long id)
         {
-            var record = await assignorRepository.ReadByIdAsync(id);
-            return record != null;
+            return await assignorRepository.ExistsById(id);
         }
 
         public async Task<Assignor> GetAssignorById(long id)

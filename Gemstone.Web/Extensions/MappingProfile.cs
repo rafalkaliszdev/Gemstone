@@ -12,7 +12,8 @@ namespace Gemstone.Web.Extensions
 
             CreateMap<Specialist, LoginModel>().ReverseMap();
 
-            // RegisterModel does not require mapping
+            CreateMap<Assignor, RegisterModel>().ReverseMap();
+            CreateMap<Specialist, RegisterModel>().ReverseMap();
 
             CreateMap<Specialist, SpecialistModel>()
                 .ForMember(dest => dest.Name, option => option.MapFrom(src => src.Username))
@@ -20,8 +21,8 @@ namespace Gemstone.Web.Extensions
                 .ReverseMap();
 
             CreateMap<DirectAssignmentModel, Assignment>()
-                .Ignore(m => m.AssignorID)
-                .Ignore(m => m.SpecialistID)
+                //.Ignore(m => m.AssignorID)
+                //.Ignore(m => m.SpecialistID)
                 .Ignore(m => m.AddedOn)
                 .Ignore(m => m.AssignmentStatus)
                 .Ignore(m => m.Assignor)

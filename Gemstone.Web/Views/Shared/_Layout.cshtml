@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@using System.Security.Claims
 @{
     var url = $"{accessor.HttpContext.Request.Scheme}://{accessor.HttpContext.Request.Host}/";
 }
@@ -17,19 +18,16 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="@Url.Action("Index","Home")">Start</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>*@
         <div class="collapse navbar-collapse" id="collaps ibleNavbar">
             <ul class="navbar-nav navbar-collapse">
-                @if (accessor.HttpContext.User.Identity.IsAuthenticated)
-                {
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("Index", "Specialist")">Browse specialists</a>
-                    </li>
-                }
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Main Page</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("About","Home")">About</a>
                 </li>
@@ -39,9 +37,40 @@
             </ul>
             <th:partial name="_LoginPartial">
 
-
         </div>
     </nav>
+
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        @*<span class="navbar-text">
+                Actions:
+            </span>*@
+        <span class="navbar-text">
+            <span class="badge badge-pill badge-success">
+                @accessor.HttpContext.User.Claims.SingleOrDefault(x => x.Type == ClaimTypes.Role).Value
+            </span>
+        </span>
+        <div class="collapse navbar-collapse" id="collaps ibleNavbar">
+            <ul class="navbar-nav navbar-collapse">
+                @if (accessor.HttpContext.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Specialist")">Manual Assignment</a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="@Url.Action("", "")"><strike>Automatic Assignment</strike></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("", "")"> <strike> Auction Assignment </strike> </a>
+                    </li>
+                }
+
+            </ul>
+        </div>
+    </nav>
+
+
 
 
     @* todo consider making it partial *@

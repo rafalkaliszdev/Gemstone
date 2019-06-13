@@ -24,6 +24,5 @@ namespace Gemstone.Web.ViewModels
         [Required]
         [Display(Name ="Select role")]
         public string SelectedRoleName { get; set; }
-        public SelectList AvailableRoles { get; set; }
     }
 }

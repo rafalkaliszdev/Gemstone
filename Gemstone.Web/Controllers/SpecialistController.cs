@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Gemstone.Web.Controllers
@@ -20,7 +22,7 @@ namespace Gemstone.Web.Controllers
         private readonly IAssignmentService assignmentService;
         private readonly IMapper mapper;
 
-        public SpecialistController(ISpecialistService specialistService, IAssignorService assignorService, IAssignmentService assignmentService,IMapper mapper)
+        public SpecialistController(ISpecialistService specialistService, IAssignorService assignorService, IAssignmentService assignmentService, IMapper mapper)
         {
             this.specialistService = specialistService;
             this.assignorService = assignorService;
@@ -43,7 +45,7 @@ namespace Gemstone.Web.Controllers
 
         public async Task<IActionResult> Details(long id)
         {
-            if(id == 0)
+            if (id == 0)
                 return NotFound();
             var specialist = await specialistService.GetSpecialistById(id);
             if (specialist == null)
@@ -60,11 +62,14 @@ namespace Gemstone.Web.Controllers
             var specialist = await specialistService.GetSpecialistById(id);
             if (specialist == null)
                 return NotFound();
+
             var model = new DirectAssignmentModel
             {
                 SpecialistID = specialist.ID,
                 SpecialistName = specialist.Username,
                 ProposedDoneOn = DateTime.Now.AddDays(7),
+                ExpiresOn = DateTime.Now.AddDays(7),
+                ProposedMaxPrice = 10
             };
 
             return View(model);
@@ -76,6 +81,7 @@ namespace Gemstone.Web.Controllers
             if (ModelState.IsValid)
             {
                 var assignment = mapper.Map<Assignment>(model);
+                assignment.AddedOn = DateTime.Now;
                 await assignmentService.CreateAssignment(assignment);
                 return RedirectToAction(nameof(Index));
             }

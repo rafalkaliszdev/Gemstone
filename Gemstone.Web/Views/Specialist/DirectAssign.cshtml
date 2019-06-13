@@ -5,7 +5,7 @@
 }
 
 <div class="alert alert-primary">
-    Directly assign the work to @Model.SpecialistName
+    Assign work directly to @Model.SpecialistName
 </div>
 
 <th:form asp-controller="Specialist" asp-action="DirectAssign" method="post">
@@ -15,7 +15,7 @@
     <th:div asp-validation-summary="All" class="text-danger"></th:div>
     <div class="form-group">
         <th:label asp-for="ResultDescription" class="control-label"></th:label>
-        <th:textarea asp-for="ResultDescription" class="form-control"></th:textarea>
+        <th:textarea asp-for="ResultDescription" placeholder="e.g. standard checks and repairs" class="form-control"></th:textarea>
         <th:span asp-validation-for="ResultDescription" class="text-danger"></th:span>
     </div>
     <div class="form-group">

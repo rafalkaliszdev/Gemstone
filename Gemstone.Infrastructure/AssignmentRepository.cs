@@ -17,12 +17,13 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-        public Task CreateAsync(Assignment model)
+        public async Task CreateAsync(Assignment entity)
         {
-            throw new NotImplementedException();
+            await _context.Assignment.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(Assignment model)
+        public Task DeleteAsync(Assignment entity)
         {
             throw new NotImplementedException();
         }

@@ -16,8 +16,7 @@ namespace Gemstone.Core.Services
 
         public async Task<bool> SpecialistExistsById(long id)
         {
-            var record = await specialistRepository.ReadByIdAsync(id);
-            return record != null;
+            return await specialistRepository.ExistsById(id);
         }
 
         public async Task<Specialist> GetSpecialistById(long id)
