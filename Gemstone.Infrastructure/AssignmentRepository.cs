@@ -1,6 +1,6 @@
 ﻿using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
-using Gemstone.Infrastructure.DataInitialization;
+using Gemstone.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -4,7 +4,7 @@ using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
 using Gemstone.Core.Services;
 using Gemstone.Infrastructure;
-using Gemstone.Infrastructure.DataInitialization;
+using Gemstone.Infrastructure.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;

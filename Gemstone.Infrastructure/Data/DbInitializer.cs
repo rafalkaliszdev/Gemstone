@@ -3,7 +3,7 @@ using Gemstone.Core.Enums;
 using System;
 using System.Linq;
 
-namespace Gemstone.Infrastructure.DataInitialization
+namespace Gemstone.Infrastructure.Data
 {
     public class DbInitializer
     {

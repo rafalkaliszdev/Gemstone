@@ -4,7 +4,7 @@ using Gemstone.Infrastructure.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Gemstone.Infrastructure.DataInitialization
+namespace Gemstone.Infrastructure.Data
 {
     public class EfDbContext : DbContext
     {

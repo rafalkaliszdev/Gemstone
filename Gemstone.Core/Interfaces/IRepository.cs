@@ -15,7 +15,7 @@ namespace Gemstone.Core.Interfaces
         Task DeleteAsync(TEntity model);
     }
 
-    public interface IAsyncRepository<T> where T : BaseEntity
+    public interface IAsyncRepository<T> where T : EntityBase
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
