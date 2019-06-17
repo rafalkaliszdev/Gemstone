@@ -7,9 +7,9 @@ namespace Gemstone.Core.Services
 {
     public class SpecialistService : ISpecialistService
     {
-        private readonly IRepository<Specialist> specialistRepository;
+        private readonly IAsyncRepository<Specialist> specialistRepository;
 
-        public SpecialistService(IRepository<Specialist> repository)
+        public SpecialistService(IAsyncRepository<Specialist> repository)
         {
             this.specialistRepository = repository;
         }
@@ -21,13 +21,13 @@ namespace Gemstone.Core.Services
 
         public async Task<Specialist> GetSpecialistById(long id)
         {
-            var record = await specialistRepository.ReadByIdAsync(id);
+            var record = await specialistRepository.GetByIdAsync(id);
             return record;
         }
 
         public async Task<IReadOnlyCollection<Specialist>> GetAllSpecialists()
         {
-            var records = await specialistRepository.ReadAllAsync();
+            var records = await specialistRepository.ListAllAsync();
             return records;
         }
     }

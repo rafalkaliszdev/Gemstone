@@ -6,9 +6,9 @@ namespace Gemstone.Core.Services
 {
     public class AssignorService : IAssignorService
     {
-        private readonly IRepository<Assignor> assignorRepository;
+        private readonly IAsyncRepository<Assignor> assignorRepository;
 
-        public AssignorService(IRepository<Assignor> repository)
+        public AssignorService(IAsyncRepository<Assignor> repository)
         {
             this.assignorRepository = repository;
         }
@@ -20,7 +20,7 @@ namespace Gemstone.Core.Services
 
         public async Task<Assignor> GetAssignorById(long id)
         {
-            var record = await assignorRepository.ReadByIdAsync(id);
+            var record = await assignorRepository.GetByIdAsync(id);
             return record;
         }
     }

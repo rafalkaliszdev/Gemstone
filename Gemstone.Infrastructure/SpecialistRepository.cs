@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
-    public class SpecialistRepository : IRepository<Specialist>
+    public class SpecialistRepository : IAsyncRepository<Specialist>
     {
         private readonly EfDbContext _context;
 
@@ -19,7 +19,7 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Specialist>> ReadAllAsync()
+        public async Task<IReadOnlyCollection<Specialist>> ListAllAsync()
         {
             var records = await (from acc in _context.Account
                                  where acc.AccountRole == AccountRole.Specialist
@@ -27,7 +27,7 @@ namespace Gemstone.Infrastructure
             return records.AsReadOnly();
         }
 
-        public async Task<Specialist> ReadByIdAsync(long id)
+        public async Task<Specialist> GetByIdAsync(long id)
         {
             var specialist = await _context.Account
                 .Cast<Specialist>()
@@ -39,7 +39,7 @@ namespace Gemstone.Infrastructure
             return specialist;
         }
 
-        public Task CreateAsync(Specialist entity)
+        public Task AddAsync(Specialist entity)
         {
             throw new NotImplementedException();
         }

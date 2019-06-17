@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
-    public class AssignorRepository : IRepository<Assignor>
+    public class AssignorRepository : IAsyncRepository<Assignor>
     {
         private readonly EfDbContext _context;
 
@@ -19,7 +19,7 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Assignor>> ReadAllAsync()
+        public async Task<IReadOnlyCollection<Assignor>> ListAllAsync()
         {
             var records = await (from acc in _context.Account
                                  where acc.AccountRole == AccountRole.Assignor
@@ -27,7 +27,7 @@ namespace Gemstone.Infrastructure
             return records.AsReadOnly();
         }
 
-        public async Task<Assignor> ReadByIdAsync(long id)
+        public async Task<Assignor> GetByIdAsync(long id)
         {
             var record = await (from acc in _context.Account
                                 where acc.AccountRole == AccountRole.Assignor
@@ -36,7 +36,7 @@ namespace Gemstone.Infrastructure
             return record;
         }
 
-        public Task CreateAsync(Assignor entity)
+        public Task AddAsync(Assignor entity)
         {
             throw new NotImplementedException();
         }

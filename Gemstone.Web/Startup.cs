@@ -42,10 +42,10 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
-            services.AddScoped<IRepository<Account>, AccountRepository>();
-            services.AddScoped<IRepository<Specialist>, SpecialistRepository>();
-            services.AddScoped<IRepository<Assignor>, AssignorRepository>();
-            services.AddScoped<IRepository<Assignment>, AssignmentRepository>();
+            services.AddScoped<IAsyncRepository<Account>, AccountRepository>();
+            services.AddScoped<IAsyncRepository<Specialist>, SpecialistRepository>();
+            services.AddScoped<IAsyncRepository<Assignor>, AssignorRepository>();
+            services.AddScoped<IAsyncRepository<Assignment>, AssignmentRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)

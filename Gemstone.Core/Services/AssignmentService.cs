@@ -10,12 +10,12 @@ namespace Gemstone.Core.Services
 {
     public class AssignmentService : IAssignmentService
     {
-        private readonly IRepository<Assignment> assignmentRepository;
+        private readonly IAsyncRepository<Assignment> assignmentRepository;
         private readonly ISpecialistService specialistService;
         private readonly IAssignorService assignorService;
         private readonly IHttpContextAccessor httpContext;
 
-        public AssignmentService(IRepository<Assignment> repository, ISpecialistService specialistService, IAssignorService assignorService)
+        public AssignmentService(IAsyncRepository<Assignment> repository, ISpecialistService specialistService, IAssignorService assignorService)
         {
             this.assignmentRepository = repository;
             this.specialistService = specialistService;
@@ -29,7 +29,7 @@ namespace Gemstone.Core.Services
 
         public async Task<Assignment> GetAssignmentById(long id)
         {
-            var record = await assignmentRepository.ReadByIdAsync(id);
+            var record = await assignmentRepository.GetByIdAsync(id);
             return record;
         }
         public async Task CreateAssignment(Assignment assignment)
@@ -45,7 +45,7 @@ namespace Gemstone.Core.Services
             if (!await specialistService.SpecialistExistsById(assignment.SpecialistID))
                 throw new InvalidOperationException();
 
-            await assignmentRepository.CreateAsync(assignment);
+            await assignmentRepository.AddAsync(assignment);
         }
     }
 }

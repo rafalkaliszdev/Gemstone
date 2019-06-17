@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
-    public class AccountRepository : IRepository<Account>
+    public class AccountRepository : IAsyncRepository<Account>
     {
         private readonly EfDbContext _context;
 
@@ -17,14 +17,14 @@ namespace Gemstone.Infrastructure
             _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Account>> ReadAllAsync()
+        public async Task<IReadOnlyCollection<Account>> ListAllAsync()
         {
             var records = await (from acc in _context.Account
                                  select acc).AsNoTracking().ToListAsync();
             return records.AsReadOnly();
         }
 
-        public async Task<Account> ReadByIdAsync(long id)
+        public async Task<Account> GetByIdAsync(long id)
         {
             var record = await (from acc in _context.Account
                                 where acc.ID == id
@@ -32,7 +32,7 @@ namespace Gemstone.Infrastructure
             return record;
         }
 
-        public async Task CreateAsync(Account entity)
+        public async Task AddAsync(Account entity)
         {
             await _context.Account.AddAsync(entity);
             await _context.SaveChangesAsync();

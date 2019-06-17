@@ -7,21 +7,21 @@ namespace Gemstone.Core.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<Account> accountRepository;
+        private readonly IAsyncRepository<Account> accountRepository;
 
-        public AccountService(IRepository<Account> accountRepository)
+        public AccountService(IAsyncRepository<Account> accountRepository)
         {
             this.accountRepository = accountRepository;
         }
 
         public void AddNewAccount(Account account)
         {
-            accountRepository.CreateAsync(account);
+            accountRepository.AddAsync(account);
         }
 
         public async Task<Account> AuthenciateAccount(string username, string password)
         {
-            var accounts = await accountRepository.ReadAllAsync();
+            var accounts = await accountRepository.ListAllAsync();
             var account = accounts
                 .SingleOrDefault(
                 acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant() &&
@@ -31,7 +31,7 @@ namespace Gemstone.Core.Services
 
         public async Task<bool> UsernameIsUnique(string username)
         {
-            var accounts = await accountRepository.ReadAllAsync();
+            var accounts = await accountRepository.ListAllAsync();
             var account = accounts.SingleOrDefault(acc => acc.Username.ToLowerInvariant() == username.ToLowerInvariant());
             return account == null;
         }
