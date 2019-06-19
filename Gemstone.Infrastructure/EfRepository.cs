@@ -1,5 +1,6 @@
 ﻿using Gemstone.Core.Abstracts;
 using Gemstone.Core.Interfaces;
+using Gemstone.Core.Interfaces.Repositories;
 using Gemstone.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -35,7 +36,6 @@ namespace Gemstone.Infrastructure
         {
             _dbContext.Set<TEntity>().Add(entity);
             await _dbContext.SaveChangesAsync();
-
             return entity;
         }
 

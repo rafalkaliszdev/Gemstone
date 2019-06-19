@@ -7,53 +7,52 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gemstone.Core.Interfaces.Repositories;
 
 namespace Gemstone.Infrastructure
 {
-    public class AssignorRepository : IAsyncRepository<Assignor>
+    public class AssignorRepository : EfRepository<Assignor>, IAssignorRepository
     {
-        private readonly EfDbContext _context;
 
-        public AssignorRepository(EfDbContext context)
+        public AssignorRepository(EfDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Assignor>> ListAllAsync()
-        {
-            var records = await (from acc in _context.Account
-                                 where acc.AccountRole == AccountRole.Assignor
-                                 select acc as Assignor).AsNoTracking().ToListAsync();
-            return records.AsReadOnly();
-        }
+        //public async Task<IReadOnlyCollection<Assignor>> ListAllAsync()
+        //{
+        //    var records = await (from acc in _context.Account
+        //                         where acc.AccountRole == AccountRole.Assignor
+        //                         select acc as Assignor).AsNoTracking().ToListAsync();
+        //    return records.AsReadOnly();
+        //}
 
-        public async Task<Assignor> GetByIdAsync(long id)
-        {
-            var record = await (from acc in _context.Account
-                                where acc.AccountRole == AccountRole.Assignor
-                                where acc.ID == id
-                                select acc as Assignor).SingleOrDefaultAsync();
-            return record;
-        }
+        //public async Task<Assignor> GetByIdAsync(long id)
+        //{
+        //    var record = await (from acc in _context.Account
+        //                        where acc.AccountRole == AccountRole.Assignor
+        //                        where acc.ID == id
+        //                        select acc as Assignor).SingleOrDefaultAsync();
+        //    return record;
+        //}
 
-        public Task AddAsync(Assignor entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task AddAsync(Assignor entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task UpdateAsync(Assignor entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task UpdateAsync(Assignor entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task DeleteAsync(Assignor model)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task DeleteAsync(Assignor model)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<bool> ExistsById(long id)
-        {
-            return await _context.Account.AnyAsync(p => p.ID == id);
-        }
+        //public async Task<bool> ExistsById(long id)
+        //{
+        //    return await _context.Account.AnyAsync(p => p.ID == id);
+        //}
     }
 }

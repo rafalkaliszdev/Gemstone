@@ -10,53 +10,51 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
-    public class SpecialistRepository : IAsyncRepository<Specialist>
+    public class SpecialistRepository : EfRepository<Specialist>, ISpecialistRepository
     {
-        private readonly EfDbContext _context;
 
-        public SpecialistRepository(EfDbContext context)
+        public SpecialistRepository(EfDbContext context) : base(context)
         {
-            _context = context;
         }
 
-        public async Task<IReadOnlyCollection<Specialist>> ListAllAsync()
-        {
-            var records = await (from acc in _context.Account
-                                 where acc.AccountRole == AccountRole.Specialist
-                                 select acc as Specialist).AsNoTracking().ToListAsync();
-            return records.AsReadOnly();
-        }
+        //public async Task<IReadOnlyCollection<Specialist>> ListAllAsync()
+        //{
+        //    var records = await (from acc in _context.Account
+        //                         where acc.AccountRole == AccountRole.Specialist
+        //                         select acc as Specialist).AsNoTracking().ToListAsync();
+        //    return records.AsReadOnly();
+        //}
 
-        public async Task<Specialist> GetByIdAsync(long id)
-        {
-            var specialist = await _context.Account
-                .Cast<Specialist>()
-                .Where(acc => acc.ID == id)
-                .Include(spec => spec.Assignments)
-                .ThenInclude(assignment => assignment.Assignor)
-                .SingleOrDefaultAsync();
+        //public async Task<Specialist> GetByIdAsync(long id)
+        //{
+        //    var specialist = await _context.Account
+        //        .Cast<Specialist>()
+        //        .Where(acc => acc.ID == id)
+        //        .Include(spec => spec.Assignments)
+        //        .ThenInclude(assignment => assignment.Assignor)
+        //        .SingleOrDefaultAsync();
 
-            return specialist;
-        }
+        //    return specialist;
+        //}
 
-        public Task AddAsync(Specialist entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task AddAsync(Specialist entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task UpdateAsync(Specialist entity)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task UpdateAsync(Specialist entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Task DeleteAsync(Specialist model)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task DeleteAsync(Specialist model)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<bool> ExistsById(long id)
-        {
-            return await _context.Account.AnyAsync(p => p.ID == id);
-        }
+        //public async Task<bool> ExistsById(long id)
+        //{
+        //    return await _context.Account.AnyAsync(p => p.ID == id);
+        //}
     }
 }

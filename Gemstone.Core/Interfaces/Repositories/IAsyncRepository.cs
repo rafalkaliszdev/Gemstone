@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Gemstone.Core.Interfaces
+namespace Gemstone.Core.Interfaces.Repositories
 {
     public interface IAsyncRepository<TEntity> where TEntity : EntityBase
     {

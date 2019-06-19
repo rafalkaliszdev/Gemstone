@@ -1,5 +1,6 @@
 ﻿using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
+using Gemstone.Core.Interfaces.Repositories;
 using Gemstone.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure
 {
-    public class AccountRepository : EfRepository<Assignment>, IAccountRepository
+    public class AccountRepository : EfRepository<Account>, IAccountRepository
     {
         private readonly EfDbContext _context;
 
