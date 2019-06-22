@@ -1,4 +1,5 @@
-﻿using Gemstone.Core.DomainModels;
+﻿using Gemstone.Core.Interfaces.Repositories;
+using Gemstone.Core.DomainModels;
 using Gemstone.Core.Interfaces;
 using System;
 using System.Threading.Tasks;

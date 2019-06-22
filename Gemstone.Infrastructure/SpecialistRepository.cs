@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Gemstone.Core.Interfaces.Repositories;
 using System.Threading.Tasks;
 
 namespace Gemstone.Infrastructure

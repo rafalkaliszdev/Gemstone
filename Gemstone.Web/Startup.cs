@@ -18,6 +18,7 @@ using System;
 using AutoMapper;
 using Gemstone.Web.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using Gemstone.Core.Interfaces.Repositories;
 
 namespace Gemstone
 {
@@ -42,10 +43,14 @@ namespace Gemstone
 
         private void AddRepositories(IServiceCollection services)
         {
-            services.AddScoped<IAsyncRepository<Account>, AccountRepository>();
-            services.AddScoped<IAsyncRepository<Specialist>, SpecialistRepository>();
-            services.AddScoped<IAsyncRepository<Assignor>, AssignorRepository>();
-            services.AddScoped<IAsyncRepository<Assignment>, AssignmentRepository>();
+            //services.AddScoped<IAsyncRepository<Account>, AccountRepository>();
+            //services.AddScoped<IAsyncRepository<Specialist>, SpecialistRepository>();
+            //services.AddScoped<IAsyncRepository<Assignor>, AssignorRepository>();
+            //services.AddScoped<IAsyncRepository<Assignment>, AssignmentRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<ISpecialistRepository, SpecialistRepository>();
+            services.AddScoped<IAssignorRepository, AssignorRepository>();
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
         }
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
