@@ -35,14 +35,34 @@ namespace Gemstone
 
         private void RegisterTypes(ContainerBuilder builder)
         {
-            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
-            builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
-            builder.RegisterType<AssignorService>().As<IAssignorService>().InstancePerLifetimeScope();
-            builder.RegisterType<AssignmentService>().As<IAssignmentService>().InstancePerLifetimeScope();
+            //builder.RegisterType<AccountService>().As<IAccountService>().InstancePerLifetimeScope();
+            //builder.RegisterType<SpecialistService>().As<ISpecialistService>().InstancePerLifetimeScope();
+            //builder.RegisterType<AssignorService>().As<IAssignorService>().InstancePerLifetimeScope();
+            //builder.RegisterType<AssignmentService>().As<IAssignmentService>().InstancePerLifetimeScope();
         }
 
         private void AddRepositories(IServiceCollection services)
         {
+
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+
+
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ISpecialistService, SpecialistService>();
+            services.AddScoped<IAssignorService, AssignorService>();
+            services.AddScoped<IAssignmentService, AssignmentService>();
+
+
+
+
+
+
+
+
+
+
+
+
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ISpecialistRepository, SpecialistRepository>();
             services.AddScoped<IAssignorRepository, AssignorRepository>();
