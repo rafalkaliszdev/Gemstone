@@ -34,25 +34,5 @@ namespace Gemstone.Infrastructure
         //                        select acc as Assignor).SingleOrDefaultAsync();
         //    return record;
         //}
-
-        //public Task AddAsync(Assignor entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task UpdateAsync(Assignor entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task DeleteAsync(Assignor model)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public async Task<bool> ExistsById(long id)
-        //{
-        //    return await _context.Account.AnyAsync(p => p.ID == id);
-        //}
     }
 }
