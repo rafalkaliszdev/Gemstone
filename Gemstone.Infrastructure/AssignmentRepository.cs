@@ -39,10 +39,6 @@ namespace Gemstone.Infrastructure
         //    throw new NotImplementedException();
         //}
 
-        //public Task<Assignment> GetByIdAsync(long id)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
     }
 }
