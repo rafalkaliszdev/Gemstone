@@ -34,11 +34,6 @@ namespace Gemstone.Infrastructure
         //    return await _context.Assignment.AnyAsync(p => p.ID == id);
         //}
 
-        //public Task<IReadOnlyCollection<Assignment>> ListAllAsync()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
 
     }
 }
