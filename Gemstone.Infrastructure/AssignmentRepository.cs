@@ -29,11 +29,6 @@ namespace Gemstone.Infrastructure
         //    throw new NotImplementedException();
         //}
 
-        //public async Task<bool> ExistsById(long id)
-        //{
-        //    return await _context.Assignment.AnyAsync(p => p.ID == id);
-        //}
-
 
     }
 }
