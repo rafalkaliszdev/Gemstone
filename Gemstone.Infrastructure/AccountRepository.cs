@@ -51,9 +51,5 @@ namespace Gemstone.Infrastructure
         //    await _context.SaveChangesAsync();
         //}
 
-        //public async Task<bool> ExistsById(long id)
-        //{
-        //    return await _context.Account.AnyAsync(p => p.ID == id);
-        //}
     }
 }
