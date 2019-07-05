@@ -45,11 +45,6 @@ namespace Gemstone.Infrastructure
         //    await _context.SaveChangesAsync();
         //}
 
-        //public async Task DeleteAsync(Account model)
-        //{
-        //    _context.Account.Remove(model);
-        //    await _context.SaveChangesAsync();
-        //}
 
     }
 }
