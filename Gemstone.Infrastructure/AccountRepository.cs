@@ -34,11 +34,6 @@ namespace Gemstone.Infrastructure
         //}
 
 
-        //public async Task UpdateAsync(Account entity)
-        //{
-        //    _context.Account.Update(entity);
-        //    await _context.SaveChangesAsync();
-        //}
 
 
     }
