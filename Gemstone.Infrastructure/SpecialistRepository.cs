@@ -48,10 +48,6 @@ namespace Gemstone.Infrastructure
         //    throw new NotImplementedException();
         //}
 
-        //public Task DeleteAsync(Specialist model)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
     }
 }
