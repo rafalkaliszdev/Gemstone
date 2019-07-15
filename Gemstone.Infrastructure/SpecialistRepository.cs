@@ -43,10 +43,6 @@ namespace Gemstone.Infrastructure
         //    throw new NotImplementedException();
         //}
 
-        //public Task UpdateAsync(Specialist entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
 
     }
