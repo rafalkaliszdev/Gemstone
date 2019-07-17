@@ -38,11 +38,7 @@ namespace Gemstone.Infrastructure
         //    return specialist;
         //}
 
-        //public Task AddAsync(Specialist entity)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
+ 
 
 
     }
