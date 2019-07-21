@@ -14,9 +14,7 @@ namespace Gemstone.Infrastructure
     public class SpecialistRepository : EfRepository<Specialist>, ISpecialistRepository
     {
 
-        public SpecialistRepository(EfDbContext context) : base(context)
-        {
-        }
+        public SpecialistRepository(EfDbContext context) : base(context) { }
 
         //public async Task<IReadOnlyCollection<Specialist>> ListAllAsync()
         //{
@@ -38,7 +36,7 @@ namespace Gemstone.Infrastructure
         //    return specialist;
         //}
 
- 
+
 
 
     }
